@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TiranaToDo — What's on in Tirana</title>
+<link rel="stylesheet" href="./_ds/styles.css">
+<link rel="stylesheet" href="./pagine.css">
+</head>
+<body class="te-page" style="background:var(--te-surface-2)" data-screen-label="Event list">
+
+<!-- DEV ONLY — scelta dello stato. Si toglie in produzione con lo <script> in fondo. -->
+<div class="dev-bar">
+  <b>State</b>
+  <a href="#results" data-state-link="results">With results</a>
+  <a href="#empty" data-state-link="empty">No results</a>
+  <a href="#loading" data-state-link="loading">Loading</a>
+  <span>Sample data · prices in Lek are examples</span>
+</div>
+
+<!-- logo segnaposto: quadrato rosso + wordmark, sostituire col marchio definitivo -->
+<header class="te-header">
+  <a class="te-logo" href="./lista-eventi.html"><span class="te-logo__mark"></span>TiranaToDo</a>
+  <ul class="te-nav">
+    <li><a class="is-active" href="./lista-eventi.html">Events</a></li>
+    <li><a href="#">Submit an event</a></li>
+  </ul>
+  <a class="te-btn te-btn--primary te-btn--s te-only-desktop" href="#"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>Add event</a>
+  <button class="te-btn te-btn--icon te-only-mobile" type="button" aria-label="Menu" style="border-color:transparent"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button>
+</header>
+
+<main class="te-wrap te-wrap--flush">
+  <h1 class="te-sr">What's on in Tirana</h1>
+
+  <div style="padding:var(--te-sp-3) var(--te-gutter) 0;background:var(--te-white)">
+    <label class="te-sr" for="q">Search events</label>
+    <div class="te-search">
+      <svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+      <input class="te-search__input" id="q" type="search" placeholder="Search events, venues, artists">
+    </div>
+  </div>
+
+  <div class="te-filters">
+    <div class="te-scroll" role="group" aria-label="Date">
+      <button class="te-chip is-active" type="button" aria-pressed="true">Today</button>
+      <button class="te-chip" type="button" aria-pressed="false">Tomorrow</button>
+      <button class="te-chip" type="button" aria-pressed="false">Weekend</button>
+      <button class="te-chip te-chip--icon" type="button" aria-label="Pick a date"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg></button>
+    </div>
+    <div class="te-scroll" role="group" aria-label="Categories">
+      <button class="te-chip is-active" type="button" aria-pressed="true">All</button>
+      <button class="te-chip" type="button" aria-pressed="false" data-cat="music"><i class="te-dot"></i>Music</button>
+      <button class="te-chip" type="button" aria-pressed="false" data-cat="nightlife"><i class="te-dot"></i>Nightlife</button>
+      <button class="te-chip" type="button" aria-pressed="false" data-cat="theatre"><i class="te-dot"></i>Theatre</button>
+      <button class="te-chip" type="button" aria-pressed="false" data-cat="cinema"><i class="te-dot"></i>Cinema</button>
+      <button class="te-chip" type="button" aria-pressed="false" data-cat="art"><i class="te-dot"></i>Art</button>
+      <button class="te-chip" type="button" aria-pressed="false" data-cat="food"><i class="te-dot"></i>Food &amp; Drink</button>
+      <button class="te-chip" type="button" aria-pressed="false" data-cat="sport"><i class="te-dot"></i>Sport</button>
+      <button class="te-chip" type="button" aria-pressed="false" data-cat="family"><i class="te-dot"></i>Family</button>
+      <button class="te-chip" type="button" aria-pressed="false" data-cat="meetups"><i class="te-dot"></i>Meetups</button>
+      <button class="te-chip" type="button" aria-pressed="false" data-cat="outdoors"><i class="te-dot"></i>Outdoors</button>
+      <button class="te-chip" type="button" aria-pressed="false" data-cat="other"><i class="te-dot"></i>Other</button>
+    </div>
+    <div class="te-results" data-show="results"><span>7 events · Sat 12 – Sun 13 Sep</span></div>
+    <div class="te-results" data-show="empty" hidden><span>0 events · Sat 12 Sep</span><button class="te-link-btn" type="button">Clear filters</button></div>
+    <div class="te-results" data-show="loading" hidden><span>Loading events…</span></div>
+  </div>
+
+  <!-- ─── Stato: con risultati ─── -->
+  <div data-show="results">
+
+    <section class="te-pad te-pad-t" aria-label="Featured event">
+      <a class="te-card te-card--featured" href="./dettaglio-evento.html" data-cat="music">
+        <div class="te-card__media">
+          <!-- prima immagine della pagina: nessun loading=lazy, si vede subito -->
+          <img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/music.jpg" width="700" height="438" decoding="async" alt="An electric guitar and a microphone stand alone in a spotlight on a small dark stage, seen over the heads of a seated audience">
+          <div class="te-card__over">
+            <span class="te-tag te-badge--on-image"><i class="te-dot"></i>Music</span>
+            <span class="te-badge te-badge--featured te-badge--on-image"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>Featured</span>
+          </div>
+        </div>
+        <div class="te-card__body">
+          <p class="te-card__date"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Sat 12 Sep, 21:00</p>
+          <h2 class="te-card__title">Live music: open mic night at Tulla Culture Center</h2>
+          <p class="te-card__place"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>Tulla Culture Center, Blloku</span></p>
+          <div class="te-card__foot">
+            <span class="te-card__price">500 L</span>
+            <button class="te-vote te-vote--compact" type="button" aria-pressed="false" aria-label="I'm interested · 128 people"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg><span class="te-vote__count">128</span></button>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <section class="te-group">
+      <h2 class="te-group__title">Tonight · Sat 12 Sep</h2>
+      <div class="te-list--cols te-pad">
+
+        <a class="te-card te-card--list" href="./dettaglio-evento.html" data-cat="meetups">
+          <div class="te-card__media"><img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/meetups.jpg" width="700" height="438" loading="lazy" decoding="async" alt="People talking in small groups with drinks in hand on a rooftop terrace at dusk, under a string of festoon lights"></div>
+          <div class="te-card__body">
+            <p class="te-card__date">19:30 · <span class="te-tag" style="min-height:24px;padding:0 var(--te-sp-2)"><i class="te-dot"></i>Meetups</span></p>
+            <h3 class="te-card__title">Newcomers in Tirana: welcome drinks for internationals</h3>
+            <p class="te-card__place"><span>Radio Bar, Blloku</span></p>
+            <div class="te-card__foot">
+              <span class="te-badge te-badge--free">Free</span>
+              <button class="te-vote te-vote--compact is-voted" type="button" aria-pressed="true" aria-label="You're interested · 64 people"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg><span class="te-vote__count">64</span></button>
+            </div>
+          </div>
+        </a>
+
+        <a class="te-card te-card--list" href="./dettaglio-evento.html" data-cat="cinema">
+          <div class="te-card__media"><img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/cinema.jpg" width="700" height="438" loading="lazy" decoding="async" alt="Rows of empty folding chairs facing a lit open-air cinema screen at night, under a full moon"></div>
+          <div class="te-card__body">
+            <p class="te-card__date">21:30 · <span class="te-tag" style="min-height:24px;padding:0 var(--te-sp-2)"><i class="te-dot"></i>Cinema</span></p>
+            <h3 class="te-card__title">Open-air screening: Albanian classics with English subtitles</h3>
+            <p class="te-card__place"><span>Rinia Park, open-air stage</span></p>
+            <div class="te-card__foot">
+              <span class="te-card__price">300 L</span>
+              <button class="te-vote te-vote--compact" type="button" aria-pressed="false" aria-label="I'm interested · 41 people"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg><span class="te-vote__count">41</span></button>
+            </div>
+          </div>
+        </a>
+
+        <a class="te-card te-card--list" href="./dettaglio-evento.html" data-cat="nightlife">
+          <!-- nightlife: fra le sei foto pubblicate non c'e' una scena di locale notturno.
+               Si usa meetups.jpg (sera, gruppo, bicchieri in mano): e' la scena piu' vicina
+               al bar crawl. Da sostituire appena arriva una foto di categoria nightlife. -->
+          <div class="te-card__media"><img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/meetups.jpg" width="700" height="438" loading="lazy" decoding="async" alt="People talking in small groups with drinks in hand on a rooftop terrace at dusk, under a string of festoon lights"></div>
+          <div class="te-card__body">
+            <p class="te-card__date">23:00 · <span class="te-tag" style="min-height:24px;padding:0 var(--te-sp-2)"><i class="te-dot"></i>Nightlife</span></p>
+            <h3 class="te-card__title">Blloku bar crawl for internationals</h3>
+            <p class="te-card__place"><span>Folie Terrace, Blloku</span></p>
+            <div class="te-card__foot">
+              <span class="te-card__price">500 L</span>
+              <button class="te-vote te-vote--compact is-solo" type="button" aria-pressed="false" aria-label="I'm interested"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></button>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <section class="te-group">
+      <h2 class="te-group__title">Tomorrow · Sun 13 Sep</h2>
+      <div class="te-list--cols te-pad">
+
+        <a class="te-card te-card--list" href="./dettaglio-evento.html" data-cat="outdoors">
+          <div class="te-card__media"><img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/outdoors.jpg" width="700" height="438" loading="lazy" decoding="async" alt="Four hikers walking single file up a stony mountain path at sunrise, with mist filling the valley below"></div>
+          <div class="te-card__body">
+            <p class="te-card__date">08:00 · <span class="te-tag" style="min-height:24px;padding:0 var(--te-sp-2)"><i class="te-dot"></i>Outdoors</span></p>
+            <h3 class="te-card__title">Group hike to Mount Dajti with Tirana Hiking Club</h3>
+            <p class="te-card__place"><span>Dajti Ekspres cable car, lower station</span></p>
+            <div class="te-card__foot">
+              <span class="te-badge te-badge--last">Last seats</span>
+              <button class="te-vote te-vote--compact" type="button" aria-pressed="false" aria-label="I'm interested · 37 people"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg><span class="te-vote__count">37</span></button>
+            </div>
+          </div>
+        </a>
+
+        <a class="te-card te-card--list" href="./dettaglio-evento.html" data-cat="food">
+          <div class="te-card__media"><img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/food.jpg" width="700" height="438" loading="lazy" decoding="async" alt="Hands passing a tray of baked pastries across a wooden table crowded with salads, bread, olives and pasta"></div>
+          <div class="te-card__body">
+            <p class="te-card__date">11:00 · <span class="te-tag" style="min-height:24px;padding:0 var(--te-sp-2)"><i class="te-dot"></i>Food &amp; Drink</span></p>
+            <h3 class="te-card__title">Sunday brunch club at Komiteti</h3>
+            <p class="te-card__place"><span>Komiteti Kafe-Muzeum</span></p>
+            <div class="te-card__foot">
+              <span class="te-card__price">1 200 L</span>
+              <button class="te-vote te-vote--compact" type="button" aria-pressed="false" aria-label="I'm interested · 52 people"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg><span class="te-vote__count">52</span></button>
+            </div>
+          </div>
+        </a>
+
+        <a class="te-card te-card--list" href="./dettaglio-evento.html" data-cat="art">
+          <div class="te-card__media"><img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/art.jpg" width="700" height="438" loading="lazy" decoding="async" alt="Two visitors standing in front of large abstract paintings in a bright white gallery room"></div>
+          <div class="te-card__body">
+            <p class="te-card__date">17:00 · <span class="te-tag" style="min-height:24px;padding:0 var(--te-sp-2)"><i class="te-dot"></i>Art</span></p>
+            <h3 class="te-card__title">Guided walk through the National Gallery collection</h3>
+            <p class="te-card__place"><span>National Gallery of Arts</span></p>
+            <div class="te-card__foot">
+              <span class="te-badge te-badge--free">Free</span>
+              <button class="te-vote te-vote--compact is-solo" type="button" aria-pressed="false" aria-label="I'm interested"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></button>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <div class="te-pad" style="padding-top:var(--te-sp-5);padding-bottom:var(--te-sp-6)">
+      <button class="te-btn te-btn--secondary te-btn--block" type="button">Load more events</button>
+    </div>
+  </div>
+
+  <!-- ─── Stato: zero risultati ─── -->
+  <div data-show="empty" hidden>
+    <div class="te-empty">
+      <span class="te-empty__icon"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></span>
+      <h2 class="te-h2">No events match your filters</h2>
+      <p class="te-body te-muted">Try another day or another category. Or clear the filters and see everything happening in Tirana this week.</p>
+      <button class="te-btn te-btn--secondary" type="button">Clear filters</button>
+      <p class="te-small te-muted">Know something that should be here? <a href="#">Submit an event</a></p>
+    </div>
+  </div>
+
+  <!-- ─── Stato: caricamento ─── -->
+  <div data-show="loading" hidden aria-busy="true">
+    <p class="te-sr" role="status">Loading events</p>
+    <section class="te-pad te-pad-t">
+      <div class="te-card">
+        <div class="te-skel te-skel--media"></div>
+        <div class="te-card__body">
+          <div class="te-skel te-skel--line" style="width:40%"></div>
+          <div class="te-skel te-skel--title" style="width:90%"></div>
+          <div class="te-skel te-skel--line" style="width:60%"></div>
+        </div>
+      </div>
+    </section>
+    <section class="te-group">
+      <h2 class="te-group__title"><span class="te-skel te-skel--title" style="display:block;width:180px"></span></h2>
+      <div class="te-list--cols te-pad" style="padding-bottom:var(--te-sp-6)">
+        <div class="te-skel-card">
+          <div class="te-skel te-skel-card__media"></div>
+          <div class="te-skel-card__body"><div class="te-skel te-skel--line" style="width:45%"></div><div class="te-skel te-skel--title" style="width:95%"></div><div class="te-skel te-skel--line" style="width:65%"></div></div>
+        </div>
+        <div class="te-skel-card">
+          <div class="te-skel te-skel-card__media"></div>
+          <div class="te-skel-card__body"><div class="te-skel te-skel--line" style="width:35%"></div><div class="te-skel te-skel--title" style="width:85%"></div><div class="te-skel te-skel--line" style="width:55%"></div></div>
+        </div>
+        <div class="te-skel-card">
+          <div class="te-skel te-skel-card__media"></div>
+          <div class="te-skel-card__body"><div class="te-skel te-skel--line" style="width:50%"></div><div class="te-skel te-skel--title" style="width:90%"></div><div class="te-skel te-skel--line" style="width:60%"></div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<footer class="te-footer">
+  <div class="te-wrap te-wrap--flush">
+    <div class="te-footer__cols">
+      <div>
+        <p class="te-footer__title">TiranaToDo</p>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Submit an event</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="te-footer__title">Browse</p>
+        <ul>
+          <li><a href="#">Today</a></li>
+          <li><a href="#">This weekend</a></li>
+          <li><a href="#">All categories</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="te-footer__legal">
+      <nav class="te-footer__lang" aria-label="Language">
+        <a class="is-active" href="#" lang="en">EN</a>
+        <a href="#" lang="sq">SQ</a>
+        <a href="#" lang="it">IT</a>
+      </nav>
+      <p>© 2026 TiranaToDo · <a href="#">Privacy</a></p>
+    </div>
+  </div>
+</footer>
+
+<nav class="te-tabbar" aria-label="Main">
+  <a class="te-tab is-active" href="./lista-eventi.html" aria-current="page"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Home</a>
+  <a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>Search</a>
+  <a class="te-tab te-tab--add" href="#"><span class="te-tab__fab"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span>Add</a>
+  <a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>Saved</a>
+  <a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>Menu</a>
+</nav>
+
+<!-- DEV ONLY — mostra uno dei tre stati. Non e' logica di prodotto: si toglie in produzione. -->
+<script>
+(function(){
+  var valid = ['results','empty','loading'];
+  function apply(s){
+    if (valid.indexOf(s) < 0) { s = valid[0]; }
+    var i, els = document.querySelectorAll('[data-show]');
+    for (i = 0; i < els.length; i++) {
+      els[i].hidden = els[i].getAttribute('data-show').split(' ').indexOf(s) < 0;
+    }
+    var links = document.querySelectorAll('[data-state-link]');
+    for (i = 0; i < links.length; i++) {
+      links[i].className = (links[i].getAttribute('data-state-link') === s) ? 'is-on' : '';
+    }
+  }
+  function read(){ return (window.location.hash || '').replace('#',''); }
+  window.addEventListener('hashchange', function(){ apply(read()); });
+  apply(read());
+})();
+</script>
+
+<!--
+STRINGHE VISIBILI — lista-eventi (EN default; da tradurre SQ, IT)
+brand.name → TiranaToDo
+nav.events → Events
+nav.submit → Submit an event
+nav.add → Add event
+nav.menu → Menu
+page.h1 → What's on in Tirana
+search.label → Search events
+search.placeholder → Search events, venues, artists
+filter.date.today → Today
+filter.date.tomorrow → Tomorrow
+filter.date.weekend → Weekend
+filter.date.pick → Pick a date
+filter.group.date → Date
+filter.group.categories → Categories
+filter.cat.all → All
+filter.cat.music → Music
+filter.cat.nightlife → Nightlife
+filter.cat.theatre → Theatre
+filter.cat.cinema → Cinema
+filter.cat.art → Art
+filter.cat.food → Food &amp; Drink
+filter.cat.sport → Sport
+filter.cat.family → Family
+filter.cat.meetups → Meetups
+filter.cat.outdoors → Outdoors
+filter.cat.other → Other
+results.count → {n} events · {range}
+results.loading → Loading events…
+results.clear → Clear filters
+list.featured → Featured
+media.nophoto → No photo yet   [segnaposto: da confermare a MUSE]
+list.group.tonight → Tonight · {date}
+list.group.tomorrow → Tomorrow · {date}
+list.loadmore → Load more events
+card.free → Free
+card.lastseats → Last seats
+card.vote → I'm interested
+card.voted → You're interested
+card.vote.count → I'm interested · {n} people
+empty.title → No events match your filters
+empty.body → Try another day or another category. Or clear the filters and see everything happening in Tirana this week.
+empty.action → Clear filters
+empty.submit.lead → Know something that should be here?
+empty.submit.link → Submit an event
+tab.home → Home
+tab.search → Search
+tab.add → Add
+tab.saved → Saved
+tab.menu → Menu
+footer.col.brand → TiranaToDo
+footer.about → About
+footer.submit → Submit an event
+footer.contact → Contact
+footer.col.browse → Browse
+footer.today → Today
+footer.weekend → This weekend
+footer.categories → All categories
+footer.lang → Language
+footer.lang.en → EN
+footer.lang.sq → SQ
+footer.lang.it → IT
+footer.legal → © 2026 TiranaToDo
+footer.privacy → Privacy
+
+TESTI ALTERNATIVI DELLE FOTO (li pronuncia un lettore di schermo: sono
+testo visibile, non metadati. Da confermare a MUSE insieme alle stringhe.)
+media.alt.music → An electric guitar and a microphone stand alone in a spotlight on a small dark stage, seen over the heads of a seated audience
+media.alt.meetups → People talking in small groups with drinks in hand on a rooftop terrace at dusk, under a string of festoon lights
+media.alt.cinema → Rows of empty folding chairs facing a lit open-air cinema screen at night, under a full moon
+media.alt.outdoors → Four hikers walking single file up a stony mountain path at sunrise, with mist filling the valley below
+media.alt.food → Hands passing a tray of baked pastries across a wooden table crowded with salads, bread, olives and pasta
+media.alt.art → Two visitors standing in front of large abstract paintings in a bright white gallery room
+
+FOTO: i sette riquadri portano una fotografia, abbinata alla categoria
+della scheda. Le sei foto stanno nel repo del progetto
+(assets/demo/web/), sono generate con AI e ritagliate 16:10 a 700x438.
+Ripetizioni: meetups.jpg copre anche la scheda nightlife, perche' fra le
+sei non c'e' una scena di locale notturno.
+La prima immagine della pagina (featured) carica subito; tutte le altre
+hanno loading="lazy".
+
+SEGNAPOSTO IMMAGINE: la classe .te-media-empty resta in pagine.css e non
+la usa piu' nessun riquadro di questo mockup. E' lo stato di ripiego per
+l'evento il cui organizzatore non carica nessuna foto — in produzione
+succedera' spesso. Occupa lo stesso riquadro dell'<img>: si scambiano
+senza muovere un pixel.
+
+DATI D'ESEMPIO, NON REALI: titoli, luoghi, contatori e prezzi in Lek
+(500 L, 300 L, 1 200 L) sono segnaposto. I valori veri arrivano dalla
+fonte del sito.
+-->
+</body>
+</html>
