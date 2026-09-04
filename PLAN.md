@@ -78,7 +78,15 @@ Ogni chiamata al modulo, anche rifiutata: timestamp, ip_hash, esito, motivo. Ser
 
 ## 4. Categorie
 
-Dieci, fisse in fase 1, tarate sugli expat: music, nightlife, meetups & language exchange, food & drink, arts & exhibitions, theatre & cinema, sport & outdoors, workshops & talks, markets & fairs, family & other. Ogni categoria ha un colore dal design system (§8) e un'etichetta per ognuna delle tre lingue (§6). Le chiavi in database sono in inglese (`music`, `nightlife`, `meetups`, …).
+**Undici, fisse in fase 1**, tarate sugli expat. Le chiavi in database sono queste, in inglese, e sono le stesse del design system:
+
+`music` · `nightlife` · `theatre` · `cinema` · `art` · `food` · `sport` · `family` · `meetups` · `outdoors` · `other`
+
+Ogni categoria ha la sua terna di colori nel design system (`--te-cat-<nome>`, con `-bg` e `-ink`) e un'etichetta per ognuna delle tre lingue (§6).
+
+⚠️ **Allineate al design system il 04/09/2026, dopo la consegna di LORI.** La prima stesura di questo piano ne elencava dieci accorpate (`theatre & cinema`, `sport & outdoors`, `family & other`, più `workshops & talks` e `markets & fairs`). LORI ha separato le coppie e sostituito le ultime due con `meetups` e `outdoors`, con questa ragione scritta nel design system: *un expat filtra per meetup e per escursione, non per mercatini*. Vince il design system, che è già costruito e reso.
+
+⚠️ **Conseguenza da tenere d'occhio:** workshop, conferenze e mercatini non hanno più una categoria propria e cadono in `other`. Se dopo tre mesi la coda di `/submit` mostra che arrivano spesso, si aggiunge una categoria: costa una riga di enum, una terna di colori e tre etichette. ⛔ Non si aggiunge prima di vedere il dato.
 
 ## 5. Pagine e funzioni
 
@@ -214,7 +222,7 @@ Il modello che Davide ha in mente: pubblicazione gratuita, «in evidenza» a pag
 
 | Decisione | Chi la prende | Serve per |
 |---|---|---|
-| Registrare `tiranatodo.com` (+ `.al`) dopo il via di LEX sul marchio | Davide | fase 0 |
+| Registrare `tiranatodo.com` (+ `.al`) | Davide | fase 0 |
 | Progetto Supabase nuovo: URL, anon key, service role | Davide crea, passa le chiavi come secret Cloudflare | fase 1 |
 | Chiavi Turnstile (sito + segreto) | Davide, dashboard Cloudflare | fase 3 |
 | Chiave Resend dedicata e dominio mittente verificato | Davide | fase 3 |
@@ -222,6 +230,14 @@ Il modello che Davide ha in mente: pubblicazione gratuita, «in evidenza» a pag
 | Testi interfaccia sq/en ed email | MUSE, lanciata dal PM | fase 3-6 |
 | Testo privacy e termini d'uso | LEX, lanciata dal PM | fase 6 |
 | Offerta e prezzi «in evidenza» | STRATEGO + VAULT + PROFANO + firma in tre | progetto fase 2 |
+
+## 11-bis. Il nome: questione chiusa, non riaprirla
+
+Ricerca marchio fatta il 04/09/2026 su TMview (che non è un registro ufficiale): «tiranatodo» e «tirana events» non danno nessun marchio. Ne esiste uno vicino, **«TIRANA TODAY Lexo, bej diferencen»**, marchio combinato albanese AL/T/2020/000851, registrato il 10/11/2021 e in scadenza il 16/10/2030, **nella sola classe 35** (pubblicità online, pay-per-click, promozione vendite per terzi). Il titolare è il quotidiano online Tirana Today.
+
+LEX ha consigliato di cambiare nome. **Davide ha deciso di tenere TiranaToDo**, e la decisione è sua: sta agli atti in `project_status.md`. ⛔ La sessione che costruisce non riapre la questione e non propone nomi.
+
+L'unica cosa che ricade sulla costruzione: **conservare prove d'uso datate dal primo giorno**. In pratica, il primo deploy in produzione deve lasciare una traccia con data verificabile (commit firmato, cronologia dei deploy Cloudflare, prima pagina indicizzata). Non serve fare niente in più: serve non cancellarlo.
 
 ## 12. Regole per la sessione che costruisce
 
