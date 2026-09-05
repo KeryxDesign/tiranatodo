@@ -61,9 +61,22 @@
      tutti gli altri. Anche l'oggetto ha formato fisso (§2.1): tre pipe,
      sempre nello stesso posto.
      ⚠️ La SOP e' in stato PROPOSTA, non ancora ratificata da Davide.
-     ⚡ Il token NEW e' ratificato da Davide (05/09/2026) e vince sul NUOVO
-     che la SOP §2.1 fissa ancora: la pagina e' in inglese e chi copia non e'
-     italiano. La SOP va allineata, ed e' di OPS.
+     ⚡ Il token NEW e' ratificato da Davide (05/09/2026); la SOP §2.1 e' stata
+     allineata lo stesso giorno e la terna e' NEW / EDIT / CANCEL, in inglese.
+     ⚡⚡ I SEGNAPOSTO fra &lt; e &gt; sono la forma canonica di §2.2-bis, e la
+     pagina e' una COPIA: se pagina e SOP divergono vince la SOP. La regola che
+     li governa (§2.2-ter): ⛔ nessun segnaposto e' mai un valore che
+     accetteremmo. Per questo qui non c'e' nessuna data vera e nessun prezzo
+     vero - un esempio credibile rispedito indietro tale e quale sarebbe
+     indistinguibile da un evento reale. Gli esempi VERI (2026-09-12, 500 ALL)
+     stanno nella legenda qui accanto, dove non possono viaggiare in una mail.
+     ⛔ Nel sorgente le angolari si scrivono &amp;lt; e &amp;gt;: dentro un <pre>
+     un &lt;title&gt; non scappato lo mangia il browser come tag.
+     ⚡ Le due righe # sono di MUSE (copy/stringhe_en.md, lotto 3), a 27 e 26
+     caratteri su un tetto di 28 fissato da OPS §2.2-quater: il contenitore ne
+     regge 30 misurati da LORI, i 2 di margine non si spendono. ⛔ Una riga #
+     che va a capo perde il # nella continuazione e si legge come un campo.
+     La riga vuota dopo il blocco # fa parte del modello, non e' spaziatura.
      La legenda dei formati e' sotto, in .te-legend. -->
 <div class="te-submit-cols" style="margin-top:var(--te-sp-8)">
 
@@ -74,27 +87,30 @@
 <svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>Copy</button>
 </div>
 <pre class="te-copybox" id="mail-template">To: <mark class="te-ph">events@tiranatodo.com</mark>
-Subject: [TIRANATODO] NEW | category | YYYY-MM-DD | event title
+Subject: [TIRANATODO] NEW | &lt;category&gt; | &lt;YYYY-MM-DD&gt; | &lt;title&gt;
 
-TITLE:
-CATEGORY:
-DATE_START:
-TIME_START:
-DATE_END:
-TIME_END:
-ALL_DAY:
-VENUE_NAME:
-ADDRESS:
-IS_FREE:
-PRICE:
-TICKET_URL:
-DESCRIPTION:
-PHOTO:
-ORGANIZER_NAME:
-ORGANIZER_EMAIL:
-ORGANIZER_PHONE:
-LANGUAGE:
-CONSENT:</pre>
+# Replace the brackets too.
+# Keep 19 lines, empty too
+
+TITLE: &lt;title&gt;
+CATEGORY: &lt;category&gt;
+DATE_START: &lt;YYYY-MM-DD&gt;
+TIME_START: &lt;HH:MM&gt;
+DATE_END: &lt;YYYY-MM-DD&gt;
+TIME_END: &lt;HH:MM&gt;
+ALL_DAY: &lt;YES/NO&gt;
+VENUE_NAME: &lt;venue&gt;
+ADDRESS: &lt;address&gt;
+IS_FREE: &lt;YES/NO&gt;
+PRICE: &lt;NNN ALL&gt;
+TICKET_URL: &lt;url&gt;
+DESCRIPTION: &lt;text&gt;
+PHOTO: &lt;ATTACHED/LINK:url/NONE&gt;
+ORGANIZER_NAME: &lt;name&gt;
+ORGANIZER_EMAIL: &lt;email&gt;
+ORGANIZER_PHONE: &lt;phone&gt;
+LANGUAGE: &lt;EN/SQ/IT&gt;
+CONSENT: &lt;YES/NO&gt;</pre>
 <p class="te-small te-muted" style="margin-top:var(--te-sp-2)">Placeholder address: the tiranatodo.com domain is not registered yet.</p>
 </section>
 

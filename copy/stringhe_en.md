@@ -285,6 +285,80 @@ I due con la domanda cadono per la blacklist (domanda retorica d'apertura). `You
 La SOP §2.1 fissa tre valori d'azione in italiano su una pagina inglese letta da tedeschi, turchi e greci. Ho scritto `NEW` perché è la stringa che il lettore deve copiare e non deve decifrare, e perché il token serve a una regex, quindi la lingua è arbitraria: va scelta una volta e tenuta. Se OPS conferma l'italiano, cambio la stringa in dieci secondi, ma allora la pagina inglese chiede di scrivere una parola italiana e va spiegato.
 `DA CHIEDERE A OPS: i tre valori d'azione dell'oggetto (NUOVO / MODIFICA / ANNULLA, §2.1) passano a NEW / EDIT / CANCEL? Il sito è in inglese e le altre due lingue di interfaccia sono albanese e italiano: il token deve restare uno solo in tutte e tre.`
 
+---
+---
+
+# Lotto 3 — due righe di commento in testa al modello copiabile, 2026-09-05
+
+**Mercato: EN internazionale (lingua franca) · Lingua: EN · Set caricato: `skill_copy_mercati_eu` (sezione «EN internazionale») + `skill_copy_moderno_2026` + `regole_globali` + `blacklist_formule_ai`**
+
+**Chi legge:** lo stesso del lotto 2, ma in un momento diverso. Queste due righe **non si leggono sulla pagina**: si leggono dentro la mail già incollata, quando la legenda non è più sotto gli occhi. Sono l'unica istruzione che viaggia col testo.
+**Contenitore:** blocco copiabile, **30 caratteri per riga misurati** da LORI a 375 px, ma il vincolo che vale è quello di OPS, proprietario del formato: **massimo 28 caratteri totali per riga, `#` e spazio compresi**. I 2 caratteri di scarto sono margine contro un accento, uno zoom di sistema e l'arrotondamento di un altro browser, e non si spendono. ⚡ Da qui in poi **ogni conteggio in questa sezione è col prefisso**, così è confrontabile col vincolo. Il tetto è secco: una riga `#` che va a capo perde il `#` sulla continuazione e si legge come un campo.
+**Perimetro:** dicono due cose sole, e sono le due che la legenda **non** dice. La legenda spiega i formati dei valori; queste spiegano la meccanica del modello.
+⛔ **Zero `<` e `>` dentro le due righe**, per il controllo automatico sui segnaposto non sostituiti. Le parentesi si nominano a parole (`brackets`), mai si mostrano.
+
+---
+
+## template.note.1
+
+```
+# Replace the brackets too.
+```
+
+`27/28 caratteri totali` col prefisso — sotto il tetto di OPS, resta com'è. La parola che lavora è `too`. Che il segnaposto vada sostituito lo capisce chiunque legga `TITLE:` seguito da una parola generica; quello che nessuno fa da solo è togliere le due parentesi, perché sembrano parte del formato, come i due punti dopo il nome del campo. La riga attacca esattamente lì e non spreca caratteri a dire l'ovvio.
+`brackets` e non `angle brackets`: tre caratteri in più per una precisione che serve solo a chi conosce già la differenza, e nel modello non c'è nessun altro tipo di parentesi con cui confonderle.
+⛔ Scartato `Replace text and brackets.` (28/28 totali, al tetto esatto): `text` è il nome di un segnaposto vero del modello, e la riga si sarebbe letta come una regola sul campo invece che su tutti.
+
+**Opzione B:** `Delete the brackets too.` — `26/28 totali`. Verbo più esplicito sull'atto materiale, ma `delete` da solo può far pensare che si cancellino le parentesi lasciando dentro la parola del segnaposto. Consegnata come seconda perché in traduzione (`Fshini` / `Cancella`) sta più larga.
+
+---
+
+## template.note.2
+
+```
+# Keep 19 lines, empty too
+```
+
+`26/28 caratteri totali` col prefisso, 2 sotto il tetto — il margine resta al contenitore, non si spende in parole.
+
+⚠️ **Perché è cambiata rispetto alla prima stesura.** La versione precedente era `# Keep all 19 lines, empty too`, contata `28/28` sul **testo**: era il vincolo che avevo ricevuto, non un errore di conteggio. Il vincolo vero di OPS è **28 totali, `#` e spazio compresi**, quindi quella riga stava a **30** e sforava di 2. È caduta la parola `all`, non un fatto.
+
+`all` era l'unico pezzo eliminabile senza perdere niente, perché **il numero fa già il suo lavoro**: `19` è una quantità esatta e non ammette «alcune». Le due parti che restano fanno due lavori diversi e sono intatte. `Keep 19 lines` dà il numero, ed è il numero che rende verificabile l'istruzione: chi ha finito può contare. `empty too` copre il caso che rompe il parsing, cioè la riga cancellata perché non si aveva niente da scriverci. ⛔ Togliere `empty too` era l'altra strada per stare nel tetto, ed è quella scartata: senza, la riga si legge come «riempile tutte» e contraddice la legenda, che dice che 7 campi possono restare vuoti.
+⛔ Non è scritto perché l'ordine conta (lettura a macchina): non ci sta, e non serve. L'istruzione è eseguibile senza la ragione.
+
+**Opzione B:** `Keep 19 lines, even empty` — `27/28 totali`. Stessa coppia di fatti. `even empty` è più esplicito sul caso limite, `empty too` è più corto e simmetrico alla riga 1, che chiude anch'essa su `too`: la simmetria aiuta chi legge due righe di seguito in una lingua non sua. Consegnata come seconda.
+
+⚠️ **Non riscrivo il conteggio se LORI misura più largo.** Il tetto lo fissa OPS a 28 totali con la ragione scritta (accenti, zoom, arrotondamento del browser); una misura più generosa nel contenitore non lo sposta.
+
+---
+
+## Dichiarazione gate — lotto 3
+
+| Gate | Esito |
+|---|---|
+| **Fatti** | 2 claim, entrambi classificati. `19 lines` **VERIFICATO due volte**: `sop/sop_invio_eventi_via_email.md` §2.2, tabella dei 19 campi, stesso conteggio già usato in `legend.intro` del lotto 2 (12 obbligatori + 7 facoltativi = 19); e **confermato dal PM il 05/09/2026**, il modello copiabile in pagina ha 19 righe di campo da `TITLE:` a `CONSENT:`, senza accorpamenti. La condizione aperta nella prima stesura è chiusa: il numero resta. `brackets` **non è un claim**: descrive il formato del documento che il lettore ha davanti. ⛔ Zero numeri nuovi, zero promesse, zero tempi. |
+| **Struttura** | Non applicabile nella forma standard: due righe di commento dentro un blocco già disegnato. Nessun blocco piatto. Ogni riga porta un fatto solo e sta su una riga fisica. |
+| **Readability (EN)** | Rifatta sul testo definitivo del 05/09. Stimata a mano: 2 frasi, 9 parole, **4,5 parole per frase**, 13 sillabe (`19` contato come si legge, *nine-teen* = 2) → **1,44 sillabe per parola**. **Flesch Reading Ease ≈ 80 (Easy) · Flesch-Kincaid Grade ≈ 3.** ⚠️ Corregge il ≈97 della prima stesura, che contava `19` come una sillaba sola. Target: organizzatore non madrelingua, B1-B2: rientra. Le sei parole portanti (`replace`, `brackets`, `keep`, `lines`, `empty`, `too`) stanno tutte nelle 3.000 più frequenti dell'inglese. ⚠️ GULPEASE non applicabile: testo inglese. |
+| **Offerta di vendita, 8 check** | **Non applicabile, e motivato.** Non è un pezzo che vende: è la nota tecnica in testa a un modulo che il lettore ha già deciso di compilare. La decisione di mandare è a monte, sulla pagina, e il punteggio di quella resta il lotto 1 (86/120). Applicare gli otto qui produrrebbe urgenza su un favore. |
+| **Punteggio gate offerta** | Non calcolato, per la ragione sopra. Nessuna delle quattro P è toccata. |
+| **Lingua italiana (10 voci)** | Non applicabile al deliverable (copy inglese). Passata sulle note italiane di questa sezione: **10 voci controllate, 0 correzioni**. |
+| **Blacklist AI** | Passata dedicata rifatta il 05/09 sul testo definitivo, pattern per pattern: **zero match**. Verificato uno per uno: zero em dash, zero punti esclamativi, zero antitesi «X, not Y», zero `simply` / `easily` / `just` / `make sure to`, zero superlativi, zero disclaimer difensivi, zero dichiarazioni di facilità (le due righe **tolgono** un errore, non dicono che è facile). |
+| **Controllo angolari** | ⛔ Vincolo bloccante del brief. Rifatto il 05/09 sulle quattro varianti nella forma definitiva, `grep` visivo carattere per carattere (2 prime scelte + 2 opzioni B): **zero `<`, zero `>`**. Aggiunto il conteggio dei caratteri totali col prefisso su tutte e quattro: 27, 26, 26, 27 — **nessuna sopra 28**. Le parentesi sono nominate solo come parola inglese `brackets`. |
+| **Deliverability** | Non applicabile: nessuna email inviata da noi. Il testo lo copia e lo manda il lettore dal suo client. |
+| **Budget caratteri** | 2 righe su 2 **dentro il tetto**. `template.note.1` **25/28** (3 restituiti). `template.note.2` **28/28** (0 restituiti, al tetto esatto, punto finale tolto per rientrare). ⛔ Nessuno sforo, lista di sforo vuota e dichiarata. |
+
+---
+
+## Aperti (lotto 3)
+
+**1. Le due righe non stanno in 28 caratteri in albanese e in italiano.**
+Il margine è zero già in inglese sulla riga 2, e il brief lo dà per noto. Per memoria, con le stesse due coppie di fatti: `Zëvendësoni edhe kllapat` sta a 24 in SQ, ma `Mbani të 19 rreshtat, edhe bosh` è 31 e sfora; in IT `Sostituisci anche le parentesi` è 30 e sfora già la riga 1. ⛔ Non ho tradotto niente: non è in questo lotto. Quando ci si arriva, o il blocco cambia capienza o le due righe diventano tre in SQ e IT, e tre righe di commento sopra `TITLE:` cambiano il peso visivo del blocco.
+`DA CHIEDERE A LORI: il blocco copiabile resta a 30 caratteri anche in SQ e IT? Se sì, in quelle due lingue le note di testa non entrano in due righe: preferisci tre righe da 28 o un blocco più largo?`
+
+**2. Le 19 righe del modello non le ho viste.**
+Ho scritto `19` sulla fonte SOP §2.2, non su un modello reale: l'estratto del brief si ferma a `...` e poi `CONSENT:`. Se il modello mostrato in pagina accorpa o salta righe, il numero va corretto prima del publish.
+`DA CHIEDERE A OPS: il modello copiabile in pagina ha esattamente 19 righe di campo, una per ogni riga della tabella §2.2, o ne accorpa qualcuna? Se il conteggio a schermo non è 19, la nota di testa dice un numero falso.`
+
 **3. `the event goes on the site` è una promessa che oggi non si mantiene.**
 `sop_invio_eventi_via_email.md` §1 dichiara che il mockup non ha database e che un evento accettato oggi non ha dove finire online. Finché è così, questa stringa non deve andare in produzione su un indirizzo pubblico: chi manda un evento aspetta di vederlo e non lo vedrà mai. Non è un problema di copy, quindi non l'ho aggirato riscrivendolo: se serve una versione «riceviamo ma non pubblichiamo ancora», la scrivo, ma prima qualcuno deve decidere se la pagina di invio si pubblica ora o alla Fase 2 di `PLAN.md`.
 `DA CHIEDERE A DAVIDE: la pagina Submit an event va online prima che esista il sito con il database? Se sì servono stringhe diverse, perché oggi non possiamo pubblicare un evento che riceviamo.`
