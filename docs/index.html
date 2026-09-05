@@ -37,30 +37,43 @@
     </div>
   </div>
 
+  <!-- ══════════════════════════════════════════════════════════════
+       FILTRI — due domande, due terreni (LORI, 05/09/2026)
+       Riga 1 QUANDO: fascia grigia a tutta larghezza, pastiglie
+       monocrome, "Pick a date" fissa a destra fuori dallo scorrevole.
+       Riga 2 COSA: fondo bianco, pastiglie con tinta e icona.
+       Il fondo diverso e' il segnale piu' forte; il colore il secondo;
+       lo spazio il terzo. Acceso = nero in tutte e due le righe: e' la
+       regola del design system e tiene insieme le due file.
+       ⚡ data-cat serve al COLORE (lo aggancia il design system),
+       data-cat-key serve al FILTRO (lo legge app.js). Servono tutti e due.
+       ══════════════════════════════════════════════════════════════ -->
   <div class="te-filters">
-    <div class="te-scroll" role="group" aria-label="Date" data-filter="date">
-      <button class="te-chip is-active" type="button" aria-pressed="true" data-date="anytime">Anytime</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-date="today">Today</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-date="tomorrow">Tomorrow</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-date="weekend">Weekend</button>
-      <button class="te-chip te-chip--icon" type="button" aria-label="Pick a date"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg></button>
+    <div class="te-filters__when">
+      <div class="te-scroll" role="group" aria-label="Date" data-filter="date">
+        <button class="te-chip is-active" type="button" aria-pressed="true" data-date="anytime">Anytime</button>
+        <button class="te-chip" type="button" aria-pressed="false" data-date="today">Today</button>
+        <button class="te-chip" type="button" aria-pressed="false" data-date="tomorrow">Tomorrow</button>
+        <button class="te-chip" type="button" aria-pressed="false" data-date="weekend">Weekend</button>
+      </div>
+      <button class="te-chip te-chip--icon te-filters__pick" type="button" aria-label="Pick a date"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg></button>
     </div>
     <div class="te-scroll" role="group" aria-label="Categories" data-filter="cat">
-      <button class="te-chip is-active" type="button" aria-pressed="true" data-cat-key="all">All</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-cat-key="music"><i class="te-dot"></i>Music</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-cat-key="nightlife"><i class="te-dot"></i>Nightlife</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-cat-key="theatre"><i class="te-dot"></i>Theatre</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-cat-key="cinema"><i class="te-dot"></i>Cinema</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-cat-key="art"><i class="te-dot"></i>Art</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-cat-key="food"><i class="te-dot"></i>Food &amp; Drink</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-cat-key="sport"><i class="te-dot"></i>Sport</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-cat-key="family"><i class="te-dot"></i>Family</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-cat-key="meetups"><i class="te-dot"></i>Meetups</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-cat-key="outdoors"><i class="te-dot"></i>Outdoors</button>
-      <button class="te-chip" type="button" aria-pressed="false" data-cat-key="other"><i class="te-dot"></i>Other</button>
+      <button class="te-chip is-active" type="button" aria-pressed="true" data-cat-key="all"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>All</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="music" data-cat="music"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>Music</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="nightlife" data-cat="nightlife"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14l-7 8Z"></path><path d="M12 11v8"></path><path d="M8 21h8"></path></svg>Nightlife</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="theatre" data-cat="theatre"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v6a8 8 0 0 1-16 0Z"></path><path d="M9 10h.01"></path><path d="M15 10h.01"></path><path d="M9.5 14.5a3.5 3.5 0 0 0 5 0"></path></svg>Theatre</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="cinema" data-cat="cinema"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"></path><path d="m6.2 5.3 3.1 3.9"></path><path d="m12.4 3.4 3.1 4"></path><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"></path></svg>Cinema</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="art" data-cat="art"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0 0 20 2.5 2.5 0 0 0 2-4 2.5 2.5 0 0 1 2-4h2a4 4 0 0 0 4-4 10 10 0 0 0-10-8Z"></path><circle cx="8.5" cy="7.5" r="1.2" fill="currentColor"></circle><circle cx="13.5" cy="6.5" r="1.2" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r="1.2" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r="1.2" fill="currentColor"></circle></svg>Art</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="food" data-cat="food"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2v6a3 3 0 0 0 6 0V2"></path><path d="M7 8v14"></path><path d="M17 22V2c2.2 0 3.5 2.2 3.5 5.5S18.2 13 16 13h1"></path></svg>Food &amp; Drink</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="sport" data-cat="sport"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14 14 0 0 0 0 20"></path><path d="M12 2a14 14 0 0 1 0 20"></path></svg>Sport</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="family" data-cat="family"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="6" r="3"></circle><path d="M3 21v-2a5 5 0 0 1 10 0v2"></path><circle cx="17.5" cy="12" r="2"></circle><path d="M14 21v-1.5a3.5 3.5 0 0 1 7 0V21"></path></svg>Family</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="meetups" data-cat="meetups"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3.5"></circle><path d="M2 21v-1.5A5.5 5.5 0 0 1 7.5 14h3A5.5 5.5 0 0 1 16 19.5V21"></path><path d="M16.5 3.6a3.5 3.5 0 0 1 0 6.8"></path><path d="M18 14.2a5.5 5.5 0 0 1 4 5.3V21"></path></svg>Meetups</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="outdoors" data-cat="outdoors"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 3 4 8 5-5 5 15H2Z"></path></svg>Outdoors</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="other" data-cat="other"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="8" cy="12" r="1.2" fill="currentColor"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor"></circle><circle cx="16" cy="12" r="1.2" fill="currentColor"></circle></svg>Other</button>
     </div>
     <div class="te-results"><span><b data-count>17 events</b><span data-range></span></span></div>
-          </div>
+  </div>
 
   <!-- Le card le disegna app.js leggendo eventi.js. ⛔ Non si scrivono a mano:
        una card scritta a mano non risponde ai filtri e invecchia da sola. -->
@@ -90,8 +103,7 @@
       </div>
     </section>
     <section class="te-group">
-      <h2 class="te-group__title"><span class="te-skel te-skel--title" style="display:block;width:180px"></span></h2>
-      <div class="te-list--cols te-pad" style="padding-bottom:var(--te-sp-6)">
+      <div class="te-grid te-pad" style="padding-bottom:var(--te-sp-6)">
         <div class="te-skel-card">
           <div class="te-skel te-skel-card__media"></div>
           <div class="te-skel-card__body"><div class="te-skel te-skel--line" style="width:45%"></div><div class="te-skel te-skel--title" style="width:95%"></div><div class="te-skel te-skel--line" style="width:65%"></div></div>
@@ -107,6 +119,31 @@
       </div>
     </section>
   </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       AGGANCIO AL CANALE — in fondo alla lista (LORI, 05/09/2026).
+       Sta qui e non in cima perche' chi arriva in fondo ha gia' letto:
+       e' il momento in cui o esce o vuole il prossimo giro.
+       ⛔ Non nella tabbar: li c'e' gia' il FAB rosso "Add", che e'
+       l'azione di chi ORGANIZZA. Mettere "Follow" accanto vorrebbe dire
+       due pubblici diversi a due centimetri di distanza.
+       ⛔ Il bottone NON prende il verde di WhatsApp: il canale si
+       riconosce dal GLIFO, non dalla tinta. Il glifo qui e' un fumetto
+       nostro, SEGNAPOSTO: il marchio di terzi si incolla dal file
+       ufficiale in fase di costruzione, non si ridisegna.
+       URL: il canale non esiste ancora — href="#" e data-ph, come
+       events@tiranatodo.com in submit-evento.html.
+       ══════════════════════════════════════════════════════════════ -->
+  <section class="te-pad" style="padding-top:var(--te-sp-6);padding-bottom:var(--te-sp-8)" aria-label="Stay updated">
+    <div class="te-follow">
+      <span class="te-follow__icon" aria-hidden="true"><svg class="te-ic" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"></path></svg></span>
+      <div class="te-follow__body">
+        <p class="te-follow__title">[MUSE: titolo — seguire il canale WhatsApp]</p>
+        <p class="te-follow__text">[MUSE: una riga — cosa arriva e ogni quanto]</p>
+      </div>
+      <a class="te-btn te-btn--secondary" href="#" data-ph="whatsapp-channel-url">[MUSE: etichetta bottone]</a>
+    </div>
+  </section>
 
 </main>
 
@@ -124,9 +161,15 @@
       <div>
         <p class="te-footer__title">Browse</p>
         <ul>
-          <li><a href="#">Today</a></li>
-          <li><a href="#">This weekend</a></li>
-          <li><a href="#">All categories</a></li>
+          <li><a href="./lista-eventi.html?date=today">Today</a></li>
+          <li><a href="./lista-eventi.html?date=weekend">This weekend</a></li>
+          <li><a href="./lista-eventi.html">All categories</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="te-footer__title">[MUSE: titolo colonna — restare aggiornati]</p>
+        <ul>
+          <li><a href="#" data-ph="whatsapp-channel-url">[MUSE: voce — canale WhatsApp]</a></li>
         </ul>
       </div>
     </div>

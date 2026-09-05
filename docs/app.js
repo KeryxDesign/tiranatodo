@@ -9,13 +9,14 @@
    e lo costruisce la sessione descritta in PLAN.md. Questo file serve
    solo a far vedere e provare il comportamento.
 
+   ✅ RATIFICATO DA LORI il 05/09/2026: il formato della data nella card
+   (fmtCardDate), il chip «Anytime» come stato di partenza al posto di
+   «Today», e la griglia .te-grid del design system al posto della classe
+   .te-list--cols, che non era definita da nessuna parte.
+
    ⏳ DA RATIFICARE DA LORI:
-     1. il formato della data nella card (funzione fmtCardDate)
-     2. il chip «Anytime» in testa alla riga delle date: e' lo stesso
-        schema del chip «All» che lei ha gia' messo in testa alle
-        categorie, non un modello nuovo
-     3. la forma del segno «Picked by us» (§7 del piano), qui non
-        ancora disegnato
+     · la forma del segno «Picked by us» (§7 del piano), non ancora
+       disegnato
    ══════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -128,7 +129,7 @@
       '<div class="te-card__body">' +
         '<p class="te-card__date">' + IC_CLOCK + fmtCardDate(ev) + '</p>' +
         '<h3 class="te-card__title">' + esc(ev.title) + '</h3>' +
-        '<p class="te-card__place"><span>' + esc(ev.venue + ', ' + ev.area) + '</span>' + CHEVRON + '</p>' +
+        '<p class="te-card__place">' + IC_PIN + '<span>' + esc(ev.venue + ', ' + ev.area) + '</span>' + CHEVRON + '</p>' +
         '<div class="te-card__foot">' + priceHtml(ev) + '</div>' +
       '</div></a>';
   }
@@ -180,7 +181,7 @@
        titolo la ripeterebbe (decisione LORI, opzione b). */
     var rest = hits.filter(function (e) { return e !== feat; });
     if (rest.length) {
-      html += '<section class="te-group"><div class="te-list--cols te-pad">' +
+      html += '<section class="te-group"><div class="te-grid te-pad">' +
               rest.map(cardHtml).join('') + '</div></section>';
     }
     host.innerHTML = html;

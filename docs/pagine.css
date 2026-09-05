@@ -1,6 +1,11 @@
 /* TiranaToDo — classi di pagina non ancora nel design system.
    Solo token --te-*: nessun colore, misura o raggio scritto a mano.
-   Da riportare in styles.css del DS quando LORI approva. */
+   Da riportare in styles.css del DS quando LORI approva.
+
+   ⚠️ REVISIONE LORI 05/09/2026 — questo file era incompleto rispetto
+   al markup: dodici classi usate nelle tre pagine non esistevano ne'
+   qui ne' in _ds/styles.css, quindi non facevano niente. Elenco e
+   riparazione nella sezione CLASSI MORTE piu' sotto. */
 
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap');
 
@@ -30,6 +35,11 @@
 /* stessa ragione sul luogo: "Dajti Ekspres cable car, lower station"
    veniva tagliato a meta'. Dove si va e' un fatto, non una rifinitura. */
 .te-card--list .te-card__place span{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+/* In griglia le card di una riga hanno altezza uguale (align stretch):
+   senza questo il piede resta attaccato al luogo e sotto avanza vuoto.
+   Con margin-top:auto prezzo e voto si allineano in fondo su tutta la
+   riga. In colonna singola auto vale 0 e il distacco lo da' il padding. */
+.te-card--list .te-card__foot{margin-top:auto;padding-top:var(--te-sp-2)}
 
 /* Affordance "si apre" — la card e' gia' un <a>, ma a schermo non si
    vede (niente hover utile su mobile). Un chevron muto (eredita
@@ -37,12 +47,159 @@
    il rosso resta al voto "I'm interested") in fondo alla riga del
    luogo, su OGNI card, compatta e featured, pagina lista e dettaglio:
    non e' un secondo invito a cliccare in piu' del bottone di voto
-   dentro la card, e' la lettura di quello che gia' c'e'. Markup da
-   aggiungere in lista-eventi.html e dettaglio-evento.html: ultimo
-   figlio di ogni .te-card__place, un <svg class="te-ic te-ic--s
-   te-card__chevron" aria-hidden="true"> con <polyline points="9 18
-   15 12 9 6"> (chevron destro, viewBox 0 0 24 24). */
+   dentro la card, e' la lettura di quello che gia' c'e'.
+   ⚠️ 05/09: il markup non era mai stato messo in pagina. Ora c'e'. */
 .te-card__chevron{margin-left:auto}
+
+/* Rilievo al passaggio del mouse: serve solo dove il mouse c'e'.
+   Su una griglia di card e' il segnale che l'oggetto intero e' un link. */
+@media (hover:hover){.te-card:hover{box-shadow:var(--te-shadow-md)}}
+
+/* ══════════════════════════════════════════════════════════════════
+   CLASSI MORTE — riparazione del 05/09/2026.
+   Erano scritte nel markup delle tre pagine e non esistevano da
+   nessuna parte. Conseguenze misurate, non teoriche:
+   · .te-list--cols .te-pad .te-pad-t → nessuna colonna e nessun
+     margine: le card toccavano il bordo dello schermo e restavano
+     una sotto l'altra anche a 1440px. E' il difetto che ha aperto
+     questo giro. RIPARATO CAMBIANDO IL MARKUP: la lista ora usa
+     .te-grid del design system (1 col · 2 da 600 · 3 da 960) invece
+     di .te-list--cols. Un secondo nome con le stesse soglie sarebbe
+     una forcella del DS destinata a divergere. Restano .te-pad e
+     .te-pad-t, che sono spaziatura di pagina e nel DS non ci sono.
+   · .te-section → "About this event" e "Organiser" senza margini:
+     il testo toccava i bordi sul dettaglio.
+   · .te-only-mobile / .te-only-desktop → il bottone "Add event" da
+     desktop e l'hamburger da mobile si vedevano tutti e due sempre.
+   · .te-header--desktop / .te-hero__bar--mobile → la testata del
+     dettaglio e la barra sopra la foto convivevano a ogni larghezza.
+   · .te-badge--featured → il badge "Featured" era senza fondo: testo
+     scuro direttamente sulla fotografia, illeggibile.
+   · .te-card--featured → la card in evidenza era una card qualunque.
+   · .te-skel-card / __media / __body → gli scheletri di caricamento
+     erano div alti zero: lo stato "Loading" mostrava il vuoto.
+   ══════════════════════════════════════════════════════════════════ */
+.te-pad{padding-left:var(--te-gutter);padding-right:var(--te-gutter)}
+.te-pad-t{padding-top:var(--te-sp-4)}
+.te-section{padding:var(--te-sp-6) var(--te-gutter)}
+
+.te-only-desktop{display:none}
+@media (min-width:960px){
+  .te-only-mobile{display:none}
+  .te-only-desktop{display:inline-flex}
+}
+.te-header--desktop{display:none}
+@media (min-width:960px){.te-header--desktop{display:flex}}
+/* la soglia e' 960 come il resto: e' dove compare .te-nav e sparisce
+   la tabbar. Sotto quella misura la navigazione del dettaglio e'
+   la barra sopra la foto; sopra, la testata. Mai tutte e due. */
+@media (min-width:960px){.te-hero__bar--mobile{display:none}}
+
+.te-badge--featured{background:var(--te-ink);color:var(--te-on-ink)}
+
+/* CARD IN EVIDENZA — una sola per pagina, ed e' la prima cosa che si
+   legge. Da mobile: stessa card, foto piu' alta (3/2 invece di 2/1) e
+   titolo di un gradino piu' grande. Da 768 diventa orizzontale, foto a
+   sinistra: a tutta larghezza su 1200px una foto 2/1 sarebbe alta 600
+   pixel e mangerebbe lo schermo intero prima del primo evento. */
+.te-card--featured .te-card__media{aspect-ratio:3/2}
+.te-card--featured .te-card__title{font-size:var(--te-fs-h3);-webkit-line-clamp:3}
+@media (min-width:768px){
+  .te-card--featured{display:grid;grid-template-columns:1.15fr 1fr;align-items:stretch}
+  .te-card--featured .te-card__media{aspect-ratio:16/10}
+  .te-card--featured .te-card__body{justify-content:center;padding:var(--te-sp-6);gap:var(--te-sp-3)}
+  .te-card--featured .te-card__title{font-size:var(--te-fs-h2)}
+  .te-card--featured .te-card__foot{margin-top:var(--te-sp-2)}
+}
+
+.te-skel-card{background:var(--te-white);border-radius:var(--te-r-md);box-shadow:var(--te-shadow-sm);overflow:hidden}
+.te-skel-card__media{aspect-ratio:2/1;border-radius:0}
+.te-skel-card__body{padding:var(--te-sp-3) var(--te-sp-4) var(--te-sp-4);display:flex;flex-direction:column;gap:var(--te-sp-2)}
+
+/* ══════════════════════════════════════════════════════════════════
+   BARRA FILTRI — due domande diverse, due terreni diversi (05/09/2026)
+   Prima: due righe di pastiglie identiche a 8px di distanza, sullo
+   stesso bianco. A colpo d'occhio erano una lista sola di quindici
+   comandi, e nessuno capiva che "Today" e "Music" rispondono a due
+   domande separate. Le tre cose che li separano ora, in ordine di
+   forza: il FONDO (la riga delle date sta su una fascia grigia a tutta
+   larghezza, le categorie sul bianco), il COLORE (le categorie portano
+   la tinta, le date sono monocrome), lo SPAZIO (12px invece di 8).
+   Zero etichette aggiunte: su una barra appiccicata in cima ogni riga
+   di testo in piu' e' spazio tolto agli eventi.
+   Lo stato acceso resta nero per tutte e due le righe — e' la regola
+   del design system, ed e' quello che tiene insieme le due file
+   mentre le fasce le separano.
+
+   La barra si appiccica SOTTO la testata, non a 0: erano due elementi
+   sticky alla stessa quota, e la testata (z 30) copriva i filtri (z 20).
+   ══════════════════════════════════════════════════════════════════ */
+.te-filters{top:56px}
+@media (min-width:960px){.te-filters{top:72px}}
+
+.te-filters__when{position:relative;display:flex;align-items:center;background:var(--te-surface-2);padding:var(--te-sp-2) 0;margin-bottom:var(--te-sp-3)}
+.te-filters__when .te-scroll{flex:1 1 auto;min-width:0;padding-top:0;padding-bottom:0}
+/* "Pick a date" esce dallo scorrevole e resta fissa a destra: e' la
+   via d'uscita verso qualunque data, e un comando che scorre via dallo
+   schermo non esiste. Con cinque voci le pastiglie non stanno piu' su
+   una riga a 390px (ne servono ~460): scorrono, e la sfumatura dice
+   che sotto il pollice ce n'e' ancora. */
+.te-filters__pick{flex:none;margin-right:var(--te-gutter);background:var(--te-white)}
+.te-filters__pick::before{content:"";position:absolute;right:100%;top:0;bottom:0;width:var(--te-sp-6);pointer-events:none;background:linear-gradient(90deg,color-mix(in srgb,var(--te-surface-2),transparent 100%),var(--te-surface-2))}
+@media (min-width:960px){
+  /* col mouse una fila che scorre in orizzontale e' una fila che non si
+     legge: da desktop le pastiglie vanno a capo. */
+  .te-filters .te-scroll{flex-wrap:wrap;overflow-x:visible}
+  .te-filters__pick::before{display:none}
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   PASTIGLIE CATEGORIA — colore e icona (05/09/2026)
+   Spenta: fondo bianco, filo e icona nella tinta della categoria,
+   etichetta nell'inchiostro della categoria. Il colore c'e' e si vede,
+   ma la pastiglia resta un contorno: non puo' essere scambiata per il
+   bottone rosso, che e' pieno, alto 48 e ha l'ombra.
+   Accesa: nero pieno, etichetta bianca, icona che resta colorata —
+   la regola del DS ("attivo = nero per tutte le chip"), che qui vale
+   doppio perche' fa lo stato acceso il piu' contrastato della riga.
+   Contrasti misurati: etichetta -ink su bianco ben oltre 4,5:1; filo e
+   icona (grafica, pavimento 3:1) da 3,36:1 (meetups) a 4,86:1 su
+   bianco, e da 3,51:1 (other) a 5,09:1 (meetups) sul nero acceso.
+   Nessuna tinta e' stata cambiata e nessuna soglia abbassata.
+   Fuoco da tastiera: l'anello del DS (--te-ring, bianco + nero) vale
+   identico su bianco, su nero e sulla fascia grigia. Non si tocca. */
+.te-chip__ic{flex:none}
+.te-chip--cat{border-color:var(--cat);color:var(--cat-ink)}
+.te-chip--cat .te-chip__ic{color:var(--cat)}
+.te-chip--cat:hover,.te-chip--cat.is-hover{background:var(--cat-bg);border-color:var(--cat)}
+.te-chip--cat.is-active{background:var(--te-ink);border-color:var(--te-ink);color:var(--te-on-ink)}
+.te-chip--cat.is-active .te-chip__ic{color:var(--cat)}
+
+/* ══════════════════════════════════════════════════════════════════
+   BLOCCO "SEGUI IL CANALE" — .te-follow (05/09/2026)
+   Due azioni per due persone diverse, e non devono somigliarsi:
+   · "Add" e' di chi organizza: rosso, pieno, tondo, sempre nella barra
+     in basso, icona +. Verbo: dare.
+   · "Follow" e' di chi consuma: nero su bianco, rettangolare, dentro a
+     un blocco che spiega, una volta sola in fondo alla pagina.
+     Verbo: ricevere.
+   Quattro assi di differenza — colore, forma, posizione, verbo.
+   ⛔ Il bottone NON prende il verde di WhatsApp. Il rosso e' riservato
+   alle azioni primarie e il verde non e' in palette: metterlo qui vuol
+   dire tre inviti diversi sulla stessa schermata e nessuno che vince.
+   Il canale si riconosce dal GLIFO, non dalla tinta, e il glifo si
+   incolla dal file ufficiale — non si ridisegna (marchio di terzi).
+   Nel mockup c'e' un fumetto nostro, segnaposto dichiarato. */
+.te-follow{display:flex;gap:var(--te-sp-4);align-items:flex-start;background:var(--te-white);border:1.5px solid var(--te-line-soft);border-radius:var(--te-r-md);box-shadow:var(--te-shadow-sm);padding:var(--te-sp-5)}
+.te-follow__icon{width:var(--te-tap);height:var(--te-tap);flex:none;border-radius:50%;background:var(--te-surface-2);color:var(--te-ink);display:flex;align-items:center;justify-content:center}
+.te-follow__body{display:flex;flex-direction:column;gap:var(--te-sp-1);min-width:0}
+.te-follow__title{font-size:var(--te-fs-lead);line-height:var(--te-lh-title);font-weight:800;margin:0}
+.te-follow__text{font-size:var(--te-fs-small);line-height:1.4;color:var(--te-ink-muted);margin:0}
+.te-follow .te-btn{margin-top:var(--te-sp-3);align-self:flex-start}
+@media (min-width:600px){
+  .te-follow{align-items:center}
+  .te-follow .te-btn{margin-top:0;margin-left:auto;flex:none}
+}
 
 /* ══════════════════════════════════════════════════════════════════
    SEGNAPOSTO IMMAGINE — .te-media-empty, stato reale "evento senza
@@ -81,8 +238,12 @@
 
 /* ══════════════════════════════════════════════════════════════════
    DEV ONLY — barra di scelta dello stato. Non fa parte del design:
-   si toglie in produzione insieme allo <script> in fondo alla pagina. */
-.dev-bar{position:sticky;top:0;z-index:999;display:flex;flex-wrap:wrap;gap:var(--te-sp-2);align-items:center;padding:var(--te-sp-2) var(--te-sp-4);background:var(--te-surface-3);border-bottom:1.5px solid var(--te-line);font-size:var(--te-fs-small)}
+   si toglie in produzione insieme allo <script> in fondo alla pagina.
+   Non e' piu' appiccicata in cima: erano tre elementi sticky alla
+   stessa quota e falsavano la lettura della pagina vera. */
+.dev-bar{position:static;display:flex;flex-wrap:wrap;gap:var(--te-sp-2);align-items:center;padding:var(--te-sp-2) var(--te-sp-4);background:var(--te-surface-3);border-bottom:1.5px solid var(--te-line);font-size:var(--te-fs-small)}
 .dev-bar__label{font-weight:700;color:var(--te-ink-muted)}
 .dev-bar button{font-size:var(--te-fs-small);padding:var(--te-sp-1) var(--te-sp-3)}
 .dev-bar button.is-active{background:var(--te-ink);color:var(--te-on-ink);border-color:var(--te-ink)}
+.dev-bar a{display:inline-flex;align-items:center;min-height:32px;padding:0 var(--te-sp-3);border-radius:var(--te-r-pill);border:1.5px solid var(--te-line);color:var(--te-ink);text-decoration:none;font-weight:600}
+.dev-bar a.is-on{background:var(--te-ink);color:var(--te-on-ink);border-color:var(--te-ink)}

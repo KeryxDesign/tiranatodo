@@ -9,8 +9,10 @@
 </head>
 <body class="te-page" data-screen-label="Submit an event">
 
-<!-- Avviso permanente, come sulle altre due pagine. ⏳ testo segnaposto,
-     DA CHIEDERE A MUSE. -->
+<!-- Avviso permanente, come sulle altre due pagine. Rimesso il 05/09/2026:
+     era stato tolto in revisione, ma resta per decisione di Davide. Si
+     toglie solo quando dentro al sito ci sono eventi veri.
+     ⏳ testo segnaposto, DA CHIEDERE A MUSE. -->
 <p class="te-demo-note" role="note" style="margin:0;padding:var(--te-sp-2) var(--te-gutter);background:var(--te-ink);color:var(--te-on-ink);font-size:15px;line-height:1.4;font-weight:400;text-align:center">Demo site — these events are not real. Nothing here is happening.</p>
 
 <header class="te-header">
@@ -92,6 +94,18 @@ Subject: <mark class="te-ph">[MUSE: oggetto]</mark>
 <li><a href="./lista-eventi.html">All categories</a></li>
 </ul>
 </div>
+<!-- Il canale WhatsApp compare qui SOLO nel piede, e in nessun altro
+     punto di questa pagina (LORI, 05/09/2026). Questa e' la pagina di
+     chi ORGANIZZA: mettere in mezzo l'invito a seguire il canale, che
+     e' l'azione di chi CONSUMA, sarebbe proprio la confusione fra i
+     due pubblici da evitare. Nel piede invece ci sta: il piede e' la
+     mappa del sito, non un invito. -->
+<div>
+<p class="te-footer__title">[MUSE: titolo colonna — restare aggiornati]</p>
+<ul>
+<li><a href="#" data-ph="whatsapp-channel-url">[MUSE: voce — canale WhatsApp]</a></li>
+</ul>
+</div>
 </div>
 <div class="te-footer__legal">
 <nav class="te-footer__lang" aria-label="Language">
@@ -156,6 +170,8 @@ copybox.label → Email template
 copybox.copy → Copy / Copied                        [utility, non di marca — vedi nota in consegna]
 copybox.note → Placeholder address — the tiranatodo.com domain isn't registered yet.
 alert.heading → What happens next                   [etichetta strutturale, come "Organiser" in dettaglio-evento]
+follow.footer.title → [MUSE] titolo colonna di piede            [NUOVA]
+follow.footer.link → [MUSE] voce di piede                       [NUOVA]
 footer.* → come in lista-eventi.html
 
 CAMPI ANCORA APERTI (non stringhe, vuoti da riempire quando arrivano):
@@ -163,10 +179,14 @@ CAMPI ANCORA APERTI (non stringhe, vuoti da riempire quando arrivano):
 - [OPS: elenco campi] elenco dei campi richiesti nel corpo della mail
 - [MUSE] etichetta del bottone primario (apre il client di posta)
 - [MUSE/OPS] testo di cosa succede dopo l'invio (tempi, conferma)
+- [MUSE] le due voci nuove della colonna di piede sul canale WhatsApp
 
 INDIRIZZO: events@tiranatodo.com è un segnaposto dichiarato — il
 dominio tiranatodo.com non è ancora registrato. Non sostituire senza
 conferma di Davide/OPS.
+
+CANALE WHATSAPP: stesso trattamento — il canale non esiste ancora,
+quindi href="#" e data-ph="whatsapp-channel-url".
 -->
 
 </body>
