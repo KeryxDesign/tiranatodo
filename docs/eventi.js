@@ -29,12 +29,12 @@
 window.TE_IMG_BASE = 'https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/';
 
 window.TE_PHOTOS = {
-  music:    { file: 'music.jpg',    alt: 'An electric guitar and a microphone stand alone in a spotlight on a small dark stage, seen over the heads of a seated audience' },
-  meetups:  { file: 'meetups.jpg',  alt: 'People talking in small groups with drinks in hand on a rooftop terrace at dusk, under a string of festoon lights' },
+  music:    { file: 'music.jpg',    alt: 'An electric guitar and a microphone on a small dark stage, lit by one spotlight, seen over the heads of a seated audience.' },
+  meetups:  { file: 'meetups.jpg',  alt: 'People talking in small groups on a rooftop terrace at dusk, with a line of small light bulbs hanging above them.' },
   cinema:   { file: 'cinema.jpg',   alt: 'Rows of empty folding chairs facing a lit open-air cinema screen at night, under a full moon' },
-  outdoors: { file: 'outdoors.jpg', alt: 'A stone path climbing through pine trees on a hillside, with the roofs of a city visible far below in the morning haze' },
+  outdoors: { file: 'outdoors.jpg', alt: 'A stone path going up through pine trees on a hillside, with the roofs of a city far below in the morning mist.' },
   food:     { file: 'food.jpg',     alt: 'Small plates of grilled vegetables, bread and cheese crowded together on a worn wooden table, seen from above' },
-  art:      { file: 'art.jpg',      alt: 'Framed canvases hanging on a white gallery wall, with two visitors standing back to look at them' }
+  art:      { file: 'art.jpg',      alt: 'Framed paintings on a white gallery wall, with two visitors standing a few steps away and looking at them.' }
 };
 
 /* Categoria → foto usata. Dove le due colonne non coincidono, e' un prestito. */
