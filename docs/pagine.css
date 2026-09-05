@@ -1,159 +1,88 @@
-/* ══════════════════════════════════════════════════════════════════
-   TiranaToDo — classi di pagina non ancora nel design system.
+/* TiranaToDo — classi di pagina non ancora nel design system.
    Solo token --te-*: nessun colore, misura o raggio scritto a mano.
-   Da riportare in styles.css del DS quando LORI approva.
-   ═════════════════════════════════════════════════════════════════ */
+   Da riportare in styles.css del DS quando LORI approva. */
 
-/* [hidden] deve battere display:flex/grid delle classi te-* */
-[hidden]{display:none !important}
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap');
 
-/* ─── Card in evidenza (slot Featured) ─────────────────────────
-   Si distingue per bordo inchiostro + titolo 24, non per colore:
-   il rosso resta alle azioni. */
-.te-card--featured{border:1.5px solid var(--te-ink);box-shadow:var(--te-shadow-md)}
-.te-card--featured .te-card__title{font-size:var(--te-fs-h2);line-height:var(--te-lh-title)}
-.te-card--featured .te-card__body{padding:var(--te-sp-4)}
-.te-badge--featured{background:var(--te-ink);color:var(--te-on-ink)}
+.te-scroll>*{scroll-snap-align:start}
+.te-card__over>*{pointer-events:auto}
+.te-hero__bar>div{display:flex;gap:var(--te-sp-2)}
+.te-actions__row>*{flex:1 1 auto;min-width:0;padding-left:var(--te-sp-4);padding-right:var(--te-sp-4)}
 
 /* ══════════════════════════════════════════════════════════════════
-   CARD COMPATTA — la foto sale sopra il testo (04/09/2026)
-   ──────────────────────────────────────────────────────────────────
-   PRIMA: striscia di 104px sul fianco, alta quanto la card. Misurata
-   a 390 reali faceva 104 x 253. Su una foto 16:10 quel riquadro e' un
-   ritaglio verticale: si vedeva una fetta, non la scena.
-   PERCHE' NON BASTAVA ALLARGARE LA STRISCIA: a 390 la card e' larga
-   358 e il corpo ne usa 254 per tenere il titolo in tre righe e il
-   luogo in due. Ogni pixel dato alla foto e' un pixel tolto al testo,
-   che ricomincia a troncarsi — che e' il difetto riparato poche righe
-   piu' sotto. A quella larghezza non c'e' spazio da spostare: la foto
-   deve prendersi tutta la riga.
-   PERCHE' 2/1 E NON 16/10: a piena larghezza il riquadro passa a
-   358 x 179. In 16/10 sarebbe 358 x 224, cioe' quanto la card in
-   evidenza (356 x 223), e le due schede diventerebbero la stessa cosa.
-   Il 2/1 tiene la foto leggibile, lascia alla card in evidenza il suo
-   ruolo di pezzo grosso, e alza la pagina di meno.
-   COSTO: la card passa da 253 a ~350 di altezza. Dichiarato in consegna.
-   Le foto sorgente sono 700x438: il riquadro piu' largo che questa
-   regola produce e' 447 (due colonne a 959px), quindi non si sgranano.
-   ══════════════════════════════════════════════════════════════════ */
+   CARD COMPATTA — da striscia laterale (104px) a foto sopra, 2/1
+   (04/09/2026). Prima: riga icona-piu'-testo su 104px di larghezza,
+   titolo tagliato a 2 righe, luogo troncato con ellissi. Il problema
+   non era estetico: un luogo troncato tipo "Dajti Ekspres cable
+   car..." e' un'informazione persa, non una rifinitura. Ora la foto
+   sta sopra (aspect-ratio 2/1, larghezza piena della card) e il corpo
+   sotto ha tutta la larghezza della card per respirare: titolo su 3
+   righe, luogo su 2 righe intere invece di 1 troncata. Costo: la card
+   e' piu' alta, quindi meno eventi visibili sopra la piega — accettato
+   perche' la leggibilita' vince (criterio in testa a questo file). Se
+   in futuro serve il markup del riquadro-senza-foto, torna a essere il
+   div .te-media-empty al posto dell'<img>, dentro lo stesso
+   .te-card__media / .te-hero__media. */
 .te-card--list{flex-direction:column;align-items:stretch}
 .te-card--list .te-card__media{width:auto;aspect-ratio:2/1;align-self:auto}
-/* corpo: stessi margini della card normale, ora che il testo parte dal
-   bordo sinistro della scheda e non da fianco a una striscia */
 .te-card--list .te-card__body{flex:0 1 auto;padding:var(--te-sp-3) var(--te-sp-4) var(--te-sp-4)}
-
-/* ─── Card compatta: il nome dell'evento e' l'elemento che si legge
-   per primo. Il DS lo taglia a 2 righe; nella lista compatta i titoli
-   veri arrivano a 3 e venivano troncati a meta' parola. */
 .te-card--list .te-card__title{-webkit-line-clamp:3}
 /* stessa ragione sul luogo: "Dajti Ekspres cable car, lower station"
    veniva tagliato a meta'. Dove si va e' un fatto, non una rifinitura. */
 .te-card--list .te-card__place span{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 
+/* Affordance "si apre" — la card e' gia' un <a>, ma a schermo non si
+   vede (niente hover utile su mobile). Un chevron muto (eredita
+   ink-muted da .te-card__place: zero colore scritto qui, mai rosso —
+   il rosso resta al voto "I'm interested") in fondo alla riga del
+   luogo, su OGNI card, compatta e featured, pagina lista e dettaglio:
+   non e' un secondo invito a cliccare in piu' del bottone di voto
+   dentro la card, e' la lettura di quello che gia' c'e'. Markup da
+   aggiungere in lista-eventi.html e dettaglio-evento.html: ultimo
+   figlio di ogni .te-card__place, un <svg class="te-ic te-ic--s
+   te-card__chevron" aria-hidden="true"> con <polyline points="9 18
+   15 12 9 6"> (chevron destro, viewBox 0 0 24 24). */
+.te-card__chevron{margin-left:auto}
+
 /* ══════════════════════════════════════════════════════════════════
-   SEGNAPOSTO IMMAGINE — stato "evento senza foto"
-   ──────────────────────────────────────────────────────────────────────
-   ⚠ NEL MOCKUP QUESTA REGOLA NON LA USA NESSUN RIQUADRO. Dal
-   04/09/2026 tutti e dodici i riquadri delle due pagine portano una
-   fotografia. Il codice non e' morto: e' lo stato di ripiego.
-   QUANDO ENTRA: quando l'evento arriva senza immagine, cioe' quando
-   l'organizzatore non ne carica nessuna. In produzione capitera'
-   spesso — non tutti caricano una foto — e allora il markup del
-   riquadro torna a essere il div .te-media-empty al posto dell'<img>,
-   dentro lo stesso .te-card__media / .te-hero__media. Il riquadro non
-   cambia di un pixel: la regola qui sotto ricalca esattamente
-   l'ingombro di un'immagine con object-fit:cover.
-   ⛔ Quindi non si cancella, nemmeno sembrando inutilizzata: la si
-   toglie solo il giorno in cui il sito garantisse una foto per ogni
-   evento, che non e' il caso.
-   ──────────────────────────────────────────────────────────────────────
-   Tre decisioni, e ognuna ha una ragione:
-   1. Occupa esattamente il riquadro della foto (position:absolute,
-      inset:0, come farebbe un img object-fit:cover): quando la foto
-      arriva non si muove un pixel, ne' in lista ne' nella testata.
-   2. Tessitura a righe diagonali + icona + una riga di testo. La
-      tessitura dice "qui manca un'immagine"; il blocco di tinta piatto
-      da solo si leggeva come decorazione. Le righe NON si animano:
-      lo shimmer e' dello skeleton (te-skel) e vuol dire "sto
-      caricando". Fermo = assenza, animato = attesa.
-   3. Il colore viene dalla triade della categoria (--cat, --cat-bg,
-      --cat-ink): undici tinte, quindi una lista non e' un muro
-      identico. ⛔ Nessun rosso: il rosso resta alle azioni, e un
-      segnaposto non e' un'azione.
-   Il campo e' un SVG inline (pattern in userSpaceOnUse, quindi righe
-   di 8px costanti nei tre ritagli); nessun file esterno, nessuna
-   richiesta di rete. L'id del pattern e' unico per pagina.
+   SEGNAPOSTO IMMAGINE — .te-media-empty, stato reale "evento senza
+   foto". Non e' usato nel mockup (ogni evento di esempio ha una foto),
+   ma resta: e' il fallback che la produzione userà davvero. Non si
+   cancella perche' oggi non si vede. */
+.te-media-empty{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--cat-bg,var(--te-surface-2))}
+.te-media-empty__bg{position:absolute;inset:0;opacity:.5}
+.te-media-empty__field{position:relative;display:flex;flex-direction:column;align-items:center;gap:var(--te-sp-1);color:var(--cat-ink,var(--te-ink-muted))}
+.te-media-empty__label{font-size:var(--te-fs-small);font-weight:700}
+
+.te-footer__lang{display:inline-flex;border:1.5px solid var(--te-on-ink-muted);border-radius:var(--te-r-pill);overflow:hidden}
+
+/* ══════════════════════════════════════════════════════════════════
+   SUBMIT AN EVENT — passi numerati e blocco email copiabile
+   (05/09/2026). Non c'e' modulo: la procedura passa da email. Il
+   blocco copiabile e' il pezzo centrale della pagina — per questo il
+   suo font-size e' il corpo (17px), non il 15 delle note: e' il
+   contenuto piu' importante, non una didascalia.
    ══════════════════════════════════════════════════════════════════ */
-.te-media-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--te-sp-2);padding:var(--te-sp-3);text-align:center;overflow:hidden}
-.te-media-empty__field{position:absolute;inset:0;width:100%;height:100%;display:block}
-.te-media-empty__bg{fill:var(--cat-bg,var(--te-surface-2))}
-.te-media-empty__stripe{fill:var(--cat,var(--te-line));fill-opacity:.16}
-.te-media-empty__mark{position:relative;display:flex;color:var(--cat-ink,var(--te-ink-muted))}
-.te-media-empty__mark .te-ic{width:28px;height:28px}
-/* 15px, peso 600, inchiostro di categoria sulla propria tinta: la
-   coppia piu' chiara delle undici (other) misura 8,2:1. */
-.te-media-empty__label{position:relative;font-size:var(--te-fs-small);font-weight:600;line-height:1.3;color:var(--cat-ink,var(--te-ink-muted))}
-/* ⚠ 04/09/2026 — qui c'erano due deroghe per la card compatta: etichetta
-   nascosta e icona a 24px, perche' la striscia da 104px non teneva il
-   testo. La striscia non c'e' piu' (riquadro 358 x 179 a 390), quindi
-   le deroghe sono cadute e il segnaposto della card compatta mostra
-   icona ed etichetta come tutti gli altri. La classe resta, lo stato
-   resta: e' solo la deroga che non serve piu'. */
-/* ritagli grandi: l'icona cresce, il testo no (pavimento 15px). */
-.te-card--featured .te-media-empty__mark .te-ic,.te-hero__media .te-media-empty__mark .te-ic{width:40px;height:40px}
+.te-steps{display:flex;flex-direction:column;gap:var(--te-sp-5);list-style:none;padding:0;margin:0}
+.te-step{display:flex;gap:var(--te-sp-3);align-items:flex-start}
+.te-step__num{width:32px;height:32px;flex:none;margin-top:2px;border-radius:50%;background:var(--te-ink);color:var(--te-on-ink);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:var(--te-fs-small)}
+.te-step__body{display:flex;flex-direction:column;gap:2px}
+.te-step__title{font-size:var(--te-fs-body);font-weight:700;line-height:1.4;margin:0}
+.te-step__text{font-size:var(--te-fs-small);color:var(--te-ink-muted);line-height:1.4;margin:0}
 
-/* ─── Lista compatta che diventa colonne da 600px ────────────────── */
-.te-list--cols{display:grid;grid-template-columns:1fr;gap:var(--te-sp-3)}
-@media (min-width:600px){.te-list--cols{grid-template-columns:repeat(2,1fr);gap:var(--te-sp-4)}}
-@media (min-width:960px){.te-list--cols{grid-template-columns:repeat(3,1fr)}}
-
-/* ─── Skeleton di card compatta ────────────────────────────────
-   Segue la forma vera della card: foto sopra a 2/1, testo sotto.
-   Uno skeleton che promette una striscia laterale e poi consegna
-   un'altra impaginazione fa saltare la pagina al caricamento. */
-.te-skel-card{display:flex;flex-direction:column;background:var(--te-white);border-radius:var(--te-r-md);box-shadow:var(--te-shadow-sm);overflow:hidden}
-.te-skel-card__media{width:auto;aspect-ratio:2/1;border-radius:0}
-.te-skel-card__body{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:var(--te-sp-2);padding:var(--te-sp-3) var(--te-sp-4) var(--te-sp-4)}
-
-/* ─── Impaginazione di sezione ──────────────────────────────── */
-.te-section{padding:var(--te-sp-6) var(--te-gutter) 0}
-.te-pad{padding:0 var(--te-gutter)}
-.te-pad-t{padding-top:var(--te-sp-4)}
-.te-pad-b{padding-bottom:var(--te-sp-4)}
-.te-stack{display:flex;flex-direction:column;gap:var(--te-sp-3)}
-
-/* ─── Mostrare/nascondere per viewport ───────────────────────── */
-.te-only-desktop{display:none}
-.te-header--desktop{display:none}
-@media (min-width:960px){
-  /* la card in evidenza non si mangia la prima schermata: da 960 va su
-     due colonne, immagine a sinistra e fatti a destra. A 1280 l'altezza
-     scende da ~719px a ~420px e la lista entra sopra la piega. */
-  .te-card--featured{flex-direction:row;align-items:stretch}
-  .te-card--featured .te-card__media{width:58%;flex:none;aspect-ratio:16/10}
-  .te-card--featured .te-card__body{flex:1;justify-content:center;padding:var(--te-sp-8)}
-  /* le undici categorie ci stanno tutte: a schermo largo vanno a capo
-     invece di scorrere e tagliarsi contro il bordo destro */
-  .te-filters .te-scroll{flex-wrap:wrap;overflow-x:visible}
-  .te-only-desktop{display:inline-flex}
-  .te-only-mobile{display:none}
-  .te-header--desktop{display:flex}
-  .te-hero__bar--mobile{display:none}
-}
-
-/* ─── Piede: la scelta lingua non si stira ─────────────────────── */
-.te-footer__legal .te-footer__lang{align-self:flex-start;margin-bottom:var(--te-sp-2)}
-/* dentro .te-footer__legal il DS azzera min-height sui link (riga legale
-   in prosa): qui il selettore lingua e' un comando, torna a 44. */
-.te-footer__legal .te-footer__lang a{display:inline-flex;min-height:var(--te-tap)}
-/* link dentro la riga legale: area toccabile 44 senza spostare la riga */
-.te-footer__legal p a{display:inline-block;padding-block:var(--te-sp-4);margin-block:calc(var(--te-sp-4) * -1)}
+.te-copybox-head{display:flex;align-items:center;justify-content:space-between;gap:var(--te-sp-2);margin-bottom:var(--te-sp-2)}
+.te-copybox-label{font-size:var(--te-fs-small);font-weight:700;color:var(--te-ink-muted)}
+/* pre-wrap + overflow-wrap:anywhere: un indirizzo o un segnaposto
+   lungo va a capo, non spinge la pagina in scorrimento orizzontale. */
+.te-copybox{border:1.5px solid var(--te-line);border-radius:var(--te-r-md);background:var(--te-surface-2);padding:var(--te-sp-4);font-family:ui-monospace,Menlo,monospace;font-size:var(--te-fs-body);line-height:var(--te-lh-body);color:var(--te-ink);white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+/* segnaposto dichiarato dentro il blocco: tinta di avviso (la stessa
+   coppia di "Last seats"), mai rosso — il rosso resta alle azioni. */
+.te-ph{background:var(--te-warn-bg);color:var(--te-warn-ink);padding:0 4px;border-radius:var(--te-r-sm);font-style:normal}
 
 /* ══════════════════════════════════════════════════════════════════
    DEV ONLY — barra di scelta dello stato. Non fa parte del design:
-   si toglie in produzione insieme allo <script> in fondo alla pagina.
-   ═════════════════════════════════════════════════════════════════ */
-.dev-bar{display:flex;align-items:center;gap:var(--te-sp-2);flex-wrap:wrap;padding:var(--te-sp-2) var(--te-gutter);background:var(--te-surface-3);border-bottom:1px solid var(--te-line);font-family:var(--te-font);font-size:var(--te-fs-small);color:var(--te-ink);line-height:1.4}
-.dev-bar b{font-weight:700}
-.dev-bar a{display:inline-flex;align-items:center;min-height:var(--te-tap);padding:0 var(--te-sp-3);border-radius:var(--te-r-pill);border:1.5px solid var(--te-line);background:var(--te-white);color:var(--te-ink);text-decoration:none;font-weight:600}
-.dev-bar a.is-on{background:var(--te-ink);color:var(--te-on-ink);border-color:var(--te-ink)}
+   si toglie in produzione insieme allo <script> in fondo alla pagina. */
+.dev-bar{position:sticky;top:0;z-index:999;display:flex;flex-wrap:wrap;gap:var(--te-sp-2);align-items:center;padding:var(--te-sp-2) var(--te-sp-4);background:var(--te-surface-3);border-bottom:1.5px solid var(--te-line);font-size:var(--te-fs-small)}
+.dev-bar__label{font-weight:700;color:var(--te-ink-muted)}
+.dev-bar button{font-size:var(--te-fs-small);padding:var(--te-sp-1) var(--te-sp-3)}
+.dev-bar button.is-active{background:var(--te-ink);color:var(--te-on-ink);border-color:var(--te-ink)}

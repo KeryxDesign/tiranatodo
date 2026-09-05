@@ -43,11 +43,19 @@
   var sh = function (dt) { return DAYS[dt.getDay()].slice(0, 3); };
   var smon = function (dt) { return MONTHS[dt.getMonth()].slice(0, 3); };
 
-  /* ⏳ Formato della data nella card. Un posto solo: se LORI ne vuole
-     un altro, si cambia qui e cambia in tutte le card insieme. */
+  /* Formato della data nella card — ratificato da LORI il 05/09/2026,
+     opzione b: data e ora esatte su OGNI card, con icona orologio, e i
+     titoli di gruppo per data tolti perche' ripeterebbero la stessa cosa.
+     Compatta: «Sat 5 Sep · 21:00». Featured: giorno e mese per esteso.
+     Un posto solo: si cambia qui e cambia in tutte le card insieme. */
   function fmtCardDate(ev) {
     var dt = dateOf(ev);
     return sh(dt) + ' ' + dt.getDate() + ' ' + smon(dt) + ' · ' + ev.time;
+  }
+
+  function fmtFeaturedDate(ev) {
+    var dt = dateOf(ev);
+    return DAYS[dt.getDay()] + ' ' + dt.getDate() + ' ' + MONTHS[dt.getMonth()] + ' · ' + ev.time;
   }
 
   function fmtGroupTitle(ev) {
@@ -84,6 +92,12 @@
   var IC_PIN = '<svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>';
   var IC_STAR = '<svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>';
 
+  var CHEVRON = '<svg class="te-ic te-ic--s te-card__chevron" viewBox="0 0 24 24" aria-hidden="true" style="flex:none"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+
+  function catTag(ev) {
+    return '<span class="te-tag te-badge--on-image"><i class="te-dot"></i>' + window.TE_CAT_LABEL[ev.cat] + '</span>';
+  }
+
   function href(ev) { return './dettaglio-evento.html?e=' + encodeURIComponent(ev.slug); }
 
   function featuredHtml(ev) {
@@ -92,14 +106,14 @@
       '<div class="te-card__media">' +
         '<img src="' + window.TE_IMG_BASE + ph.file + '" width="700" height="438" decoding="async" alt="' + esc(ph.alt) + '">' +
         '<div class="te-card__over">' +
-          '<span class="te-tag te-badge--on-image"><i class="te-dot"></i>' + window.TE_CAT_LABEL[ev.cat] + '</span>' +
+          catTag(ev) +
           '<span class="te-badge te-badge--featured te-badge--on-image">' + IC_STAR + 'Featured</span>' +
         '</div>' +
       '</div>' +
       '<div class="te-card__body">' +
-        '<p class="te-card__date">' + IC_CLOCK + fmtCardDate(ev) + '</p>' +
+        '<p class="te-card__date">' + IC_CLOCK + fmtFeaturedDate(ev) + '</p>' +
         '<h2 class="te-card__title">' + esc(ev.title) + '</h2>' +
-        '<p class="te-card__place">' + IC_PIN + '<span>' + esc(ev.venue + ', ' + ev.area) + '</span></p>' +
+        '<p class="te-card__place">' + IC_PIN + '<span>' + esc(ev.venue + ', ' + ev.area) + '</span>' + CHEVRON + '</p>' +
         '<div class="te-card__foot">' + priceHtml(ev) + '</div>' +
       '</div></a>';
   }
@@ -107,12 +121,14 @@
   function cardHtml(ev) {
     var ph = photoOf(ev);
     return '<a class="te-card te-card--list" href="' + href(ev) + '" data-cat="' + ev.cat + '">' +
-      '<div class="te-card__media"><img src="' + window.TE_IMG_BASE + ph.file + '" width="700" height="438" loading="lazy" decoding="async" alt="' + esc(ph.alt) + '"></div>' +
+      '<div class="te-card__media">' +
+        '<img src="' + window.TE_IMG_BASE + ph.file + '" width="700" height="438" loading="lazy" decoding="async" alt="' + esc(ph.alt) + '">' +
+        '<div class="te-card__over">' + catTag(ev) + '</div>' +
+      '</div>' +
       '<div class="te-card__body">' +
-        '<p class="te-card__date">' + fmtCardDate(ev) +
-          ' · <span class="te-tag" style="min-height:24px;padding:0 var(--te-sp-2)"><i class="te-dot"></i>' + window.TE_CAT_LABEL[ev.cat] + '</span></p>' +
+        '<p class="te-card__date">' + IC_CLOCK + fmtCardDate(ev) + '</p>' +
         '<h3 class="te-card__title">' + esc(ev.title) + '</h3>' +
-        '<p class="te-card__place"><span>' + esc(ev.venue + ', ' + ev.area) + '</span></p>' +
+        '<p class="te-card__place"><span>' + esc(ev.venue + ', ' + ev.area) + '</span>' + CHEVRON + '</p>' +
         '<div class="te-card__foot">' + priceHtml(ev) + '</div>' +
       '</div></a>';
   }
@@ -160,18 +176,13 @@
     if (feat) {
       html += '<section class="te-pad te-pad-t" aria-label="Featured event">' + featuredHtml(feat) + '</section>';
     }
+    /* ⛔ Niente titoli di gruppo per data: la data sta su ogni card e il
+       titolo la ripeterebbe (decisione LORI, opzione b). */
     var rest = hits.filter(function (e) { return e !== feat; });
-    var lastDay = null;
-    rest.forEach(function (ev, i) {
-      if (ev.d !== lastDay) {
-        if (lastDay !== null) { html += '</div></section>'; }
-        html += '<section class="te-group"><h2 class="te-group__title">' + fmtGroupTitle(ev) +
-                '</h2><div class="te-list--cols te-pad">';
-        lastDay = ev.d;
-      }
-      html += cardHtml(ev);
-      if (i === rest.length - 1) { html += '</div></section>'; }
-    });
+    if (rest.length) {
+      html += '<section class="te-group"><div class="te-list--cols te-pad">' +
+              rest.map(cardHtml).join('') + '</div></section>';
+    }
     host.innerHTML = html;
 
     /* stato vuoto e contatore */

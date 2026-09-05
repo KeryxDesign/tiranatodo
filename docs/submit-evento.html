@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submit an event — TiranaToDo</title>
+<link rel="stylesheet" href="./_ds/styles.css">
+<link rel="stylesheet" href="./pagine.css">
+</head>
+<body class="te-page" data-screen-label="Submit an event">
+
+<!-- Avviso permanente, come sulle altre due pagine. ⏳ testo segnaposto,
+     DA CHIEDERE A MUSE. -->
+<p class="te-demo-note" role="note" style="margin:0;padding:var(--te-sp-2) var(--te-gutter);background:var(--te-ink);color:var(--te-on-ink);font-size:15px;line-height:1.4;font-weight:400;text-align:center">Demo site — these events are not real. Nothing here is happening.</p>
+
+<header class="te-header">
+<a class="te-logo" href="./lista-eventi.html"><span class="te-logo__mark"></span>TiranaToDo</a>
+<ul class="te-nav">
+<li><a href="./lista-eventi.html">Events</a></li>
+<li><a class="is-active" href="./submit-evento.html">Submit an event</a></li>
+</ul>
+<button class="te-btn te-btn--icon te-only-mobile" type="button" aria-label="Menu" style="border-color:transparent"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button>
+</header>
+
+<main class="te-wrap">
+
+<h1 class="te-h1" style="margin-top:var(--te-sp-6)">Submit an event</h1>
+<p class="te-body te-muted" style="margin-top:var(--te-sp-2)">[MUSE: riga d'apertura — spiega che l'invio evento passa da email, non da un modulo]</p>
+
+<ol class="te-steps" style="margin-top:var(--te-sp-6)">
+<li class="te-step">
+<span class="te-step__num" aria-hidden="true">1</span>
+<div class="te-step__body">
+<p class="te-step__title">[MUSE: titolo passo 1]</p>
+<p class="te-step__text">[MUSE: testo passo 1 — copia il modello qui sotto]</p>
+</div>
+</li>
+<li class="te-step">
+<span class="te-step__num" aria-hidden="true">2</span>
+<div class="te-step__body">
+<p class="te-step__title">[MUSE: titolo passo 2]</p>
+<p class="te-step__text">[MUSE: testo passo 2 — compila i tuoi dati nel modello]</p>
+</div>
+</li>
+<li class="te-step">
+<span class="te-step__num" aria-hidden="true">3</span>
+<div class="te-step__body">
+<p class="te-step__title">[MUSE: titolo passo 3]</p>
+<p class="te-step__text">[MUSE: testo passo 3 — invia il messaggio a noi]</p>
+</div>
+</li>
+</ol>
+
+<section style="margin-top:var(--te-sp-8)">
+<div class="te-copybox-head">
+<span class="te-copybox-label">Email template</span>
+<button class="te-btn te-btn--secondary te-btn--s" type="button" data-copy-target="mail-template" data-label="Copy">
+<svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>Copy</button>
+</div>
+<pre class="te-copybox" id="mail-template">To: <mark class="te-ph">events@tiranatodo.com</mark>
+Subject: <mark class="te-ph">[MUSE: oggetto]</mark>
+
+<mark class="te-ph">[OPS: elenco campi]</mark></pre>
+<p class="te-small te-muted" style="margin-top:var(--te-sp-2)">Placeholder address — the tiranatodo.com domain isn't registered yet.</p>
+</section>
+
+<a class="te-btn te-btn--primary te-btn--block" style="margin-top:var(--te-sp-5)" href="mailto:events@tiranatodo.com" aria-label="Open your email app with a new message to events@tiranatodo.com" title="Open your email app with a new message to events@tiranatodo.com"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>[MUSE]</a>
+
+<div class="te-alert te-alert--info" style="margin-top:var(--te-sp-8);margin-bottom:var(--te-sp-10)">
+<svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+<div><strong>What happens next</strong> [MUSE/OPS: tempi di revisione e conferma]</div>
+</div>
+
+</main>
+
+<footer class="te-footer">
+<div class="te-wrap te-wrap--flush">
+<div class="te-footer__cols">
+<div>
+<p class="te-footer__title">TiranaToDo</p>
+<ul>
+<li><a href="#">About</a></li>
+<li><a href="./submit-evento.html">Submit an event</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<p class="te-footer__title">Browse</p>
+<ul>
+<li><a href="./lista-eventi.html">Today</a></li>
+<li><a href="./lista-eventi.html">This weekend</a></li>
+<li><a href="./lista-eventi.html">All categories</a></li>
+</ul>
+</div>
+</div>
+<div class="te-footer__legal">
+<nav class="te-footer__lang" aria-label="Language">
+<a class="is-active" href="#" lang="en">EN</a>
+<a href="#" lang="sq">SQ</a>
+<a href="#" lang="it">IT</a>
+</nav>
+<p>© 2026 TiranaToDo · <a href="#">Privacy</a></p>
+</div>
+</div>
+</footer>
+
+<nav class="te-tabbar" aria-label="Main">
+<a class="te-tab" href="./lista-eventi.html"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Home</a>
+<a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>Search</a>
+<a class="te-tab te-tab--add is-active" href="./submit-evento.html" aria-current="page"><span class="te-tab__fab"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span>Add</a>
+<a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>Saved</a>
+<a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>Menu</a>
+</nav>
+
+<script>
+(function(){
+  var btn = document.querySelector('[data-copy-target]');
+  if (!btn) { return; }
+  btn.addEventListener('click', function(){
+    var target = document.getElementById(btn.getAttribute('data-copy-target'));
+    if (!target) { return; }
+    var text = target.innerText || target.textContent;
+    function done(){
+      btn.lastChild.textContent = 'Copied';
+      setTimeout(function(){ btn.lastChild.textContent = btn.getAttribute('data-label') || 'Copy'; }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, done);
+    } else {
+      var range = document.createRange();
+      range.selectNodeContents(target);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      try { document.execCommand('copy'); } catch (e) {}
+      sel.removeAllRanges();
+      done();
+    }
+  });
+})();
+</script>
+
+<!--
+STRINGHE VISIBILI — submit-evento (EN default; da tradurre SQ, IT)
+⚠️ Pagina a parte: il copy vero arriva da MUSE, i campi del modello da
+OPS — entrambi al lavoro ora. Ogni riga [MUSE] o [OPS: ...] nel markup
+è un segnaposto dichiarato, non testo pubblicabile. Sotto solo le
+stringhe scritte da me (chrome strutturale o riuso di stringhe già
+approvate altrove) — restano comunque da confermare in revisione.
+
+nav.events → Events
+nav.submit → Submit an event                        [riuso, già in uso altrove]
+nav.menu → Menu
+page.h1 → Submit an event                           [riuso, già approvato]
+copybox.label → Email template
+copybox.copy → Copy / Copied                        [utility, non di marca — vedi nota in consegna]
+copybox.note → Placeholder address — the tiranatodo.com domain isn't registered yet.
+alert.heading → What happens next                   [etichetta strutturale, come "Organiser" in dettaglio-evento]
+footer.* → come in lista-eventi.html
+
+CAMPI ANCORA APERTI (non stringhe, vuoti da riempire quando arrivano):
+- [MUSE] oggetto della mail, dentro il blocco copiabile
+- [OPS: elenco campi] elenco dei campi richiesti nel corpo della mail
+- [MUSE] etichetta del bottone primario (apre il client di posta)
+- [MUSE/OPS] testo di cosa succede dopo l'invio (tempi, conferma)
+
+INDIRIZZO: events@tiranatodo.com è un segnaposto dichiarato — il
+dominio tiranatodo.com non è ancora registrato. Non sostituire senza
+conferma di Davide/OPS.
+-->
+
+</body>
+</html>
