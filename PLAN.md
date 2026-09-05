@@ -225,6 +225,38 @@ Il modello che Davide ha in mente: pubblicazione gratuita, «in evidenza» a pag
 - Nessun pagamento, nessun listino, nessuna pagina prezzi. ⛔ Opus non scrive prezzi da nessuna parte.
 - Newsletter: in fase 1 solo un campo iscrizione in footer collegato a Kit (chiave in variabile d'ambiente). È il pubblico che rende vendibile l'evidenza dopo.
 
+## 9-bis. Dove le persone ricevono gli aggiornamenti
+
+Deciso da Davide il 05/09/2026. **Due strade separate, per due persone diverse, e non si mescolano:**
+
+- **Chi organizza e vuole pubblicare un evento → manda una mail.** Formato fisso, oggetto strutturato, procedura in `sop/sop_invio_eventi_via_email.md`. È automatizzabile davvero: un parser legge e mette in coda.
+- **Chi vuole solo restare aggiornato → segue un canale WhatsApp.** Non un gruppo: un **canale**, cioè trasmissione a senso unico, i follower non si vedono tra loro e non possono scrivere.
+
+Perché il canale e non subito la newsletter: costa zero, non richiede infrastruttura, si segue con un tocco, e **non raccoglie dati personali** — i numeri di chi segue non li vediamo, quindi in questa fase non c'è registro da tenere né informativa da pubblicare per questo canale. In Albania WhatsApp è il messenger, non un'opzione.
+
+### ⚠️ Il canale NON si automatizza, e chi costruisce deve saperlo
+
+**L'API ufficiale di Meta (WhatsApp Cloud API) non ha nessun endpoint per i Canali.** Non si crea un canale, non si pubblica un post, non si leggono i follower. Verificato il 05/09/2026. I Canali si gestiscono **solo dall'app, a mano**.
+
+Esistono gateway di terze parti che collegano un numero via QR (sessione tipo WhatsApp Web) e offrono una REST API sopra. Funzionano, costano circa 29 $/mese, e il rischio è che **il numero collegato si prenda il ban** — e se salta il numero salta il canale, cioè tutto il pubblico raccolto.
+
+**Decisione: in fase 1 si pubblica a mano.** Tre ragioni, in ordine di peso:
+1. Quel post **è** il prodotto. Il segno che distingue TiranaToDo da una lista automatica è «questi li abbiamo scelti noi» — lo stesso criterio del §7. Un feed che risputa tutto quello che arriva per mail è il contrario.
+2. Il volume non lo giustifica: tre post a settimana sono minuti, non ore.
+3. Non si compra un rischio di ban per risparmiare quei minuti.
+⛔ Se un giorno il volume lo giustifica, **il gateway lo pesa VAULT** (regola 0-ter: acquisto ricorrente sopra i 200 € l'anno). Opus non lo integra di sua iniziativa.
+
+### Cosa deve fare chi costruisce
+
+- Un **aggancio al canale** nelle pagine pubbliche. Dove sta, che forma ha e quanto pesa **lo decide LORI** — al 05/09/2026 è al lavoro su questo. ⛔ Opus non inventa la collocazione.
+- L'aggancio è un **link esterno**, non un modulo: niente form, niente campo, niente dato raccolto.
+- L'URL del canale **non esiste ancora**: segnaposto dichiarato, come `events@tiranatodo.com` in `/submit`. Lo crea Davide.
+- **Il canale e l'invio evento non devono confondersi.** «Seguici» è per chi consuma, «manda un evento» è per chi organizza: sono due azioni diverse e devono sembrare diverse.
+
+### La newsletter resta, ma dopo
+
+Il campo iscrizione in footer collegato a Kit (§9) non si toglie. La ragione per cui la mail serve comunque: **un canale WhatsApp non è un asset.** Non lo possiedi, non lo esporti, non lo vendi a uno sponsor con dei numeri attaccati, e se Meta lo chiude il pubblico è sparito. Lo slot sponsorizzato dentro una mail settimanale si vende; dentro un canale WhatsApp no. E il pubblico è diverso: il turista che sta a Tirana cinque giorni non si iscrive a una newsletter, l'expat che ci vive sì.
+
 ## 10. Fasi, in ordine, con criterio di chiusura
 
 **Fase 0 — Scaffold.** Repo, Astro + Tailwind + adapter Cloudflare, i18n a tre lingue, token importati dal design system, CI che builda a ogni push e deploya su Cloudflare Pages (anteprima per branch, produzione da `main`). Chiuso quando: build verde, pagina vuota online con i token giusti.
@@ -239,9 +271,9 @@ Il modello che Davide ha in mente: pubblicazione gratuita, «in evidenza» a pag
 
 **Fase 5 — Aperture e «scelti da noi».** Function `POST /api/view`, finestra anti-doppione, filtro robot, tab «aperture» nel pannello, campo `picked` con segno sulla card e chip di filtro. Chiuso quando: due aperture della stessa pagina dallo stesso dispositivo entro 30 minuti contano una sola volta, un crawler noto non conta, `views_count` **non compare** in nessuna pagina pubblica (verificato cercandolo nell'HTML costruito), l'admin segna un evento «scelti da noi» e il segno appare senza che la posizione cambi.
 
-**Fase 6 — Rifiniture.** PWA installabile, sitemap, `robots`, pagina privacy (testo da LEX, segnaposto intanto), 404, stato vuoto, skeleton, campo newsletter. Chiuso quando: LORI scrive APPROVATO sulle pagine pubbliche.
+**Fase 6 — Rifiniture.** PWA installabile, sitemap, `robots`, pagina privacy (testo da LEX, segnaposto intanto), 404, stato vuoto, skeleton, campo newsletter, aggancio al canale WhatsApp (§9-bis). Chiuso quando: LORI scrive APPROVATO sulle pagine pubbliche.
 
-**Fase 2 del progetto (non ora):** pagine luogo, profili organizzatore, eventi ricorrenti nativi, mappa, preferiti, canale WhatsApp/Telegram, story Instagram automatica dall'evento approvato, estrazione campi da una locandina con Claude API (visione), pagamento «in evidenza».
+**Fase 2 del progetto (non ora):** pagine luogo, profili organizzatore, eventi ricorrenti nativi, mappa, preferiti, canale Telegram, story Instagram automatica dall'evento approvato, estrazione campi da una locandina con Claude API (visione), pagamento «in evidenza».
 
 ## 11. Cosa decide Davide prima o durante
 
@@ -252,6 +284,7 @@ Il modello che Davide ha in mente: pubblicazione gratuita, «in evidenza» a pag
 | Chiavi Turnstile (sito + segreto) | Davide, dashboard Cloudflare | fase 3 |
 | Chiave Resend dedicata e dominio mittente verificato | Davide | fase 3 |
 | Email admin autorizzata | Davide | fase 4 |
+| Creare il canale WhatsApp e passare il link | Davide | fase 6 |
 | Testi interfaccia sq/en ed email | MUSE, lanciata dal PM | fase 3-6 |
 | Testo privacy e termini d'uso | LEX, lanciata dal PM | fase 6 |
 | Offerta e prezzi «in evidenza» | STRATEGO + VAULT + PROFANO + firma in tre | progetto fase 2 |
