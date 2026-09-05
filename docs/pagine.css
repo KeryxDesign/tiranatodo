@@ -247,3 +247,31 @@
 .dev-bar button.is-active{background:var(--te-ink);color:var(--te-on-ink);border-color:var(--te-ink)}
 .dev-bar a{display:inline-flex;align-items:center;min-height:32px;padding:0 var(--te-sp-3);border-radius:var(--te-r-pill);border:1.5px solid var(--te-line);color:var(--te-ink);text-decoration:none;font-weight:600}
 .dev-bar a.is-on{background:var(--te-ink);color:var(--te-on-ink);border-color:var(--te-ink)}
+
+/* ─── Legenda dei formati — solo pagina submit-evento ─────────────────── */
+/* Reference, non istruzione: si consulta mentre si compila. Sta DOPO il
+   blocco copiabile e PRIMA del bottone mailto; su desktop a fianco.
+   Non e' una tabella: 19 righe a 375px non si leggono. Le regole sono 8 e
+   ognuna copre piu' campi. Obbligatorio/facoltativo: si marca il
+   FACOLTATIVO, come .te-label .te-opt nel DS. LORI, 05/09/2026. */
+.te-submit-cols{display:grid;gap:var(--te-sp-8)}
+@media (min-width:1024px){.te-submit-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--te-sp-10);align-items:start}}
+
+.te-legend{margin:0}
+.te-legend__title{margin:0 0 var(--te-sp-3);font-size:var(--te-fs-h3);font-weight:700;line-height:var(--te-lh-title);color:var(--te-ink)}
+.te-legend__intro{margin:0;font-size:var(--te-fs-body);line-height:1.45}
+.te-legend__note{margin:var(--te-sp-4) 0 0;font-size:var(--te-fs-body);line-height:1.45;color:var(--te-ink-muted)}
+
+.te-legend__box{margin:var(--te-sp-4) 0 0;padding:var(--te-sp-4);border:1.5px solid var(--te-line-soft);border-radius:var(--te-r-md);background:var(--te-surface-2)}
+.te-legend__box p{margin:0;font-size:var(--te-fs-body);line-height:1.45}
+.te-legend__box .te-legend__vals{margin-top:var(--te-sp-3)}
+.te-legend__box .te-legend__vals code{background:var(--te-white)}
+
+.te-legend__list{display:flex;flex-direction:column;gap:var(--te-sp-4);margin:var(--te-sp-6) 0 0;padding:0;list-style:none}
+.te-legend__item{display:flex;flex-direction:column;gap:var(--te-sp-1)}
+.te-legend__head{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0}
+.te-legend__key{font-family:ui-monospace,Menlo,monospace;font-size:var(--te-fs-body);font-weight:700;line-height:1.5;color:var(--te-ink);overflow-wrap:anywhere}
+.te-legend__key span{font-weight:400;color:var(--te-ink-muted)}
+.te-legend__rule{margin:0;font-size:var(--te-fs-body);line-height:1.45;color:var(--te-ink-muted)}
+.te-legend__vals{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-width:0;margin:0;padding:0;list-style:none}
+.te-legend__head code,.te-legend__vals code{font-family:ui-monospace,Menlo,monospace;font-size:var(--te-fs-small);font-weight:400;line-height:1.5;padding:2px 7px;border-radius:var(--te-r-sm);border:1px solid var(--te-line-soft);background:var(--te-surface-2);color:var(--te-ink);white-space:nowrap}

@@ -302,3 +302,178 @@ Il gate 3 della SOP copy vuole una lettura su profilo `sim_`. Per l'expat a Tira
 
 **7. Non consegnato perché non richiesto.**
 Restano segnaposto e non li ho toccati: il titolo `Submit an event` (H1 e navigazione, già in uso), le etichette delle undici categorie, i chip dei filtri, le voci del piede `About` / `Contact` / `Privacy`, l'elenco dei campi del modello mail (`[OPS: elenco campi]`), i titoli e le descrizioni dei diciassette eventi finti di `docs/eventi.js`. Quest'ultima è la parte più grossa che manca: se il mockup si mostra a qualcuno, quei testi sono i primi che si leggono.
+
+---
+---
+
+# Lotto 2 — legenda dei campi (`.te-legend`), 2026-09-05
+
+**Mercato: EN internazionale (lingua franca) · Lingua: EN · Set caricato: `skill_copy_mercati_eu` (sezione «EN internazionale») + `skill_copy_moderno_2026` + `regole_globali` + `blacklist_formule_ai`**
+
+**Chi legge:** chi organizza un evento — bar, centro culturale, chi organizza incontri per expat. Non compra niente: ci sta facendo un favore. Registro identico al lotto 1: frasi corte, verbi finiti, zero idiomi, zero entusiasmo, zero vendita.
+**Contenitore:** blocco `.te-legend` dopo il modello copiabile. I valori accettati (`YYYY-MM-DD`, `music`, `YES`, `NO`, `500 ALL`, `EN`…) sono **chip a schermo**, e i nomi dei campi sono **etichette a schermo**: nessuna stringa li ripete, salvo quando la regola riguarda un campo diverso da quello della riga (`ALL_DAY` dentro `rule.times`, `IS_FREE` dentro `rule.price`, `CONSENT` dentro `rule.yesno`).
+**Fonte dei fatti:** `sop/sop_invio_eventi_via_email.md` §2.2, tabella dei 19 campi. Nessun numero fuori da lì.
+
+---
+
+## legend.title
+
+```
+How to fill the fields
+```
+
+`22/30 car` — usa lo stesso verbo del passo 2 già in pagina (`Fill in your event`), così il lettore capisce che questo blocco è la continuazione di quell'istruzione e non un'altra cosa. Scartati `Field rules` (troppo secco, sembra un elenco di divieti) e `What goes in each field` (23 car, ma «goes in» è un phrasal verb evitabile).
+
+---
+
+## legend.intro
+
+```
+12 of the 19 fields are required. The rules below cover the formats.
+```
+
+`68/80 car` — il numero arriva prima di tutto perché è la sola domanda che si fa chi guarda un modello di 19 righe («devo riempirle tutte?»). Seconda frase senza pronomi: «the formats» ha un referente visibile, «them» avrebbe potuto significare sia i 12 obbligatori sia tutti e 19. Fonte del 12/19: SOP §2.2, colonna Obbligatorio (12 sì, 7 no).
+
+---
+
+## legend.optional.lead
+
+```
+Optional fields
+```
+
+`15/20 car` — attacco bold del riquadro. Nomina la categoria invece di dare un'istruzione, così regge sia se i sette nomi sono elencati sotto sia se sono chip di fianco.
+
+## legend.optional.text
+
+```
+These 7 can stay empty. The other 12 all need an answer.
+```
+
+`56/60 car` — dice la stessa cosa da due lati opposti: cosa puoi saltare e cosa no. La seconda frase esiste perché il rischio vero non è lasciare vuoto un facoltativo, è lasciare vuoto un obbligatorio credendo che valga la stessa libertà. «all» prima di «need» chiude la scappatoia del «quasi tutti».
+
+⚠️ **Assunzione dichiarata:** `These 7` ha un referente solo se i sette nomi dei campi facoltativi sono visibili dentro il riquadro (elenco o chip). Vedi `Aperti (lotto 2)` punto 1.
+
+---
+
+## legend.freetext
+
+```
+Fields not listed here are free text. Write them the way you want.
+```
+
+`66/95 car` — è la stringa che toglie il lavoro inutile: senza, l'organizzatore cerca una regola anche per `TITLE`, `VENUE_NAME`, `ADDRESS`, `ORGANIZER_NAME`, e non trovandola si ferma o scrive una mail per chiedere. «Free text» è la stessa espressione della SOP §2.2 e non ha equivalente più comune.
+
+---
+
+## rule.category
+
+```
+Pick one. Write it in lower case, exactly as shown.
+```
+
+`51/60 car` — tre regole in nove parole: una sola, minuscolo, copiata identica. «exactly as shown» rimanda ai chip senza ripeterne il contenuto. Il controllo §4.3 della SOP dice che una categoria non riconosciuta fa partire una mail di chiarimento: questa riga è quella che la evita.
+
+---
+
+## rule.dates
+
+```
+Year, then month, then day. Two digits for month and day.
+```
+
+`57/60 car` — il chip mostra la forma, la frase spiega l'ordine, che è ciò che un americano e un albanese leggono in modo diverso (`12/09`). La seconda frase copre l'errore più frequente dopo l'ordine: `2026-9-5` invece di `2026-09-05`, che rompe il parsing futuro previsto dalla SOP §2.1.
+
+---
+
+## rule.times
+
+```
+Use the 24 hour clock. You can skip the start time only if ALL_DAY is YES.
+```
+
+`74/85 car` — la condizionale è scritta con `only if`, non con `unless` e non con `except when`: `only if` ha una lettura sola, dichiara che quello è **l'unico** caso in cui si può lasciare vuoto. `unless` viene letto da molti non madrelingua come un semplice «se non», e apre la porta a «l'evento è di sera, quindi non è tutto il giorno, quindi posso saltarla». Fonte: SOP §2.2 riga 4.
+`ALL_DAY` è nominato per esteso perché è un campo **diverso** da quello della riga: senza il nome, la condizione non sarebbe agganciabile.
+
+---
+
+## rule.yesno
+
+```
+Only YES or NO. CONSENT must be YES, or we cannot use your event.
+```
+
+`65/70 car` — «Only» è la parola che lavora: i chip mostrano i due valori ammessi ma non vietano `true`, `Yes`, `po`, `sì`, `free`. La seconda frase dice la conseguenza invece della regola, perché una regola senza conseguenza si legge come una preferenza. ⛔ Non è una minaccia e non è un tempo: dice cosa non possiamo fare, non cosa succederà a lui. Fonte: SOP §2.2 riga 19 e §4, motivo di rifiuto 7.
+
+---
+
+## rule.price
+
+```
+Needed only when IS_FREE is NO. Leave it empty for free events. Always in Lek.
+```
+
+`78/85 car` — la stringa copre tutte e tre le facce della regola, ed è voluto: la condizione (`only when … is NO`), il caso opposto scritto per esteso (`leave it empty`), la valuta. Il controllo §4.5 della SOP verifica proprio la coppia `IS_FREE`/`PRICE` nei due sensi, quindi scrivere solo metà regola sposterebbe l'errore invece di toglierlo.
+`Always in Lek` sostituisce la formulazione al negativo «no other currency»: dice la stessa cosa e lascia 7 caratteri di margine.
+
+---
+
+## rule.photo
+
+```
+Pick one of the three. An attached file can be JPG, PNG or WebP, up to 5 MB. NONE is fine.
+```
+
+`89/110 car` — `Pick one of the three` dice che i tre valori si escludono, cosa che i chip affiancati non dicono. I limiti stanno solo sulla frase dell'allegato, così chi manda un link non li applica per sbaglio a sé. `NONE is fine` è la traduzione della riga di SOP §2.2 «l'evento non si ferma per l'immagine»: senza, chi non ha una foto pensa di non poter mandare l'evento, ed è il caso peggiore per noi.
+`5 MB` **verificato**: SOP §2.2 (foto) e `PLAN.md` §5.4. È lo stesso numero già scritto in `submit.step3.text` del lotto 1, quindi la pagina non dichiara due limiti.
+
+---
+
+## rule.description
+
+```
+Up to 1500 characters. Shorter is fine.
+```
+
+`39/70 car` — scritto `1500` senza separatore di migliaia: `1,500` si legge «uno virgola cinque» per un tedesco, un olandese e un italiano, che sono tre delle quattro nazionalità del pubblico. La seconda frase toglie la lettura «serve una descrizione lunga», che il solo tetto suggerisce. Fonte: SOP §2.2 riga 13.
+
+---
+
+## rule.language
+
+```
+The language of your text. If you leave it empty, we use EN.
+```
+
+`60/70 car` — la prima frase dice **di cosa** parla il campo, perché è l'unico dei 19 dove il nome non basta (lingua del testo dell'evento, non lingua in cui vuoi la risposta). La seconda dichiara il comportamento senza chiedere niente. Fonte: SOP §2.2 riga 18.
+
+---
+
+## Dichiarazione gate — lotto 2
+
+| Gate | Esito |
+|---|---|
+| **Fatti** | 6 claim, tutti classificati. `12 of the 19 fields are required` **VERIFICATO** (SOP §2.2, conteggio colonna Obbligatorio: 12 sì, 7 no). `up to 5 MB` **VERIFICATO** (SOP §2.2 + `PLAN.md` §5.4). `JPG, PNG or WebP` **VERIFICATO** (SOP §2.2). `1500 characters` **VERIFICATO** (SOP §2.2 riga 13 + `PLAN.md` §5.3). `assente = EN` **VERIFICATO** (SOP §2.2 riga 18 + `PLAN.md` §6). `CONSENT` bloccante **VERIFICATO** (SOP §2.2 riga 19 + §4 motivo 7). ⛔ Zero tempi di risposta dichiarati, zero promesse di pubblicazione: la legenda descrive un formato. |
+| **Struttura** | Non applicabile nella forma standard: 13 stringhe di interfaccia dentro un contenitore già disegnato da LORI. Nessun blocco piatto: ogni regola è una o due frasi, agganciata all'etichetta del suo campo. |
+| **Readability (EN)** | Stimata a mano, non da tool. Le 13 stringhe: 24 frasi, 158 parole, **6,6 parole per frase**, ~1,28 sillabe per parola. **Flesch Reading Ease ≈ 88 (Easy) · Flesch-Kincaid Grade ≈ 3.** Target: organizzatore non madrelingua, inglese B1-B2. Superato con margine, ed è più facile del lotto 1 (83) perché qui si danno istruzioni, non si spiega un servizio. ⚠️ GULPEASE non applicabile: testo inglese. |
+| **Offerta di vendita, 8 check** | **Non applicabile, e motivato.** Non è un pezzo che vende: nessun prezzo, nessuna offerta, nessuna azione da comprare. Il brief di lancio vieta esplicitamente vendita, entusiasmo e ragione-per-agire-ora. Applicare gli otto qui produrrebbe il danno che i check esistono per evitare: urgenza fabbricata su un favore che qualcuno ci sta facendo. Il gate 8 resta valido sulla pagina `submit` nel suo insieme, dichiarato nel lotto 1 (86/120). |
+| **Punteggio gate offerta** | Non calcolato, per la ragione sopra. Il punteggio della pagina resta quello del lotto 1: **86/120, soglia 75 superata**. Le 13 stringhe nuove non toccano nessuna delle quattro P: aggiungono istruzioni operative sotto il modello, dopo la decisione di mandare. |
+| **Lingua italiana (10 voci)** | Non applicabile al deliverable (copy inglese). Passata sulle note italiane di questa sezione: **10 voci controllate, 0 correzioni**. |
+| **Blacklist AI** | Passata dedicata, pattern per pattern: **zero match**. Verificato uno per uno: zero em dash (i due trattini presenti sono in `sop_invio_eventi_via_email.md` citato, non nelle stringhe), zero antitesi «X, not Y», zero domande retoriche, zero tricolon retorici (`JPG, PNG or WebP` è un elenco di fatti), zero aperture da AI, zero superlativi, zero «simply / easily / just», zero «make sure to», zero disclaimer difensivi. ⚠️ Controllato anche l'attrito dichiarato invece che ridotto (regola 3 del gate): nessuna stringa dice che è facile, `Shorter is fine` e `NONE is fine` **tolgono** lavoro invece di dichiararlo leggero. |
+| **Deliverability** | Non applicabile: nessuna email inviata da noi. Il modello è testo che copia il lettore. |
+| **Budget caratteri** | 13 stringhe su 13 **dentro il tetto**. Nessuno sforo. Margine totale: 875 caratteri assegnati, **690 usati, 185 restituiti** (21%). Riga più stretta: `legend.optional.text` (56/60). Riga più larga di margine: `rule.description` (39/70). |
+
+---
+
+## Aperti (lotto 2)
+
+**1. `These 7` ha bisogno dei sette nomi visibili.**
+`legend.optional.text` funziona solo se dentro il riquadro dei facoltativi si vedono i sette nomi di campo (`DATE_END TIME_END TICKET_URL DESCRIPTION PHOTO ORGANIZER_PHONE LANGUAGE`), elencati o come chip. Se il riquadro contiene solo lead e testo, «These 7» non ha referente e la stringa va riscritta con i nomi dentro, che però non stanno in 60 caratteri.
+`DA CHIEDERE A LORI: nel riquadro .te-legend dei campi facoltativi i sette nomi sono a schermo (chip o elenco) accanto a legend.optional.lead? Se no, serve un budget diverso per legend.optional.text, perché i sette nomi da soli sono 78 caratteri.`
+
+**2. Le versioni SQ e IT non sono in questo lotto.**
+Il sito ha tre lingue di interfaccia (`PLAN.md` §6). Queste 13 stringhe sono solo EN. Sono scritte con verbi finiti e frasi indipendenti, quindi si traducono riga per riga senza rompersi, ⛔ ma **i budget caratteri non reggono in traduzione**: albanese e italiano crescono di circa il 15-20% su frasi corte come queste, e `rule.dates` (57/60) e `legend.optional.text` (56/60) sforerebbero di sicuro.
+`DA CHIEDERE A LORI: il blocco .te-legend ha la stessa capienza in tutte e tre le lingue? Se sì servono budget EN più stretti, perché SQ e IT non entrano negli stessi caratteri.`
+
+**3. Resta aperto dal lotto 1 e tocca anche questo blocco.**
+`NEW` contro `NUOVO` nell'oggetto (Aperti lotto 1, punto 2) non è stato deciso. Non tocca nessuna delle 13 stringhe di legenda, che non nominano l'azione, ⛔ ma se OPS conferma l'italiano la pagina inglese chiede di scrivere una parola italiana e serve una quattordicesima riga di legenda per l'oggetto. Non l'ho scritta: dipende da una decisione che non è mia.

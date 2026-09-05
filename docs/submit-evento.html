@@ -61,10 +61,13 @@
      tutti gli altri. Anche l'oggetto ha formato fisso (§2.1): tre pipe,
      sempre nello stesso posto.
      ⚠️ La SOP e' in stato PROPOSTA, non ancora ratificata da Davide.
-     ⏳ Manca ancora la legenda dei formati (cosa accetta CATEGORY, come si
-     scrive la data, quando PRICE e' obbligatorio): sta nella SOP, non in
-     pagina. E' testo visibile, quindi e' copy. -->
-<section style="margin-top:var(--te-sp-8)">
+     ⚡ Il token NEW e' ratificato da Davide (05/09/2026) e vince sul NUOVO
+     che la SOP §2.1 fissa ancora: la pagina e' in inglese e chi copia non e'
+     italiano. La SOP va allineata, ed e' di OPS.
+     La legenda dei formati e' sotto, in .te-legend. -->
+<div class="te-submit-cols" style="margin-top:var(--te-sp-8)">
+
+<section>
 <div class="te-copybox-head">
 <span class="te-copybox-label">Email template</span>
 <button class="te-btn te-btn--secondary te-btn--s" type="button" data-copy-target="mail-template" data-label="Copy">
@@ -94,6 +97,38 @@ LANGUAGE:
 CONSENT:</pre>
 <p class="te-small te-muted" style="margin-top:var(--te-sp-2)">Placeholder address: the tiranatodo.com domain is not registered yet.</p>
 </section>
+
+<!-- Legenda dei formati. Contenitore e gerarchia: LORI, 05/09/2026 - non e'
+     una tabella perche' 19 righe a 375px non si leggono; le regole sono 8 e
+     ognuna copre piu' campi. I valori accettati sono MOSTRATI come chip, non
+     descritti a parole. L'obbligatorio non si marca: si marca il FACOLTATIVO,
+     e il resto lo e' per esclusione.
+     Testo: MUSE, 05/09/2026 (copy/stringhe_en.md, lotto 2), a budget in
+     caratteri dato da LORI. I fatti vengono da sop_invio_eventi_via_email.md
+     §2.2: se cambia la SOP cambia qui.
+     ⚠️ I valori dentro <code> sono dati, non copy: si scrivono verbatim e
+     non si traducono in SQ/IT. Le frasi .te-legend__rule invece si traducono.
+     ⚠️ DA CHIEDERE A LORI: due stringhe sono al 95% del budget EN
+     (rule.dates 57/60, legend.optional.text 56/60) e albanese e italiano
+     crescono del 15-20%. Il blocco va rimisurato prima di tradurre. -->
+<section class="te-legend" aria-labelledby="legend-title">
+<h2 class="te-legend__title" id="legend-title">How to fill the fields</h2>
+<p class="te-legend__intro">12 of the 19 fields are required. The rules below cover the formats.</p>
+<div class="te-legend__box"><p><b>Optional fields</b> These 7 can stay empty. The other 12 all need an answer.</p><p class="te-legend__vals"><code>DATE_END</code><code>TIME_END</code><code>TICKET_URL</code><code>DESCRIPTION</code><code>PHOTO</code><code>ORGANIZER_PHONE</code><code>LANGUAGE</code></p></div>
+<p class="te-legend__note">Fields not listed here are free text. Write them the way you want.</p>
+<ul class="te-legend__list">
+<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">CATEGORY</b><span class="te-legend__vals"><code>music</code><code>nightlife</code><code>theatre</code><code>cinema</code><code>art</code><code>food</code><code>sport</code><code>family</code><code>meetups</code><code>outdoors</code><code>other</code></span></p><p class="te-legend__rule">Pick one. Write it in lower case, exactly as shown.</p></li>
+<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">DATE_START<span> · </span>DATE_END</b><span class="te-legend__vals"><code>YYYY-MM-DD</code></span></p><p class="te-legend__rule">Year, then month, then day. Two digits for month and day.</p></li>
+<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">TIME_START<span> · </span>TIME_END</b><span class="te-legend__vals"><code>HH:MM</code></span></p><p class="te-legend__rule">Use the 24 hour clock. You can skip the start time only if ALL_DAY is YES.</p></li>
+<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">ALL_DAY<span> · </span>IS_FREE<span> · </span>CONSENT</b><span class="te-legend__vals"><code>YES</code><code>NO</code></span></p><p class="te-legend__rule">Only YES or NO. CONSENT must be YES, or we cannot use your event.</p></li>
+<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">PRICE</b><span class="te-legend__vals"><code>500 ALL</code></span></p><p class="te-legend__rule">Needed only when IS_FREE is NO. Leave it empty for free events. Always in Lek.</p></li>
+<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">PHOTO</b><span class="te-legend__vals"><code>ATTACHED</code><code>LINK:&lt;url&gt;</code><code>NONE</code></span></p><p class="te-legend__rule">Pick one of the three. An attached file can be JPG, PNG or WebP, up to 5 MB. NONE is fine.</p></li>
+<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">DESCRIPTION</b></p><p class="te-legend__rule">Up to 1500 characters. Shorter is fine.</p></li>
+<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">LANGUAGE</b><span class="te-legend__vals"><code>EN</code><code>SQ</code><code>IT</code></span></p><p class="te-legend__rule">The language of your text. If you leave it empty, we use EN.</p></li>
+</ul>
+</section>
+
+</div>
 
 <a class="te-btn te-btn--primary te-btn--block" style="margin-top:var(--te-sp-5)" href="mailto:events@tiranatodo.com" aria-label="Open your email app with a new message to events@tiranatodo.com" title="Open your email app with a new message to events@tiranatodo.com"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>Open your email app</a>
 
@@ -191,24 +226,21 @@ OPS — entrambi al lavoro ora. Ogni riga [MUSE] o [OPS: ...] nel markup
 stringhe scritte da me (chrome strutturale o riuso di stringhe già
 approvate altrove) — restano comunque da confermare in revisione.
 
-nav.events → Events
-nav.submit → Submit an event                        [riuso, già in uso altrove]
-nav.menu → Menu
-page.h1 → Submit an event                           [riuso, già approvato]
-copybox.label → Email template
-copybox.copy → Copy / Copied                        [utility, non di marca — vedi nota in consegna]
-copybox.note → Placeholder address: the tiranatodo.com domain is not registered yet.
-alert.heading → What happens next                   [etichetta strutturale, come "Organiser" in dettaglio-evento]
-follow.footer.title → [MUSE] titolo colonna di piede            [NUOVA]
-follow.footer.link → [MUSE] voce di piede                       [NUOVA]
-footer.* → come in lista-eventi.html
+Tutte scritte. Fonte unica: copy/stringhe_en.md (MUSE, lotto 1 e lotto 2).
+Qui sotto solo l'inventario: se una stringa cambia, cambia prima di la'.
 
-CAMPI ANCORA APERTI (non stringhe, vuoti da riempire quando arrivano):
-- [MUSE] oggetto della mail, dentro il blocco copiabile
-- [OPS: elenco campi] elenco dei campi richiesti nel corpo della mail
-- [MUSE] etichetta del bottone primario (apre il client di posta)
-- [MUSE/OPS] testo di cosa succede dopo l'invio (tempi, conferma)
-- [MUSE] le due voci nuove della colonna di piede sul canale WhatsApp
+nav.* / page.h1 / footer.*        chrome, come nelle altre due pagine
+copybox.label / copybox.copy      utility, non di marca
+copybox.note                      indirizzo segnaposto
+alert.heading                     etichetta strutturale
+legend.* + rule.* (13 stringhe)   lotto 2, blocco .te-legend qui sopra
+
+⏳ APERTO, non una stringa: la legenda si consulta su questa pagina, ma si
+compila dentro l'app di posta, dove la pagina non c'e' piu'.
+DA CHIEDERE A OPS (domanda di LORI, 05/09/2026): si puo' mettere un
+suggerimento di formato dentro il modello copiabile - una riga di commento
+in testa, o un valore d'esempio dopo i due punti - oppure le 19 righe
+"NOME_CAMPO: valore" devono restare intatte per il parsing futuro?
 
 INDIRIZZO: events@tiranatodo.com è un segnaposto dichiarato — il
 dominio tiranatodo.com non è ancora registrato. Non sostituire senza
