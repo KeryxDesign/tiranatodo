@@ -296,6 +296,71 @@
 })();
 </script>
 
+<!-- ══════════════════════════════════════════════════════════════════
+     DEV ONLY — i filtri rispondono al clic. Blocco separato dallo script
+     di stato qui sopra: si tolgono insieme in produzione, ma sono due
+     cose diverse e restano divise.
+
+     ⛔ NON FILTRA. I sette eventi sono scritti a mano nella pagina, non
+     c'e' nessun archivio dietro: il comando si accende, la lista resta
+     quella. Serve a mostrare il COMPORTAMENTO del filtro, non il filtro.
+     La conta "7 events" in cima non si muove, ed e' il segnale onesto:
+     se cambiasse senza che cambia la lista, il mockup direbbe una bugia.
+
+     REGOLA DI SELEZIONE — decisione di prodotto, da rispettare nel sito vero:
+     · DATA — una sola per volta, e non si spegne. Un evento non e'
+       insieme oggi e domani: le tre voci sono la stessa domanda, e una
+       risposta ci vuole sempre. Il quarto comando (l'icona calendario)
+       non e' una scelta, apre il calendario: resta fuori.
+     · CATEGORIE — scelta multipla, con "All" come interruttore generale.
+       Accendere "All" spegne tutte le altre. Accendere una categoria
+       spegne "All". Spegnere l'ultima categoria accesa riaccende "All",
+       perche' una lista senza nessuna categoria non esiste: sarebbe una
+       pagina vuota per forza, e nessuno la vuole.
+
+     ⚠ DA RATIFICARE DA LORI. Scritto dal PM il 05/09/2026 con LORI non
+     disponibile (tre lanci caduti per guasto del processo). La regola
+     qui sopra e' una decisione di prodotto e va confermata da lei.
+     Il colore del comando acceso NON e' stato scelto qui: e' la classe
+     is-active del design system, gia' usata da LORI su "Today" e "All".
+     ═════════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  function press(btn, on){
+    if (on) { btn.classList.add('is-active'); } else { btn.classList.remove('is-active'); }
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+  var groups = document.querySelectorAll('.te-filters .te-scroll');
+  for (var g = 0; g < groups.length; g++) {
+    (function(group){
+      /* solo i comandi che hanno uno stato: l'icona calendario non ce l'ha */
+      var chips = group.querySelectorAll('.te-chip[aria-pressed]');
+      var isCat = (group.getAttribute('aria-label') === 'Categories');
+      for (var i = 0; i < chips.length; i++) {
+        chips[i].addEventListener('click', function(){
+          var me = this, j, n;
+          if (!isCat) {
+            for (j = 0; j < chips.length; j++) { press(chips[j], chips[j] === me); }
+            return;
+          }
+          var all = chips[0];
+          if (me === all) {
+            for (j = 0; j < chips.length; j++) { press(chips[j], chips[j] === all); }
+            return;
+          }
+          press(me, me.getAttribute('aria-pressed') !== 'true');
+          n = 0;
+          for (j = 1; j < chips.length; j++) {
+            if (chips[j].getAttribute('aria-pressed') === 'true') { n++; }
+          }
+          press(all, n === 0);
+        });
+      }
+    })(groups[g]);
+  }
+})();
+</script>
+
 <!--
 STRINGHE VISIBILI — lista-eventi (EN default; da tradurre SQ, IT)
 brand.name → TiranaToDo

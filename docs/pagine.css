@@ -15,6 +15,33 @@
 .te-card--featured .te-card__body{padding:var(--te-sp-4)}
 .te-badge--featured{background:var(--te-ink);color:var(--te-on-ink)}
 
+/* ══════════════════════════════════════════════════════════════════
+   CARD COMPATTA — la foto sale sopra il testo (04/09/2026)
+   ──────────────────────────────────────────────────────────────────
+   PRIMA: striscia di 104px sul fianco, alta quanto la card. Misurata
+   a 390 reali faceva 104 x 253. Su una foto 16:10 quel riquadro e' un
+   ritaglio verticale: si vedeva una fetta, non la scena.
+   PERCHE' NON BASTAVA ALLARGARE LA STRISCIA: a 390 la card e' larga
+   358 e il corpo ne usa 254 per tenere il titolo in tre righe e il
+   luogo in due. Ogni pixel dato alla foto e' un pixel tolto al testo,
+   che ricomincia a troncarsi — che e' il difetto riparato poche righe
+   piu' sotto. A quella larghezza non c'e' spazio da spostare: la foto
+   deve prendersi tutta la riga.
+   PERCHE' 2/1 E NON 16/10: a piena larghezza il riquadro passa a
+   358 x 179. In 16/10 sarebbe 358 x 224, cioe' quanto la card in
+   evidenza (356 x 223), e le due schede diventerebbero la stessa cosa.
+   Il 2/1 tiene la foto leggibile, lascia alla card in evidenza il suo
+   ruolo di pezzo grosso, e alza la pagina di meno.
+   COSTO: la card passa da 253 a ~350 di altezza. Dichiarato in consegna.
+   Le foto sorgente sono 700x438: il riquadro piu' largo che questa
+   regola produce e' 447 (due colonne a 959px), quindi non si sgranano.
+   ══════════════════════════════════════════════════════════════════ */
+.te-card--list{flex-direction:column;align-items:stretch}
+.te-card--list .te-card__media{width:auto;aspect-ratio:2/1;align-self:auto}
+/* corpo: stessi margini della card normale, ora che il testo parte dal
+   bordo sinistro della scheda e non da fianco a una striscia */
+.te-card--list .te-card__body{flex:0 1 auto;padding:var(--te-sp-3) var(--te-sp-4) var(--te-sp-4)}
+
 /* ─── Card compatta: il nome dell'evento e' l'elemento che si legge
    per primo. Il DS lo taglia a 2 righe; nella lista compatta i titoli
    veri arrivano a 3 e venivano troncati a meta' parola. */
@@ -66,10 +93,12 @@
 /* 15px, peso 600, inchiostro di categoria sulla propria tinta: la
    coppia piu' chiara delle undici (other) misura 8,2:1. */
 .te-media-empty__label{position:relative;font-size:var(--te-fs-small);font-weight:600;line-height:1.3;color:var(--cat-ink,var(--te-ink-muted))}
-/* strip da 104px della card compatta: il testo non ci sta senza andare
-   a tre righe. Resta l'icona, piu' piccola. */
-.te-card--list .te-media-empty__label{display:none}
-.te-card--list .te-media-empty__mark .te-ic{width:24px;height:24px}
+/* ⚠ 04/09/2026 — qui c'erano due deroghe per la card compatta: etichetta
+   nascosta e icona a 24px, perche' la striscia da 104px non teneva il
+   testo. La striscia non c'e' piu' (riquadro 358 x 179 a 390), quindi
+   le deroghe sono cadute e il segnaposto della card compatta mostra
+   icona ed etichetta come tutti gli altri. La classe resta, lo stato
+   resta: e' solo la deroga che non serve piu'. */
 /* ritagli grandi: l'icona cresce, il testo no (pavimento 15px). */
 .te-card--featured .te-media-empty__mark .te-ic,.te-hero__media .te-media-empty__mark .te-ic{width:40px;height:40px}
 
@@ -78,10 +107,13 @@
 @media (min-width:600px){.te-list--cols{grid-template-columns:repeat(2,1fr);gap:var(--te-sp-4)}}
 @media (min-width:960px){.te-list--cols{grid-template-columns:repeat(3,1fr)}}
 
-/* ─── Skeleton di card compatta ──────────────────────────────── */
-.te-skel-card{display:flex;gap:var(--te-sp-3);background:var(--te-white);border-radius:var(--te-r-md);box-shadow:var(--te-shadow-sm);overflow:hidden}
-.te-skel-card__media{width:104px;flex:none;border-radius:0}
-.te-skel-card__body{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:var(--te-sp-2);padding:var(--te-sp-3)}
+/* ─── Skeleton di card compatta ────────────────────────────────
+   Segue la forma vera della card: foto sopra a 2/1, testo sotto.
+   Uno skeleton che promette una striscia laterale e poi consegna
+   un'altra impaginazione fa saltare la pagina al caricamento. */
+.te-skel-card{display:flex;flex-direction:column;background:var(--te-white);border-radius:var(--te-r-md);box-shadow:var(--te-shadow-sm);overflow:hidden}
+.te-skel-card__media{width:auto;aspect-ratio:2/1;border-radius:0}
+.te-skel-card__body{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:var(--te-sp-2);padding:var(--te-sp-3) var(--te-sp-4) var(--te-sp-4)}
 
 /* ─── Impaginazione di sezione ──────────────────────────────── */
 .te-section{padding:var(--te-sp-6) var(--te-gutter) 0}
