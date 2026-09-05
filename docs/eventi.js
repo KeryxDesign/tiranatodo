@@ -41,13 +41,13 @@ window.TE_PHOTOS = {
 window.TE_CAT_PHOTO = {
   music: 'music', nightlife: 'meetups', theatre: 'music', cinema: 'cinema',
   art: 'art', food: 'food', sport: 'outdoors', family: 'outdoors',
-  meetups: 'meetups', outdoors: 'outdoors', other: 'art'
+  meetups: 'meetups', outdoors: 'outdoors', workshop: 'meetups', other: 'art'
 };
 
 window.TE_CAT_LABEL = {
   music: 'Music', nightlife: 'Nightlife', theatre: 'Theatre', cinema: 'Cinema',
   art: 'Art', food: 'Food &amp; Drink', sport: 'Sport', family: 'Family',
-  meetups: 'Meetups', outdoors: 'Outdoors', other: 'Other'
+  meetups: 'Meetups', outdoors: 'Outdoors', workshop: 'Workshops', other: 'Other'
 };
 
 /* d = giorni da oggi · time/end = ora locale · price = Lek, 0 = gratis
@@ -157,7 +157,7 @@ window.TE_EVENTS = [
     about: ['A play written and set in Tirana in the last ten years, performed in Albanian with English surtitles above the stage. Monday is the only night the surtitles run.',
             'Ninety minutes, no interval. Latecomers wait for the first scene change.'] },
 
-  { slug: 'albanian-beginners-class', cat: 'other', d: 2, time: '11:00', end: '12:30',
+  { slug: 'albanian-beginners-class', cat: 'workshop', d: 2, time: '11:00', end: '12:30',
     price: 0,
     title: 'Albanian for absolute beginners: free trial class',
     venue: 'COD', area: 'Center for Openness and Dialogue',

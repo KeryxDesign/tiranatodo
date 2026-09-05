@@ -69,6 +69,9 @@
   --te-cat-outdoors:#888700;/* @kind color */
   --te-cat-outdoors-bg:#EFF1D6;/* @kind color */
   --te-cat-outdoors-ink:#424100;/* @kind color */
+  --te-cat-workshop:#0B7E7A;/* @kind color */
+  --te-cat-workshop-bg:#D9F5F3;/* @kind color */
+  --te-cat-workshop-ink:#004E4B;/* @kind color */
   --te-cat-other:#6B7280;/* @kind color */
   --te-cat-other-bg:#EEF0F3;/* @kind color */
   --te-cat-other-ink:#343A44;/* @kind color */
@@ -201,6 +204,7 @@
 [data-cat="family"]{--cat:var(--te-cat-family);--cat-bg:var(--te-cat-family-bg);--cat-ink:var(--te-cat-family-ink)}
 [data-cat="meetups"]{--cat:var(--te-cat-meetups);--cat-bg:var(--te-cat-meetups-bg);--cat-ink:var(--te-cat-meetups-ink)}
 [data-cat="outdoors"]{--cat:var(--te-cat-outdoors);--cat-bg:var(--te-cat-outdoors-bg);--cat-ink:var(--te-cat-outdoors-ink)}
+[data-cat="workshop"]{--cat:var(--te-cat-workshop);--cat-bg:var(--te-cat-workshop-bg);--cat-ink:var(--te-cat-workshop-ink)}
 [data-cat="other"]{--cat:var(--te-cat-other);--cat-bg:var(--te-cat-other-bg);--cat-ink:var(--te-cat-other-ink)}
 .te-tag{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:0 10px;border-radius:var(--te-r-sm);background:var(--cat-bg,var(--te-surface-2));color:var(--cat-ink,var(--te-ink));font-size:var(--te-fs-small);font-weight:700;line-height:1.2;white-space:nowrap}
 .te-tag .te-dot{width:8px;height:8px}

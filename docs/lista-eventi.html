@@ -9,11 +9,6 @@
 </head>
 <body class="te-page" style="background:var(--te-surface-2)" data-screen-label="Event list">
 
-<!-- Avviso permanente. NON e' la barra DEV: quella e' stata tolta.
-     Serve perche' gli eventi qui dentro sono inventati ma i locali sono
-     veri e la pagina sta su un indirizzo pubblico. Si toglie solo quando
-     dentro ci sono eventi veri. ⏳ testo segnaposto, DA CHIEDERE A MUSE. -->
-<p class="te-demo-note" role="note" style="margin:0;padding:var(--te-sp-2) var(--te-gutter);background:var(--te-ink);color:var(--te-on-ink);font-size:15px;line-height:1.4;font-weight:400;text-align:center">Demo site: the events here are not real. Do not plan your evening on them.</p>
 
 <!-- logo segnaposto: quadrato rosso + wordmark, sostituire col marchio definitivo -->
 <header class="te-header">
@@ -22,8 +17,7 @@
     <li><a class="is-active" href="./lista-eventi.html">Events</a></li>
     <li><a href="./submit-evento.html">Submit an event</a></li>
   </ul>
-  <a class="te-btn te-btn--primary te-btn--s te-only-desktop" href="./submit-evento.html"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>Add event</a>
-  <button class="te-btn te-btn--icon te-only-mobile" type="button" aria-label="Menu" style="border-color:transparent"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button>
+  <a class="te-btn te-btn--secondary te-btn--s" href="./submit-evento.html"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>Add event</a>
 </header>
 
 <main class="te-wrap te-wrap--flush">
@@ -70,6 +64,7 @@
       <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="family" data-cat="family"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="6" r="3"></circle><path d="M3 21v-2a5 5 0 0 1 10 0v2"></path><circle cx="17.5" cy="12" r="2"></circle><path d="M14 21v-1.5a3.5 3.5 0 0 1 7 0V21"></path></svg>Family</button>
       <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="meetups" data-cat="meetups"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3.5"></circle><path d="M2 21v-1.5A5.5 5.5 0 0 1 7.5 14h3A5.5 5.5 0 0 1 16 19.5V21"></path><path d="M16.5 3.6a3.5 3.5 0 0 1 0 6.8"></path><path d="M18 14.2a5.5 5.5 0 0 1 4 5.3V21"></path></svg>Meetups</button>
       <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="outdoors" data-cat="outdoors"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 3 4 8 5-5 5 15H2Z"></path></svg>Outdoors</button>
+      <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="workshop" data-cat="workshop"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.9 2.2 20.8 10.1 17.5 13.4 9.6 5.5Z"></path><path d="M13.4 8.9 4.5 17.8"></path></svg>Workshops</button>
       <button class="te-chip te-chip--cat" type="button" aria-pressed="false" data-cat-key="other" data-cat="other"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="8" cy="12" r="1.2" fill="currentColor"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor"></circle><circle cx="16" cy="12" r="1.2" fill="currentColor"></circle></svg>Other</button>
     </div>
     <div class="te-results"><span><b data-count>17 events</b><span data-range></span></span></div>
@@ -184,13 +179,6 @@
   </div>
 </footer>
 
-<nav class="te-tabbar" aria-label="Main">
-  <a class="te-tab is-active" href="./lista-eventi.html" aria-current="page"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Home</a>
-  <a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>Search</a>
-  <a class="te-tab te-tab--add" href="./submit-evento.html"><span class="te-tab__fab"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span>Add</a>
-  <a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>Saved</a>
-  <a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>Menu</a>
-</nav>
 
 <script src="./eventi.js"></script>
 <script src="./app.js"></script>

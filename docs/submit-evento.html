@@ -3,268 +3,289 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Submit an event · TiranaToDo</title>
+<title>TiranaToDo · Send us your event</title>
 <link rel="stylesheet" href="./_ds/styles.css">
 <link rel="stylesheet" href="./pagine.css">
 </head>
 <body class="te-page" data-screen-label="Submit an event">
 
-<!-- Avviso permanente, come sulle altre due pagine. Rimesso il 05/09/2026:
-     era stato tolto in revisione, ma resta per decisione di Davide. Si
-     toglie solo quando dentro al sito ci sono eventi veri.
-     ⏳ testo segnaposto, DA CHIEDERE A MUSE. -->
-<p class="te-demo-note" role="note" style="margin:0;padding:var(--te-sp-2) var(--te-gutter);background:var(--te-ink);color:var(--te-on-ink);font-size:15px;line-height:1.4;font-weight:400;text-align:center">Demo site: the events here are not real. Do not plan your evening on them.</p>
-
 <header class="te-header">
-<a class="te-logo" href="./lista-eventi.html"><span class="te-logo__mark"></span>TiranaToDo</a>
-<ul class="te-nav">
-<li><a href="./lista-eventi.html">Events</a></li>
-<li><a class="is-active" href="./submit-evento.html">Submit an event</a></li>
-</ul>
-<button class="te-btn te-btn--icon te-only-mobile" type="button" aria-label="Menu" style="border-color:transparent"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button>
+  <a class="te-logo" href="./lista-eventi.html"><span class="te-logo__mark"></span>TiranaToDo</a>
+  <ul class="te-nav">
+    <li><a href="./lista-eventi.html">Events</a></li>
+    <li><a class="is-active" href="./submit-evento.html">Submit an event</a></li>
+  </ul>
+  <a class="te-btn te-btn--secondary te-btn--s" href="./lista-eventi.html"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>Events</a>
 </header>
 
-<main class="te-wrap">
+<main class="te-wrap te-wrap--flush">
 
-<h1 class="te-h1" style="margin-top:var(--te-sp-6)">Submit an event</h1>
-<p class="te-body te-muted" style="margin-top:var(--te-sp-2)">There is no form here. You copy the email below, fill in your event and send it. The fields tell you what to write, so you do not have to guess.</p>
+  <h1 class="te-sr">Send us your event</h1>
 
-<ol class="te-steps" style="margin-top:var(--te-sp-6)">
-<li class="te-step">
-<span class="te-step__num" aria-hidden="true">1</span>
-<div class="te-step__body">
-<p class="te-step__title">Copy the email template</p>
-<p class="te-step__text">Press the Copy button. The whole message goes to your clipboard, ready to paste.</p>
-</div>
-</li>
-<li class="te-step">
-<span class="te-step__num" aria-hidden="true">2</span>
-<div class="te-step__body">
-<p class="te-step__title">Fill in your event</p>
-<p class="te-step__text">Write your answer after each field. Field names stay in English. Your text can be in English, Albanian or Italian.</p>
-</div>
-</li>
-<li class="te-step">
-<span class="te-step__num" aria-hidden="true">3</span>
-<div class="te-step__body">
-<p class="te-step__title">Send it to us</p>
-<p class="te-step__text">Send it from the address where you want our reply. Attach a photo if you have one, up to 5 MB.</p>
-</div>
-</li>
-</ol>
+  <!-- Testata della pagina: si vede solo al primo passo. Da li in poi
+       ruberebbe la prima schermata a ogni domanda, e la domanda e' il
+       motivo per cui si sta li'. L'h1 resta nel documento, muto. -->
+  <div class="te-section" id="intro">
+    <p class="te-h1">Send us your event</p>
+    <p class="te-body" style="margin-top:var(--te-sp-3);color:var(--te-ink-muted)">Answer a few questions. At the end your email opens, already written.</p>
+  </div>
 
-<!-- I 19 campi e il loro ORDINE non sono una scelta di questa pagina: vengono
-     da sop/sop_invio_eventi_via_email.md §2.2 (owner OPS, 05/09/2026), dove
-     l'ordine e' dichiarato non negoziabile perche' un domani una macchina
-     legge la mail senza modello linguistico. ⛔ Non riordinare, non
-     rinominare, non togliere i campi facoltativi: un campo assente sposta
-     tutti gli altri. Anche l'oggetto ha formato fisso (§2.1): tre pipe,
-     sempre nello stesso posto.
-     ⚠️ La SOP e' in stato PROPOSTA, non ancora ratificata da Davide.
-     ⚡ Il token NEW e' ratificato da Davide (05/09/2026); la SOP §2.1 e' stata
-     allineata lo stesso giorno e la terna e' NEW / EDIT / CANCEL, in inglese.
-     ⚡⚡ I SEGNAPOSTO fra &lt; e &gt; sono la forma canonica di §2.2-bis, e la
-     pagina e' una COPIA: se pagina e SOP divergono vince la SOP. La regola che
-     li governa (§2.2-ter): ⛔ nessun segnaposto e' mai un valore che
-     accetteremmo. Per questo qui non c'e' nessuna data vera e nessun prezzo
-     vero - un esempio credibile rispedito indietro tale e quale sarebbe
-     indistinguibile da un evento reale. Gli esempi VERI (2026-09-12, 500 ALL)
-     stanno nella legenda qui accanto, dove non possono viaggiare in una mail.
-     ⛔ Nel sorgente le angolari si scrivono &amp;lt; e &amp;gt;: dentro un <pre>
-     un &lt;title&gt; non scappato lo mangia il browser come tag.
-     ⚡ Le due righe # sono di MUSE (copy/stringhe_en.md, lotto 3), a 27 e 26
-     caratteri su un tetto di 28 fissato da OPS §2.2-quater: il contenitore ne
-     regge 30 misurati da LORI, i 2 di margine non si spendono. ⛔ Una riga #
-     che va a capo perde il # nella continuazione e si legge come un campo.
-     La riga vuota dopo il blocco # fa parte del modello, non e' spaziatura.
-     La legenda dei formati e' sotto, in .te-legend. -->
-<div class="te-submit-cols" style="margin-top:var(--te-sp-8)">
+  <form class="te-wiz" id="wiz" novalidate>
 
-<section>
-<div class="te-copybox-head">
-<span class="te-copybox-label">Email template</span>
-<button class="te-btn te-btn--secondary te-btn--s" type="button" data-copy-target="mail-template" data-label="Copy">
-<svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>Copy</button>
-</div>
-<pre class="te-copybox" id="mail-template">To: <mark class="te-ph">events@tiranatodo.com</mark>
-Subject: [TIRANATODO] NEW | &lt;category&gt; | &lt;YYYY-MM-DD&gt; | &lt;title&gt;
+    <div class="te-wiz__bar" id="bar">
+      <p class="te-wiz__count" id="count" aria-live="polite">Step 1 of 6</p>
+      <div class="te-wiz__track"><span class="te-wiz__fill" id="fill" style="width:16.6%"></span></div>
+    </div>
 
-# Replace the brackets too.
-# Keep 19 lines, empty too
+    <!-- ── PASSO 1 · l'evento ─────────────────────────────────────── -->
+    <section class="te-wiz__panel is-current" data-step="1" aria-label="Step 1">
+      <h2 class="te-h3 te-wiz__title">The event</h2>
+      <div class="te-wiz__fields">
 
-TITLE: &lt;title&gt;
-CATEGORY: &lt;category&gt;
-DATE_START: &lt;YYYY-MM-DD&gt;
-TIME_START: &lt;HH:MM&gt;
-DATE_END: &lt;YYYY-MM-DD&gt;
-TIME_END: &lt;HH:MM&gt;
-ALL_DAY: &lt;YES/NO&gt;
-VENUE_NAME: &lt;venue&gt;
-ADDRESS: &lt;address&gt;
-IS_FREE: &lt;YES/NO&gt;
-PRICE: &lt;NNN ALL&gt;
-TICKET_URL: &lt;url&gt;
-DESCRIPTION: &lt;text&gt;
-PHOTO: &lt;ATTACHED/LINK:url/NONE&gt;
-ORGANIZER_NAME: &lt;name&gt;
-ORGANIZER_EMAIL: &lt;email&gt;
-ORGANIZER_PHONE: &lt;phone&gt;
-LANGUAGE: &lt;EN/SQ/IT&gt;
-CONSENT: &lt;YES/NO&gt;</pre>
-<p class="te-small te-muted" style="margin-top:var(--te-sp-2)">Placeholder address: the tiranatodo.com domain is not registered yet.</p>
-</section>
+        <div class="te-field" data-f="TITLE" data-req="1" data-type="text">
+          <label class="te-label" for="f-title">Event name</label>
+          <p class="te-help" id="h-title">Example: Open mic night</p>
+          <input class="te-input" id="f-title" name="TITLE" type="text" aria-describedby="h-title" autocomplete="off">
+        </div>
 
-<!-- Legenda dei formati. Contenitore e gerarchia: LORI, 05/09/2026 - non e'
-     una tabella perche' 19 righe a 375px non si leggono; le regole sono 8 e
-     ognuna copre piu' campi. I valori accettati sono MOSTRATI come chip, non
-     descritti a parole. L'obbligatorio non si marca: si marca il FACOLTATIVO,
-     e il resto lo e' per esclusione.
-     Testo: MUSE, 05/09/2026 (copy/stringhe_en.md, lotto 2), a budget in
-     caratteri dato da LORI. I fatti vengono da sop_invio_eventi_via_email.md
-     §2.2: se cambia la SOP cambia qui.
-     ⚠️ I valori dentro <code> sono dati, non copy: si scrivono verbatim e
-     non si traducono in SQ/IT. Le frasi .te-legend__rule invece si traducono.
-     ⚠️ DA CHIEDERE A LORI: due stringhe sono al 95% del budget EN
-     (rule.dates 57/60, legend.optional.text 56/60) e albanese e italiano
-     crescono del 15-20%. Il blocco va rimisurato prima di tradurre. -->
-<section class="te-legend" aria-labelledby="legend-title">
-<h2 class="te-legend__title" id="legend-title">How to fill the fields</h2>
-<p class="te-legend__intro">12 of the 19 fields are required. The rules below cover the formats.</p>
-<div class="te-legend__box"><p><b>Optional fields</b> These 7 can stay empty. The other 12 all need an answer.</p><p class="te-legend__vals"><code>DATE_END</code><code>TIME_END</code><code>TICKET_URL</code><code>DESCRIPTION</code><code>PHOTO</code><code>ORGANIZER_PHONE</code><code>LANGUAGE</code></p></div>
-<p class="te-legend__note">Fields not listed here are free text. Write them the way you want.</p>
-<ul class="te-legend__list">
-<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">CATEGORY</b><span class="te-legend__vals"><code>music</code><code>nightlife</code><code>theatre</code><code>cinema</code><code>art</code><code>food</code><code>sport</code><code>family</code><code>meetups</code><code>outdoors</code><code>other</code></span></p><p class="te-legend__rule">Pick one. Write it in lower case, exactly as shown.</p></li>
-<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">DATE_START<span> · </span>DATE_END</b><span class="te-legend__vals"><code>YYYY-MM-DD</code></span></p><p class="te-legend__rule">Year, then month, then day. Two digits for month and day.</p></li>
-<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">TIME_START<span> · </span>TIME_END</b><span class="te-legend__vals"><code>HH:MM</code></span></p><p class="te-legend__rule">Use the 24 hour clock. You can skip the start time only if ALL_DAY is YES.</p></li>
-<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">ALL_DAY<span> · </span>IS_FREE<span> · </span>CONSENT</b><span class="te-legend__vals"><code>YES</code><code>NO</code></span></p><p class="te-legend__rule">Only YES or NO. CONSENT must be YES, or we cannot use your event.</p></li>
-<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">PRICE</b><span class="te-legend__vals"><code>500 ALL</code></span></p><p class="te-legend__rule">Needed only when IS_FREE is NO. Leave it empty for free events. Always in Lek.</p></li>
-<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">PHOTO</b><span class="te-legend__vals"><code>ATTACHED</code><code>LINK:&lt;url&gt;</code><code>NONE</code></span></p><p class="te-legend__rule">Pick one of the three. An attached file can be JPG, PNG or WebP, up to 5 MB. NONE is fine.</p></li>
-<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">DESCRIPTION</b></p><p class="te-legend__rule">Up to 1500 characters. Shorter is fine.</p></li>
-<li class="te-legend__item"><p class="te-legend__head"><b class="te-legend__key">LANGUAGE</b><span class="te-legend__vals"><code>EN</code><code>SQ</code><code>IT</code></span></p><p class="te-legend__rule">The language of your text. If you leave it empty, we use EN.</p></li>
-</ul>
-</section>
+        <div class="te-field" data-f="CATEGORY" data-req="1" data-type="choice">
+          <span class="te-label" id="l-cat">Category</span>
+          <p class="te-help" id="h-cat">Pick one. If nothing fits, pick Other.</p>
+          <div class="te-choice-grid" role="radiogroup" aria-labelledby="l-cat" aria-describedby="h-cat" data-choice="CATEGORY">
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="music" data-value="music"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>Music</button>
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="nightlife" data-value="nightlife"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14l-7 8Z"></path><path d="M12 11v8"></path><path d="M8 21h8"></path></svg>Nightlife</button>
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="theatre" data-value="theatre"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v6a8 8 0 0 1-16 0Z"></path><path d="M9 10h.01"></path><path d="M15 10h.01"></path><path d="M9.5 14.5a3.5 3.5 0 0 0 5 0"></path></svg>Theatre</button>
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="cinema" data-value="cinema"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"></path><path d="m6.2 5.3 3.1 3.9"></path><path d="m12.4 3.4 3.1 4"></path><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"></path></svg>Cinema</button>
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="art" data-value="art"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0 0 20 2.5 2.5 0 0 0 2-4 2.5 2.5 0 0 1 2-4h2a4 4 0 0 0 4-4 10 10 0 0 0-10-8Z"></path><circle cx="8.5" cy="7.5" r="1.2" fill="currentColor"></circle><circle cx="13.5" cy="6.5" r="1.2" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r="1.2" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r="1.2" fill="currentColor"></circle></svg>Art</button>
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="food" data-value="food"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2v6a3 3 0 0 0 6 0V2"></path><path d="M7 8v14"></path><path d="M17 22V2c2.2 0 3.5 2.2 3.5 5.5S18.2 13 16 13h1"></path></svg>Food &amp; Drink</button>
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="sport" data-value="sport"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14 14 0 0 0 0 20"></path><path d="M12 2a14 14 0 0 1 0 20"></path></svg>Sport</button>
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="family" data-value="family"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="6" r="3"></circle><path d="M3 21v-2a5 5 0 0 1 10 0v2"></path><circle cx="17.5" cy="12" r="2"></circle><path d="M14 21v-1.5a3.5 3.5 0 0 1 7 0V21"></path></svg>Family</button>
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="meetups" data-value="meetups"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="3.5"></circle><path d="M2 21v-1.5A5.5 5.5 0 0 1 7.5 14h3A5.5 5.5 0 0 1 16 19.5V21"></path><path d="M16.5 3.6a3.5 3.5 0 0 1 0 6.8"></path><path d="M18 14.2a5.5 5.5 0 0 1 4 5.3V21"></path></svg>Meetups</button>
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="outdoors" data-value="outdoors"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 3 4 8 5-5 5 15H2Z"></path></svg>Outdoors</button>
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="workshop" data-value="workshop"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.9 2.2 20.8 10.1 17.5 13.4 9.6 5.5Z"></path><path d="M13.4 8.9 4.5 17.8"></path></svg>Workshops</button>
+        <button class="te-chip te-chip--cat te-choice__cat" type="button" role="radio" aria-checked="false" data-cat="other" data-value="other"><svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="8" cy="12" r="1.2" fill="currentColor"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor"></circle><circle cx="16" cy="12" r="1.2" fill="currentColor"></circle></svg>Other</button>
+          </div>
+        </div>
 
-</div>
+      </div>
+    </section>
 
-<a class="te-btn te-btn--primary te-btn--block" style="margin-top:var(--te-sp-5)" href="mailto:events@tiranatodo.com" aria-label="Open your email app with a new message to events@tiranatodo.com" title="Open your email app with a new message to events@tiranatodo.com"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>Open your email app</a>
+    <!-- ── PASSO 2 · quando ───────────────────────────────────────── -->
+    <!-- ALL_DAY sta per primo anche se nella mail e' il campo 7: e' lui
+         che decide se l'ora serve, e chiederla dopo vorrebbe dire far
+         compilare un campo per poi toglierlo. L'ordine delle 19 righe
+         nella mail non cambia (SOP §2.2), cambia l'ordine delle domande. -->
+    <section class="te-wiz__panel" data-step="2" aria-label="Step 2" hidden>
+      <h2 class="te-h3 te-wiz__title">When it happens</h2>
+      <div class="te-wiz__fields">
 
-<div class="te-alert te-alert--info" style="margin-top:var(--te-sp-8);margin-bottom:var(--te-sp-10)">
-<svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
-<div><strong>What happens next</strong> We read every message. If a field is missing we write back and ask for it. If everything is there, the event goes on the site.</div>
-</div>
+        <div class="te-field" data-f="ALL_DAY" data-req="1" data-type="choice">
+          <span class="te-label" id="l-allday">Does it last all day?</span>
+          <p class="te-help" id="h-allday">Yes for markets, fairs and festivals with no fixed start time.</p>
+          <div class="te-choice" role="radiogroup" aria-labelledby="l-allday" aria-describedby="h-allday" data-choice="ALL_DAY">
+            <button class="te-choice__opt" type="button" role="radio" aria-checked="false" data-value="YES">Yes</button>
+            <button class="te-choice__opt" type="button" role="radio" aria-checked="false" data-value="NO">No</button>
+          </div>
+        </div>
 
+        <div class="te-field" data-f="DATE_START" data-req="1" data-type="date">
+          <label class="te-label" for="f-dstart">Start date</label>
+          <input class="te-input" id="f-dstart" name="DATE_START" type="date">
+        </div>
+
+        <div class="te-field" data-f="TIME_START" data-req="1" data-type="time" data-req-unless="ALL_DAY=YES">
+          <label class="te-label" for="f-tstart">Start time</label>
+          <p class="te-help" id="h-tstart">Use the 24 hour clock, like 21:00.</p>
+          <input class="te-input" id="f-tstart" name="TIME_START" type="time" aria-describedby="h-tstart">
+        </div>
+
+        <div class="te-field" data-f="DATE_END" data-type="date">
+          <label class="te-label" for="f-dend">End date <span class="te-opt">Optional</span></label>
+          <p class="te-help" id="h-dend">Only if the event ends on a different day.</p>
+          <input class="te-input" id="f-dend" name="DATE_END" type="date" aria-describedby="h-dend">
+        </div>
+
+        <div class="te-field" data-f="TIME_END" data-type="time">
+          <label class="te-label" for="f-tend">End time <span class="te-opt">Optional</span></label>
+          <p class="te-help" id="h-tend">Only if you know it.</p>
+          <input class="te-input" id="f-tend" name="TIME_END" type="time" aria-describedby="h-tend">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PASSO 3 · dove ─────────────────────────────────────────── -->
+    <section class="te-wiz__panel" data-step="3" aria-label="Step 3" hidden>
+      <h2 class="te-h3 te-wiz__title">Where it happens</h2>
+      <div class="te-wiz__fields">
+
+        <div class="te-field" data-f="VENUE_NAME" data-req="1" data-type="text">
+          <label class="te-label" for="f-venue">Place name</label>
+          <p class="te-help" id="h-venue">The name of the bar, club or space where it happens.</p>
+          <input class="te-input" id="f-venue" name="VENUE_NAME" type="text" aria-describedby="h-venue" autocomplete="off">
+        </div>
+
+        <div class="te-field" data-f="ADDRESS" data-req="1" data-type="text">
+          <label class="te-label" for="f-addr">Address in Tirana</label>
+          <p class="te-help" id="h-addr">Street and area, so people can find it. Example: Rruga Sami Frashëri, Blloku</p>
+          <input class="te-input" id="f-addr" name="ADDRESS" type="text" aria-describedby="h-addr" autocomplete="off">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PASSO 4 · biglietti ────────────────────────────────────── -->
+    <section class="te-wiz__panel" data-step="4" aria-label="Step 4" hidden>
+      <h2 class="te-h3 te-wiz__title">Tickets</h2>
+      <div class="te-wiz__fields">
+
+        <div class="te-field" data-f="IS_FREE" data-req="1" data-type="choice">
+          <span class="te-label" id="l-free">Is it free?</span>
+          <div class="te-choice" role="radiogroup" aria-labelledby="l-free" data-choice="IS_FREE">
+            <button class="te-choice__opt" type="button" role="radio" aria-checked="false" data-value="YES">Yes</button>
+            <button class="te-choice__opt" type="button" role="radio" aria-checked="false" data-value="NO">No</button>
+          </div>
+        </div>
+
+        <div class="te-field" data-f="PRICE" data-req="1" data-type="number" data-show-if="IS_FREE=NO" hidden>
+          <label class="te-label" for="f-price">Ticket price in Lek</label>
+          <p class="te-help" id="h-price">Only the number in Lek, like 500.</p>
+          <input class="te-input" id="f-price" name="PRICE" type="number" inputmode="numeric" min="0" step="1" aria-describedby="h-price">
+        </div>
+
+        <div class="te-field" data-f="TICKET_URL" data-type="url">
+          <label class="te-label" for="f-turl">Ticket link <span class="te-opt">Optional</span></label>
+          <p class="te-help" id="h-turl">If tickets are sold online, paste the full link here.</p>
+          <input class="te-input" id="f-turl" name="TICKET_URL" type="url" inputmode="url" aria-describedby="h-turl" autocomplete="off">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PASSO 5 · dettagli ─────────────────────────────────────── -->
+    <section class="te-wiz__panel" data-step="5" aria-label="Step 5" hidden>
+      <h2 class="te-h3 te-wiz__title">Details</h2>
+      <div class="te-wiz__fields">
+
+        <div class="te-field" data-f="DESCRIPTION" data-type="text">
+          <label class="te-label" for="f-desc">What happens <span class="te-opt">Optional</span></label>
+          <p class="te-help" id="h-desc">The page looks empty without it. Up to 1500 characters.</p>
+          <textarea class="te-textarea" id="f-desc" name="DESCRIPTION" maxlength="1500" aria-describedby="h-desc"></textarea>
+          <p class="te-small" id="c-desc" aria-live="polite" style="color:var(--te-ink-muted);margin:0">0 / 1500</p>
+        </div>
+
+        <div class="te-field" data-f="PHOTO" data-type="choice">
+          <span class="te-label" id="l-photo">Photo <span class="te-opt">Optional</span></span>
+          <p class="te-help" id="h-photo">Choose a file, a link, or no photo. JPG, PNG or WebP, up to 5 MB.</p>
+          <div class="te-choice" role="radiogroup" aria-labelledby="l-photo" aria-describedby="h-photo" data-choice="PHOTO">
+            <button class="te-choice__opt" type="button" role="radio" aria-checked="false" data-value="ATTACHED">A file</button>
+            <button class="te-choice__opt" type="button" role="radio" aria-checked="false" data-value="LINK">A link</button>
+            <button class="te-choice__opt" type="button" role="radio" aria-checked="false" data-value="NONE">No photo</button>
+          </div>
+        </div>
+
+        <div class="te-field" data-f="PHOTO_URL" data-type="url" data-show-if="PHOTO=LINK" hidden>
+          <label class="te-label" for="f-purl">Link to the photo</label>
+          <p class="te-help" id="h-purl">Paste the full link of the file. It must open without a password.</p>
+          <input class="te-input" id="f-purl" name="PHOTO_URL" type="url" inputmode="url" aria-describedby="h-purl" autocomplete="off">
+        </div>
+
+        <div class="te-field" data-f="LANGUAGE" data-type="select">
+          <label class="te-label" for="f-lang">Language of the event</label>
+          <p class="te-help" id="h-lang">The language spoken at the event.</p>
+          <div class="te-select-wrap">
+            <select class="te-select" id="f-lang" name="LANGUAGE" aria-describedby="h-lang">
+              <option value="EN" selected>English</option>
+              <option value="SQ">Albanian</option>
+              <option value="IT">Italian</option>
+            </select>
+            <svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PASSO 6 · chi manda ────────────────────────────────────── -->
+    <section class="te-wiz__panel" data-step="6" aria-label="Step 6" hidden>
+      <h2 class="te-h3 te-wiz__title">About you</h2>
+      <div class="te-wiz__fields">
+
+        <div class="te-field" data-f="ORGANIZER_NAME" data-req="1" data-type="text">
+          <label class="te-label" for="f-oname">Your name or your group</label>
+          <p class="te-help" id="h-oname">We show this name with the event.</p>
+          <input class="te-input" id="f-oname" name="ORGANIZER_NAME" type="text" aria-describedby="h-oname" autocomplete="name">
+        </div>
+
+        <div class="te-field" data-f="ORGANIZER_EMAIL" data-req="1" data-type="email">
+          <label class="te-label" for="f-omail">Your email</label>
+          <p class="te-help" id="h-omail">We use it to answer you. We never show it on the site.</p>
+          <input class="te-input" id="f-omail" name="ORGANIZER_EMAIL" type="email" inputmode="email" aria-describedby="h-omail" autocomplete="email">
+        </div>
+
+        <div class="te-field" data-f="ORGANIZER_PHONE" data-type="text">
+          <label class="te-label" for="f-ophone">Your phone <span class="te-opt">Optional</span></label>
+          <p class="te-help" id="h-ophone">Only if we need to ask something fast. It stays private.</p>
+          <input class="te-input" id="f-ophone" name="ORGANIZER_PHONE" type="tel" inputmode="tel" aria-describedby="h-ophone" autocomplete="tel">
+        </div>
+
+        <div class="te-field" data-f="CONSENT" data-req="1" data-type="consent">
+          <span class="te-label" id="l-consent">Can we publish it?</span>
+          <p class="te-help" id="h-consent">We need a yes. Without it we cannot publish your event.</p>
+          <label class="te-check" for="f-consent">
+            <input id="f-consent" name="CONSENT" type="checkbox" aria-describedby="h-consent">
+            <span class="te-check__box" aria-hidden="true"><svg class="te-ic" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"></path></svg></span>
+            <span>Yes, you can publish this event on the site, with the name I wrote above.</span>
+          </label>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── SCHERMATA FINALE ───────────────────────────────────────── -->
+    <section class="te-done" data-step="7" aria-label="Ready" hidden>
+      <h2 class="te-h3">Your message is ready</h2>
+      <p class="te-body te-done__ready">The button opens your email app with the message written. You only press send.</p>
+
+      <a class="te-btn te-btn--primary te-btn--l te-btn--block" id="open-mail" href="#" role="button">
+        <svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>Open my email
+      </a>
+
+      <div class="te-alert te-alert--warn" id="photo-note" hidden>
+        <svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.3 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0Z"></path></svg>
+        <span>Add the photo file to the email before you send it. The site cannot attach it for you.</span>
+      </div>
+
+      <div class="te-fallback">
+        <p class="te-fallback__text">If nothing opened, there is no email app set up here. Copy the text below and send it to <span class="te-ph">events@tiranatodo.com</span></p>
+        <div class="te-fallback__head">
+          <span class="te-fallback__label">Your message: read it or copy it.</span>
+          <button class="te-btn te-btn--secondary te-btn--s" type="button" id="copy-mail">
+            <svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"></rect><path d="M4 16V6a2 2 0 0 1 2-2h10"></path></svg>Copy the text
+          </button>
+        </div>
+        <pre class="te-copybox" id="mail-text"></pre>
+      </div>
+
+      <p class="te-done__next">
+        <span>A person reads every message. This is not automatic.</span>
+        <span>If something is missing we write back and ask for it.</span>
+        <span>If everything is there, your event goes on the site.</span>
+      </p>
+    </section>
+
+    <div class="te-wiz__nav">
+      <button class="te-btn te-btn--secondary te-btn--back" type="button" id="back" hidden>
+        <svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>Back
+      </button>
+      <button class="te-btn te-btn--primary" type="button" id="next">Next
+        <svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+      </button>
+    </div>
+
+  </form>
 </main>
 
-<footer class="te-footer">
-<div class="te-wrap te-wrap--flush">
-<div class="te-footer__cols">
-<div>
-<p class="te-footer__title">TiranaToDo</p>
-<ul>
-<li><a href="#">About</a></li>
-<li><a href="./submit-evento.html">Submit an event</a></li>
-<li><a href="#">Contact</a></li>
-</ul>
-</div>
-<div>
-<p class="te-footer__title">Browse</p>
-<ul>
-<li><a href="./lista-eventi.html">Today</a></li>
-<li><a href="./lista-eventi.html">This weekend</a></li>
-<li><a href="./lista-eventi.html">All categories</a></li>
-</ul>
-</div>
-<!-- Il canale WhatsApp compare qui SOLO nel piede, e in nessun altro
-     punto di questa pagina (LORI, 05/09/2026). Questa e' la pagina di
-     chi ORGANIZZA: mettere in mezzo l'invito a seguire il canale, che
-     e' l'azione di chi CONSUMA, sarebbe proprio la confusione fra i
-     due pubblici da evitare. Nel piede invece ci sta: il piede e' la
-     mappa del sito, non un invito. -->
-<div>
-<p class="te-footer__title">Stay updated</p>
-<ul>
-<li><a href="#" data-ph="whatsapp-channel-url">WhatsApp channel</a></li>
-</ul>
-</div>
-</div>
-<div class="te-footer__legal">
-<nav class="te-footer__lang" aria-label="Language">
-<a class="is-active" href="#" lang="en">EN</a>
-<a href="#" lang="sq">SQ</a>
-<a href="#" lang="it">IT</a>
-</nav>
-<p>© 2026 TiranaToDo · <a href="#">Privacy</a></p>
-</div>
-</div>
-</footer>
-
-<nav class="te-tabbar" aria-label="Main">
-<a class="te-tab" href="./lista-eventi.html"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Home</a>
-<a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>Search</a>
-<a class="te-tab te-tab--add is-active" href="./submit-evento.html" aria-current="page"><span class="te-tab__fab"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span>Add</a>
-<a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path></svg>Saved</a>
-<a class="te-tab" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>Menu</a>
-</nav>
-
-<script>
-(function(){
-  var btn = document.querySelector('[data-copy-target]');
-  if (!btn) { return; }
-  btn.addEventListener('click', function(){
-    var target = document.getElementById(btn.getAttribute('data-copy-target'));
-    if (!target) { return; }
-    var text = target.innerText || target.textContent;
-    function done(){
-      btn.lastChild.textContent = 'Copied';
-      setTimeout(function(){ btn.lastChild.textContent = btn.getAttribute('data-label') || 'Copy'; }, 1600);
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done, done);
-    } else {
-      var range = document.createRange();
-      range.selectNodeContents(target);
-      var sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-      try { document.execCommand('copy'); } catch (e) {}
-      sel.removeAllRanges();
-      done();
-    }
-  });
-})();
-</script>
-
-<!--
-STRINGHE VISIBILI — submit-evento (EN default; da tradurre SQ, IT)
-⚠️ Pagina a parte: il copy vero arriva da MUSE, i campi del modello da
-OPS — entrambi al lavoro ora. Ogni riga [MUSE] o [OPS: ...] nel markup
-è un segnaposto dichiarato, non testo pubblicabile. Sotto solo le
-stringhe scritte da me (chrome strutturale o riuso di stringhe già
-approvate altrove) — restano comunque da confermare in revisione.
-
-Tutte scritte. Fonte unica: copy/stringhe_en.md (MUSE, lotto 1 e lotto 2).
-Qui sotto solo l'inventario: se una stringa cambia, cambia prima di la'.
-
-nav.* / page.h1 / footer.*        chrome, come nelle altre due pagine
-copybox.label / copybox.copy      utility, non di marca
-copybox.note                      indirizzo segnaposto
-alert.heading                     etichetta strutturale
-legend.* + rule.* (13 stringhe)   lotto 2, blocco .te-legend qui sopra
-
-⏳ APERTO, non una stringa: la legenda si consulta su questa pagina, ma si
-compila dentro l'app di posta, dove la pagina non c'e' piu'.
-DA CHIEDERE A OPS (domanda di LORI, 05/09/2026): si puo' mettere un
-suggerimento di formato dentro il modello copiabile - una riga di commento
-in testa, o un valore d'esempio dopo i due punti - oppure le 19 righe
-"NOME_CAMPO: valore" devono restare intatte per il parsing futuro?
-
-INDIRIZZO: events@tiranatodo.com è un segnaposto dichiarato — il
-dominio tiranatodo.com non è ancora registrato. Non sostituire senza
-conferma di Davide/OPS.
-
-CANALE WHATSAPP: stesso trattamento — il canale non esiste ancora,
-quindi href="#" e data-ph="whatsapp-channel-url".
--->
-
+<script src="./submit-evento.js"></script>
 </body>
 </html>

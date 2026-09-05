@@ -214,19 +214,12 @@
 .te-footer__lang{display:inline-flex;border:1.5px solid var(--te-on-ink-muted);border-radius:var(--te-r-pill);overflow:hidden}
 
 /* ══════════════════════════════════════════════════════════════════
-   SUBMIT AN EVENT — passi numerati e blocco email copiabile
-   (05/09/2026). Non c'e' modulo: la procedura passa da email. Il
-   blocco copiabile e' il pezzo centrale della pagina — per questo il
-   suo font-size e' il corpo (17px), non il 15 delle note: e' il
-   contenuto piu' importante, non una didascalia.
+   SUBMIT AN EVENT — blocco email copiabile (05/09/2026)
+   Non c'e' modulo: la procedura passa da email. Il blocco copiabile
+   resta come via di riserva dell'ultima schermata del questionario —
+   per questo il suo font-size e' il corpo (17px), non il 15 delle
+   note: e' contenuto da leggere e copiare, non una didascalia.
    ══════════════════════════════════════════════════════════════════ */
-.te-steps{display:flex;flex-direction:column;gap:var(--te-sp-5);list-style:none;padding:0;margin:0}
-.te-step{display:flex;gap:var(--te-sp-3);align-items:flex-start}
-.te-step__num{width:32px;height:32px;flex:none;margin-top:2px;border-radius:50%;background:var(--te-ink);color:var(--te-on-ink);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:var(--te-fs-small)}
-.te-step__body{display:flex;flex-direction:column;gap:2px}
-.te-step__title{font-size:var(--te-fs-body);font-weight:700;line-height:1.4;margin:0}
-.te-step__text{font-size:var(--te-fs-small);color:var(--te-ink-muted);line-height:1.4;margin:0}
-
 .te-copybox-head{display:flex;align-items:center;justify-content:space-between;gap:var(--te-sp-2);margin-bottom:var(--te-sp-2)}
 .te-copybox-label{font-size:var(--te-fs-small);font-weight:700;color:var(--te-ink-muted)}
 /* pre-wrap + overflow-wrap:anywhere: un indirizzo o un segnaposto
@@ -237,41 +230,65 @@
 .te-ph{background:var(--te-warn-bg);color:var(--te-warn-ink);padding:0 4px;border-radius:var(--te-r-sm);font-style:normal}
 
 /* ══════════════════════════════════════════════════════════════════
-   DEV ONLY — barra di scelta dello stato. Non fa parte del design:
-   si toglie in produzione insieme allo <script> in fondo alla pagina.
-   Non e' piu' appiccicata in cima: erano tre elementi sticky alla
-   stessa quota e falsavano la lettura della pagina vera. */
-.dev-bar{position:static;display:flex;flex-wrap:wrap;gap:var(--te-sp-2);align-items:center;padding:var(--te-sp-2) var(--te-sp-4);background:var(--te-surface-3);border-bottom:1.5px solid var(--te-line);font-size:var(--te-fs-small)}
-.dev-bar__label{font-weight:700;color:var(--te-ink-muted)}
-.dev-bar button{font-size:var(--te-fs-small);padding:var(--te-sp-1) var(--te-sp-3)}
-.dev-bar button.is-active{background:var(--te-ink);color:var(--te-on-ink);border-color:var(--te-ink)}
-.dev-bar a{display:inline-flex;align-items:center;min-height:32px;padding:0 var(--te-sp-3);border-radius:var(--te-r-pill);border:1.5px solid var(--te-line);color:var(--te-ink);text-decoration:none;font-weight:600}
-.dev-bar a.is-on{background:var(--te-ink);color:var(--te-on-ink);border-color:var(--te-ink)}
+   QUESTIONARIO A PASSI — solo pagina submit-evento (LORI, 05/09/2026)
+   Sostituisce .te-steps / .te-legend* / .te-submit-cols, tolti il 05/09.
+   Ordine di Davide: «processo a misura di umano stupido». Tre scelte
+   che vengono da lì e non si cambiano senza rifare il ragionamento:
+   1) un passo per argomento, non un campo per schermata: sei passi si
+      contano, diciannove no;
+   2) niente tendine dove le opzioni sono due o tre: bersagli grossi,
+      tutti visibili, nessuno stato nascosto;
+   3) la barra di avanzamento e i due bottoni sono appiccicati, sopra e
+      sotto: «quanto manca» e «avanti» sono le due domande che tornano
+      a ogni passo e non si vanno a cercare scorrendo.
+   ══════════════════════════════════════════════════════════════════ */
+.te-page [hidden]{display:none}
 
-/* ─── Legenda dei formati — solo pagina submit-evento ─────────────────── */
-/* Reference, non istruzione: si consulta mentre si compila. Sta DOPO il
-   blocco copiabile e PRIMA del bottone mailto; su desktop a fianco.
-   Non e' una tabella: 19 righe a 375px non si leggono. Le regole sono 8 e
-   ognuna copre piu' campi. Obbligatorio/facoltativo: si marca il
-   FACOLTATIVO, come .te-label .te-opt nel DS. LORI, 05/09/2026. */
-.te-submit-cols{display:grid;gap:var(--te-sp-8)}
-@media (min-width:1024px){.te-submit-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--te-sp-10);align-items:start}}
+.te-wiz{display:block}
 
-.te-legend{margin:0}
-.te-legend__title{margin:0 0 var(--te-sp-3);font-size:var(--te-fs-h3);font-weight:700;line-height:var(--te-lh-title);color:var(--te-ink)}
-.te-legend__intro{margin:0;font-size:var(--te-fs-body);line-height:1.45}
-.te-legend__note{margin:var(--te-sp-4) 0 0;font-size:var(--te-fs-body);line-height:1.45;color:var(--te-ink-muted)}
+.te-wiz__bar{position:sticky;top:56px;z-index:15;background:var(--te-white);padding:var(--te-sp-3) var(--te-gutter);border-bottom:1px solid var(--te-line-soft)}
+@media (min-width:960px){.te-wiz__bar{top:72px}}
+.te-wiz__count{display:block;font-size:var(--te-fs-small);font-weight:700;color:var(--te-ink-muted);margin:0 0 6px}
+.te-wiz__track{height:6px;border-radius:var(--te-r-pill);background:var(--te-surface-3);overflow:hidden}
+.te-wiz__fill{display:block;height:100%;background:var(--te-ink);border-radius:var(--te-r-pill);transition:width .2s}
 
-.te-legend__box{margin:var(--te-sp-4) 0 0;padding:var(--te-sp-4);border:1.5px solid var(--te-line-soft);border-radius:var(--te-r-md);background:var(--te-surface-2)}
-.te-legend__box p{margin:0;font-size:var(--te-fs-body);line-height:1.45}
-.te-legend__box .te-legend__vals{margin-top:var(--te-sp-3)}
-.te-legend__box .te-legend__vals code{background:var(--te-white)}
+.te-wiz__panel{padding:var(--te-sp-6) var(--te-gutter) var(--te-sp-8)}
+.te-wiz__title{margin:0 0 var(--te-sp-5)}
+.te-wiz__fields{display:flex;flex-direction:column;gap:var(--te-sp-6)}
 
-.te-legend__list{display:flex;flex-direction:column;gap:var(--te-sp-4);margin:var(--te-sp-6) 0 0;padding:0;list-style:none}
-.te-legend__item{display:flex;flex-direction:column;gap:var(--te-sp-1)}
-.te-legend__head{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0}
-.te-legend__key{font-family:ui-monospace,Menlo,monospace;font-size:var(--te-fs-body);font-weight:700;line-height:1.5;color:var(--te-ink);overflow-wrap:anywhere}
-.te-legend__key span{font-weight:400;color:var(--te-ink-muted)}
-.te-legend__rule{margin:0;font-size:var(--te-fs-body);line-height:1.45;color:var(--te-ink-muted)}
-.te-legend__vals{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-width:0;margin:0;padding:0;list-style:none}
-.te-legend__head code,.te-legend__vals code{font-family:ui-monospace,Menlo,monospace;font-size:var(--te-fs-small);font-weight:400;line-height:1.5;padding:2px 7px;border-radius:var(--te-r-sm);border:1px solid var(--te-line-soft);background:var(--te-surface-2);color:var(--te-ink);white-space:nowrap}
+/* L'aiuto sta fra etichetta e controllo, non sotto: si legge nell'ordine
+   in cui serve — cosa chiedo, come si risponde, dove si scrive. Sotto al
+   campo arriverebbe dopo l'errore che avrebbe evitato. */
+.te-help{font-size:var(--te-fs-small);line-height:1.4;color:var(--te-ink-muted);margin:-2px 0 0}
+
+/* Scelta secca (ALL_DAY, IS_FREE, PHOTO, CONSENT non e' qui: ha la
+   casella). Altezza 52px = quella di .te-input, cosi' una colonna di
+   campi misti resta una colonna sola. */
+.te-choice{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:var(--te-sp-2)}
+.te-choice__opt{display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 var(--te-sp-3);border-radius:var(--te-r-md);border:1.5px solid var(--te-line);background:var(--te-white);color:var(--te-ink);font-family:var(--te-font);font-size:var(--te-fs-body);font-weight:700;line-height:1.2;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.te-choice__opt:hover,.te-choice__opt.is-hover{background:var(--te-surface-2);border-color:var(--te-ink)}
+.te-choice__opt.is-active{background:var(--te-ink);border-color:var(--te-ink);color:var(--te-on-ink)}
+.te-choice__opt:focus-visible{outline:none;box-shadow:var(--te-ring)}
+.te-field.is-error .te-choice__opt{border-color:var(--te-err)}
+
+/* Le 12 categorie: griglia di pastiglie, non tendina. Sono le stesse
+   .te-chip--cat della lista eventi, quindi chi ha filtrato riconosce
+   colore e icona e sceglie senza leggere. */
+.te-choice-grid{display:flex;flex-wrap:wrap;gap:var(--te-sp-2)}
+
+.te-wiz__nav{position:sticky;bottom:0;z-index:15;display:flex;gap:var(--te-sp-3);padding:var(--te-sp-3) var(--te-gutter);padding-bottom:calc(var(--te-sp-3) + env(safe-area-inset-bottom));background:var(--te-white);border-top:1px solid var(--te-line)}
+.te-wiz__nav .te-btn{flex:1 1 auto}
+.te-wiz__nav .te-btn--back{flex:0 0 auto;min-width:104px}
+
+/* ─── L'ultima schermata ──────────────────────────────────────────── */
+/* Il bottone rosso e' l'azione, e il rosso e' delle azioni. La via di
+   riserva sta sotto e resta APERTA: un mailto puo' non fare niente, e
+   chi vede la pagina ferma pensa che il sito sia rotto. Chiuderla in un
+   <details> vorrebbe dire che se ne accorge solo chi la cerca. */
+.te-done{display:flex;flex-direction:column;gap:var(--te-sp-5);padding:var(--te-sp-6) var(--te-gutter) var(--te-sp-8)}
+.te-done__ready{margin:0}
+.te-fallback{border:1.5px solid var(--te-line-soft);border-radius:var(--te-r-md);background:var(--te-white);padding:var(--te-sp-4)}
+.te-fallback__text{margin:0 0 var(--te-sp-4);font-size:var(--te-fs-small);line-height:1.45;color:var(--te-ink-muted)}
+.te-fallback__head{display:flex;align-items:center;justify-content:space-between;gap:var(--te-sp-3);margin-bottom:var(--te-sp-2)}
+.te-fallback__label{font-size:var(--te-fs-small);font-weight:700;color:var(--te-ink-muted)}
+.te-done__next{display:flex;flex-direction:column;gap:var(--te-sp-1);margin:0;font-size:var(--te-fs-small);line-height:1.45;color:var(--te-ink-muted)}
