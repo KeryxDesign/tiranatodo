@@ -387,6 +387,8 @@ Restano segnaposto e non li ho toccati: il titolo `Submit an event` (H1 e naviga
 **Chi legge:** chi organizza un evento — bar, centro culturale, chi organizza incontri per expat. Non compra niente: ci sta facendo un favore. Registro identico al lotto 1: frasi corte, verbi finiti, zero idiomi, zero entusiasmo, zero vendita.
 **Contenitore:** blocco `.te-legend` dopo il modello copiabile. I valori accettati (`YYYY-MM-DD`, `music`, `YES`, `NO`, `500 ALL`, `EN`…) sono **chip a schermo**, e i nomi dei campi sono **etichette a schermo**: nessuna stringa li ripete, salvo quando la regola riguarda un campo diverso da quello della riga (`ALL_DAY` dentro `rule.times`, `IS_FREE` dentro `rule.price`, `CONSENT` dentro `rule.yesno`).
 **Fonte dei fatti:** `sop/sop_invio_eventi_via_email.md` §2.2, tabella dei 19 campi. Nessun numero fuori da lì.
+**Budget caratteri — sciolto da Davide il 05/09/2026:** i tetti di questa sezione (60 e 70 caratteri) si misurano **sul blocco copiabile**, non sulla legenda. ⚡ La legenda è in font proporzionale e a parità di caratteri occupa meno spazio: il tetto **non si allarga per questo**. ⛔ Il conteggio non si rifà sul contenitore della legenda.
+
 
 ---
 
