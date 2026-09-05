@@ -9,14 +9,9 @@
 </head>
 <body class="te-page" data-screen-label="Event detail">
 
-<!-- DEV ONLY — scelta della variante. Si toglie in produzione con lo <script> in fondo. -->
-<div class="dev-bar">
-  <b>Variant</b>
-  <a href="#normal" data-state-link="normal">Paid event</a>
-  <a href="#past" data-state-link="past">Past event</a>
-  <a href="#free" data-state-link="free">Free event</a>
-  <span>Sample data · prices in Lek are examples</span>
-</div>
+<!-- Avviso permanente, non la barra DEV. Le varianti si vedono con ?state=past
+     e ?state=free. ⏳ testo segnaposto, DA CHIEDERE A MUSE. -->
+<p class="te-demo-note" role="note" style="margin:0;padding:var(--te-sp-2) var(--te-gutter);background:var(--te-ink);color:var(--te-on-ink);font-size:15px;line-height:1.4;font-weight:400;text-align:center">Demo site — these events are not real. Nothing here is happening.</p>
 
 <!-- logo segnaposto: quadrato rosso + wordmark -->
 <header class="te-header te-header--desktop">
@@ -28,8 +23,8 @@
   <a class="te-btn te-btn--primary te-btn--s te-only-desktop" href="#"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>Add event</a>
 </header>
 
-<main>
-  <header class="te-hero" data-cat="music">
+<main data-detail>
+  <header class="te-hero" data-cat="music" data-d-hero>
     <div class="te-hero__media">
       <!-- prima immagine della pagina: nessun loading=lazy, si vede subito -->
       <img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/music.jpg" width="700" height="438" decoding="async" alt="An electric guitar and a microphone stand alone in a spotlight on a small dark stage, seen over the heads of a seated audience">
@@ -45,48 +40,44 @@
     <div class="te-hero__body">
       <div class="te-alert te-alert--warn" data-show="past" hidden>
         <svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
-        <div><strong>This event has ended</strong>Voting and calendar are closed. <a href="./lista-eventi.html">See what's on this week</a></div>
+        <div><strong>This event has ended</strong>The calendar button is closed. <a href="./lista-eventi.html">See what's on this week</a></div>
       </div>
 
       <div class="te-hero__tags">
-        <span class="te-tag"><i class="te-dot"></i>Music</span>
+        <span class="te-tag" data-d-cat><i class="te-dot"></i>Music</span>
         <span class="te-badge te-badge--new" data-show="normal">New</span>
         <span class="te-badge te-badge--past" data-show="past" hidden>Past</span>
         <span class="te-badge te-badge--free" data-show="free" hidden>Free</span>
       </div>
 
-      <h1 class="te-h1">Live music: open mic night at Tulla Culture Center</h1>
+      <h1 class="te-h1" data-d-title>Live music: open mic night at Tulla Culture Center</h1>
 
       <ul class="te-meta">
         <li>
           <svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
           <div>
-            <div class="te-meta__main">Sat 12 Sep, 21:00 – 23:00</div>
-            <div class="te-meta__sub">Sign-up for performers from 19:30</div>
+            <div class="te-meta__main" data-d-when>Sat 12 Sep, 21:00 – 23:00</div>
+            <div class="te-meta__sub" data-d-when-sub>Sign-up for performers from 19:30</div>
           </div>
         </li>
         <li>
           <svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
           <div>
-            <div class="te-meta__main">Tulla Culture Center</div>
-            <div class="te-meta__sub">Rruga Sami Frashëri, Blloku · <a href="#">Open in Maps</a></div>
+            <div class="te-meta__main" data-d-venue>Tulla Culture Center</div>
+            <div class="te-meta__sub" data-d-address>Rruga Sami Frashëri, Blloku · <a href="#">Open in Maps</a></div>
           </div>
         </li>
         <li>
           <svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 11v2"></path><path d="M13 17v2"></path></svg>
           <div>
-            <div class="te-meta__main" data-show="normal past">500 L</div>
-            <div class="te-meta__sub" data-show="normal">Includes one drink · <a href="#">Buy from the ticket partner</a></div>
-            <div class="te-meta__sub" data-show="past" hidden>Includes one drink · ticket sales are closed</div>
+            <div class="te-meta__main" data-show="normal past" data-d-price>500 L</div>
+            <div class="te-meta__sub" data-show="normal"><a href="#">Buy from the ticket partner</a></div>
+            <div class="te-meta__sub" data-show="past" hidden>Ticket sales are closed</div>
             <div class="te-meta__main" data-show="free" hidden>Free entry</div>
             <div class="te-meta__sub" data-show="free" hidden>No ticket needed · first come, first served</div>
           </div>
         </li>
       </ul>
-
-      <button class="te-vote te-vote--lg" type="button" aria-pressed="false" data-off-when="past">
-        <svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>I'm interested <span class="te-vote__count te-muted">· 128</span>
-      </button>
 
       <div class="te-actions">
         <div class="te-actions__row">
@@ -104,80 +95,29 @@
 
     <section class="te-section">
       <h2 class="te-h3">About this event</h2>
-      <p class="te-body" style="margin-top:var(--te-sp-2)">Every second Saturday Tulla opens its stage to anyone with a song, a poem or a five-minute set. Sign up at the door from 19:30; slots go in order of arrival and each performer gets eight minutes. The audience is a mix of locals and internationals, and the host switches between English and Albanian.</p>
-      <p class="te-body" style="margin-top:var(--te-sp-3)">Doors close when the room is full, about sixty people, so come early if you want a seat. The bar stays open until midnight.</p>
+      <div data-d-about></div>
     </section>
 
     <section class="te-section">
       <h2 class="te-h3">Organiser</h2>
-      <p class="te-body te-strong" style="margin-top:var(--te-sp-2)">Tulla Culture Center</p>
+      <p class="te-body te-strong" style="margin-top:var(--te-sp-2)" data-d-organizer>Tulla Culture Center</p>
     </section>
 
     <section class="te-group" style="padding-top:var(--te-sp-4)">
-      <h2 class="te-group__title">More in Music</h2>
-      <div class="te-list--cols te-pad">
-        <a class="te-card te-card--list" href="./dettaglio-evento.html" data-cat="music">
-          <div class="te-card__media"><img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/music.jpg" width="700" height="438" loading="lazy" decoding="async" alt="An electric guitar and a microphone stand alone in a spotlight on a small dark stage, seen over the heads of a seated audience"></div>
-          <div class="te-card__body">
-            <p class="te-card__date">Fri 18 Sep, 22:00</p>
-            <h3 class="te-card__title">Balkan brass night with the Tirana Street Band</h3>
-            <p class="te-card__place"><span>Hemingway Bar</span></p>
-            <div class="te-card__foot">
-              <span class="te-card__price">700 L</span>
-              <button class="te-vote te-vote--compact" type="button" aria-pressed="false" aria-label="I'm interested · 96 people"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg><span class="te-vote__count">96</span></button>
-            </div>
-          </div>
-        </a>
-        <a class="te-card te-card--list" href="./dettaglio-evento.html" data-cat="music">
-          <div class="te-card__media"><img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/music.jpg" width="700" height="438" loading="lazy" decoding="async" alt="An electric guitar and a microphone stand alone in a spotlight on a small dark stage, seen over the heads of a seated audience"></div>
-          <div class="te-card__body">
-            <p class="te-card__date">Sun 20 Sep, 19:00</p>
-            <h3 class="te-card__title">Sunday jazz session at Destil Creative Hub</h3>
-            <p class="te-card__place"><span>Destil Creative Hub</span></p>
-            <div class="te-card__foot">
-              <span class="te-badge te-badge--free">Free</span>
-              <button class="te-vote te-vote--compact is-solo" type="button" aria-pressed="false" aria-label="I'm interested"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></button>
-            </div>
-          </div>
-        </a>
-      </div>
+      <h2 class="te-group__title" data-related-title>More in Music</h2>
+      <div class="te-list--cols te-pad" data-related></div>
     </section>
 
     <section class="te-group" style="padding-bottom:var(--te-sp-8)">
-      <h2 class="te-group__title">Same day · Sat 12 Sep</h2>
-      <div class="te-list--cols te-pad">
-        <a class="te-card te-card--list" href="./dettaglio-evento.html" data-cat="meetups">
-          <div class="te-card__media"><img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/meetups.jpg" width="700" height="438" loading="lazy" decoding="async" alt="People talking in small groups with drinks in hand on a rooftop terrace at dusk, under a string of festoon lights"></div>
-          <div class="te-card__body">
-            <p class="te-card__date">19:30 · <span class="te-tag" style="min-height:24px;padding:0 var(--te-sp-2)"><i class="te-dot"></i>Meetups</span></p>
-            <h3 class="te-card__title">Newcomers in Tirana: welcome drinks for internationals</h3>
-            <p class="te-card__place"><span>Radio Bar, Blloku</span></p>
-            <div class="te-card__foot">
-              <span class="te-badge te-badge--free">Free</span>
-              <button class="te-vote te-vote--compact" type="button" aria-pressed="false" aria-label="I'm interested · 64 people"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg><span class="te-vote__count">64</span></button>
-            </div>
-          </div>
-        </a>
-        <a class="te-card te-card--list" href="./dettaglio-evento.html" data-cat="cinema">
-          <div class="te-card__media"><img src="https://raw.githubusercontent.com/KeryxDesign/tiranatodo/main/assets/demo/web/cinema.jpg" width="700" height="438" loading="lazy" decoding="async" alt="Rows of empty folding chairs facing a lit open-air cinema screen at night, under a full moon"></div>
-          <div class="te-card__body">
-            <p class="te-card__date">21:30 · <span class="te-tag" style="min-height:24px;padding:0 var(--te-sp-2)"><i class="te-dot"></i>Cinema</span></p>
-            <h3 class="te-card__title">Open-air screening: Albanian classics with English subtitles</h3>
-            <p class="te-card__place"><span>Rinia Park, open-air stage</span></p>
-            <div class="te-card__foot">
-              <span class="te-card__price">300 L</span>
-              <button class="te-vote te-vote--compact" type="button" aria-pressed="false" aria-label="I'm interested · 41 people"><svg class="te-ic te-ic--s" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg><span class="te-vote__count">41</span></button>
-            </div>
-          </div>
-        </a>
-      </div>
+      <h2 class="te-group__title" data-sameday-title>Same day</h2>
+      <div class="te-list--cols te-pad" data-sameday></div>
     </section>
 
   </div>
 </main>
 
 <div class="te-sticky-cta" data-show="normal">
-  <div class="te-sticky-cta__price"><strong>500 L</strong><span class="te-small te-muted">one drink included</span></div>
+  <div class="te-sticky-cta__price"><strong data-d-sticky-price>500 L</strong><span class="te-small te-muted" data-d-sticky-sub></span></div>
   <a class="te-btn te-btn--primary te-btn--l" href="#"><svg class="te-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 11v2"></path><path d="M13 17v2"></path></svg>Get tickets</a>
 </div>
 
@@ -212,96 +152,8 @@
   </div>
 </footer>
 
-<!-- DEV ONLY — mostra una delle tre varianti. Si toglie in produzione. -->
-<script>
-(function(){
-  var valid = ['normal','past','free'];
-  function apply(s){
-    if (valid.indexOf(s) < 0) { s = valid[0]; }
-    var i, els = document.querySelectorAll('[data-show]');
-    for (i = 0; i < els.length; i++) {
-      els[i].hidden = els[i].getAttribute('data-show').split(' ').indexOf(s) < 0;
-    }
-    var offs = document.querySelectorAll('[data-off-when]');
-    for (i = 0; i < offs.length; i++) {
-      var off = offs[i].getAttribute('data-off-when') === s;
-      offs[i].disabled = off;
-      offs[i].setAttribute('aria-disabled', off ? 'true' : 'false');
-      if (offs[i].className.indexOf('te-vote') === 0) {
-        offs[i].className = off ? 'te-vote te-vote--lg is-off' : 'te-vote te-vote--lg';
-      }
-    }
-    var links = document.querySelectorAll('[data-state-link]');
-    for (i = 0; i < links.length; i++) {
-      links[i].className = (links[i].getAttribute('data-state-link') === s) ? 'is-on' : '';
-    }
-  }
-  function read(){ return (window.location.hash || '').replace('#',''); }
-  window.addEventListener('hashchange', function(){ apply(read()); });
-  apply(read());
-})();
-</script>
+<script src="./eventi.js"></script>
+<script src="./app.js"></script>
 
-<!--
-STRINGHE VISIBILI — dettaglio-evento (EN default; da tradurre SQ, IT)
-brand.name → TiranaToDo
-nav.events → Events
-nav.submit → Submit an event
-nav.add → Add event
-detail.back → Back to events
-detail.save → Save
-detail.share → Share
-media.nophoto → No photo yet   [segnaposto: da confermare a MUSE]
-detail.past.title → This event has ended
-detail.past.body → Voting and calendar are closed.
-detail.past.link → See what's on this week
-badge.new → New
-badge.past → Past
-badge.free → Free
-detail.when → Sat 12 Sep, 21:00 – 23:00
-detail.when.note → Sign-up for performers from 19:30
-detail.where.name → Tulla Culture Center
-detail.where.address → Rruga Sami Frashëri, Blloku
-detail.where.map → Open in Maps
-detail.price → 500 L
-detail.price.note → Includes one drink
-detail.price.buy → Buy from the ticket partner
-detail.price.note.past → Includes one drink · ticket sales are closed
-detail.price.free → Free entry
-detail.price.free.note → No ticket needed · first come, first served
-detail.vote → I'm interested
-detail.vote.count → · {n}
-detail.calendar → Add to calendar
-detail.tickets → Tickets
-detail.about → About this event
-detail.organiser → Organiser
-detail.more.category → More in {category}
-detail.sameday → Same day · {date}
-cta.price.note → one drink included
-cta.tickets → Get tickets
-footer.* → come in lista-eventi
-
-TESTI ALTERNATIVI DELLE FOTO (li pronuncia un lettore di schermo: sono
-testo visibile, non metadati. Da confermare a MUSE insieme alle stringhe.)
-media.alt.music → An electric guitar and a microphone stand alone in a spotlight on a small dark stage, seen over the heads of a seated audience
-media.alt.meetups → People talking in small groups with drinks in hand on a rooftop terrace at dusk, under a string of festoon lights
-media.alt.cinema → Rows of empty folding chairs facing a lit open-air cinema screen at night, under a full moon
-
-FOTO: la testata e le quattro card portano una fotografia, abbinata alla
-categoria. Le foto stanno nel repo del progetto (assets/demo/web/), sono
-generate con AI e ritagliate 16:10 a 700x438. music.jpg compare tre
-volte perche' tre di queste schede sono davvero di categoria Music.
-La testata carica subito; le quattro card hanno loading="lazy".
-
-SEGNAPOSTO IMMAGINE: la classe .te-media-empty resta in pagine.css e non
-la usa piu' nessun riquadro di questo mockup. E' lo stato di ripiego per
-l'evento il cui organizzatore non carica nessuna foto — in produzione
-succedera' spesso. Occupa lo stesso riquadro dell'<img>: si scambiano
-senza muovere un pixel. Non dipende dalla variante: un evento gratuito o
-passato puo' avere la foto come un evento a pagamento.
-
-DATI D'ESEMPIO, NON REALI: titolo, luogo, contatore voti e prezzi in Lek
-(500 L, 300 L, 700 L) sono segnaposto.
--->
 </body>
 </html>
