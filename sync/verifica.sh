@@ -1,9 +1,10 @@
 #!/bin/bash
 # Dice se il repo e il progetto Claude Design sono la stessa cosa.
 # TiranaToDo: copia di uncaged/sync/verifica.sh, stessa logica e stessi sette
-# esiti. Cambiano solo questa intestazione e tre messaggi, che qui nominano il
-# file dell'elenco invece di dire "index.html" (in UNCAGED il file con patch si
-# chiama cosi', qui no).
+# esiti. ⛔ Dal 06/09/2026 i due file sono lo stesso script salvo questa
+# intestazione: i tre messaggi che qui nominavano il file dell'elenco invece di
+# dire "index.html" sono stati portati anche su UNCAGED. Una regola applicata a
+# una copia sola fa dipendere il comportamento da quale repo hai aperto.
 #
 # I file di Claude Design NON si scaricano da qui: si leggono dentro una
 # sessione, con list_files e read_file del suo MCP, e si salvano su disco.
@@ -14,15 +15,21 @@
 #                                      voce (con il suo docs/...), poi il nome
 #                                      "design": una cartella piatta coi nomi di
 #                                      Claude Design basta, ed e' la forma comoda.
-#   bash sync/verifica.sh <file>       un file solo: vale come il solo file con
-#                                      patch, gli altri restano NON CONTROLLATI
+#   bash sync/verifica.sh <file>       un file solo: vale come il file sorgente
+#                                      dichiarato in stato.json, campo
+#                                      "file_sorgente" (NON "quello con la
+#                                      patch"): gli altri restano NON CONTROLLATI
 #   bash sync/verifica.sh              senza argomento: meta' del controllo,
 #                                      guarda solo il lato repo
 #
 # Quali file si guardano lo dice sync/stato.json, elenco "file". I percorsi
-# "repo" partono dalla radice del repo, quindi cominciano per docs/. Uno solo
-# ha una patch: per lui si controlla che baseline + patch dia ancora il file
-# pubblicato. Tutti gli altri devono essere uguali byte per byte al file di
+# "repo" partono dalla radice del repo, quindi cominciano per docs/.
+# ZERO file con patch e' lecito, ed e' il caso normale di un repo che pubblica
+# l'artefatto tal quale: allora si controlla tutto byte per byte. Al massimo uno
+# puo' averla: per lui si controlla che baseline + patch dia ancora il file
+# pubblicato. Piu' di uno oggi si ferma, e non perche' sia sbagliato: perche'
+# nessuno ha ancora deciso cosa voglia dire (SOP §2.1, §9.3, §14 buco 4-bis).
+# Tutti gli altri devono essere uguali byte per byte al file di
 # Claude Design. Un design_sha256 a null vuol dire "mai letto dal progetto":
 # quel file e' NON CONTROLLATO, mai allineato.
 #
@@ -33,7 +40,8 @@
 # Il verdetto si legge a schermo. I codici di uscita sono uno per esito:
 #   0  ALLINEATI        tutti i file controllati, nessuno mosso
 #   1  ERRORE           argomento non trovato, stato.json incoerente,
-#                       file del repo mancante, ricostruzione che non torna
+#                       file del repo mancante, ricostruzione che non torna,
+#                       piu' di un file con patch (limite, SOP §14 buco 4-bis)
 #   2  REPO AVANTI      il repo ha modifiche che in Claude Design non ci sono
 #   3  BIFORCATI        mossi tutti e due, o la patch non si applica piu'.
 #                       Si ferma e decide una persona
@@ -68,10 +76,33 @@ try:
 except Exception as e:
     print("sync/stato.json illeggibile: %s" % e); sys.exit(1)
 
-# un solo file con patch, e deve essere il primo dell'elenco
+# Quante voci hanno una patch. ZERO E' LECITO, ed e' il caso normale di un repo
+# che pubblica l'artefatto tal quale e non ha niente da riparare (SOP §2.1,
+# §9.3, regola del 06/09/2026): allora il ramo della patch non si apre e tutte
+# le voci si controllano byte per byte.
+# ⛔ Piu' di una NON e' un errore di scrittura di stato.json: e' un limite di
+# questo script, e nessuno ha ancora deciso cosa voglia dire (SOP §14, buco
+# 4-bis). Sono due cose diverse e hanno due messaggi diversi apposta.
 con_patch = [v for v in elenco if v.get("patch")]
-if len(con_patch) != 1:
-    print("stato.json incoerente: serve esattamente un file con patch, trovati %d" % len(con_patch)); sys.exit(1)
+if len(con_patch) > 1:
+    print("LIMITE NON ANCORA DECISO: questo script regge al massimo un file con patch, nell'elenco ce ne sono %d" % len(con_patch))
+    print("  (%s)" % ", ".join(v["repo"] for v in con_patch))
+    print("Non e' stato.json scritto male: e' il buco 4-bis di §14 della SOP, aperto e non deciso. Cosa voglia dire piu' di una patch lo decide una persona. Ci si ferma.")
+    sys.exit(1)
+
+# Chi e' il sorgente lo dice stato.json col campo "file_sorgente", NON la
+# presenza di una patch: la patch e' una conseguenza frequente, non l'identita'
+# (SOP §2.1). Serve solo alla modalita' "un file solo".
+SORGENTE = stato.get("file_sorgente")
+voci_sorgente = [v for v in elenco if v.get("design") == SORGENTE]
+VOCE_SORGENTE = voci_sorgente[0] if len(voci_sorgente) == 1 else None
+if FILE and VOCE_SORGENTE is None:
+    if not voci_sorgente:
+        print("stato.json incoerente: file_sorgente %r non combacia con il campo design di nessuna voce dell'elenco." % SORGENTE)
+    else:
+        print("stato.json incoerente: file_sorgente %r combacia con %d voci dell'elenco (%s)." % (SORGENTE, len(voci_sorgente), ", ".join(v["repo"] for v in voci_sorgente)))
+    print("Con un file solo non si sa a quale voce vale: ci si ferma. Passa la cartella intera, o ripara file_sorgente.")
+    sys.exit(1)
 
 def lato_design(v):
     """percorso del file sceso da Claude Design, o None se non c'e'"""
@@ -80,7 +111,7 @@ def lato_design(v):
             p = os.path.join(DIR, nome)
             if os.path.isfile(p): return p
         return None
-    if FILE and v.get("patch"):
+    if FILE and v is VOCE_SORGENTE:
         return FILE
     return None
 
