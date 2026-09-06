@@ -14,9 +14,18 @@
       Le 19 righe restano tutte, in ordine, anche quelle vuote (SOP §2.2). */
 
 (function () {
+  /* Le righe erano 19 (SOP §2.2). Ora sono 21: MAPS_URL sta dopo ADDRESS,
+     LANGUAGE_OTHER dopo LANGUAGE. CATEGORY e LANGUAGE possono portare piu'
+     valori, separati da virgola e spazio.
+     DA CHIEDERE A OPS: la SOP fissa 19 righe con un valore solo per
+     CATEGORY e LANGUAGE, e il controllo §4.3 rimbalzerebbe un evento che
+     questa pagina permette di compilare. Il separatore qui e' scelto, non
+     ratificato. */
   var FIELDS = ['TITLE','CATEGORY','DATE_START','TIME_START','DATE_END','TIME_END',
-    'ALL_DAY','VENUE_NAME','ADDRESS','IS_FREE','PRICE','TICKET_URL','DESCRIPTION',
-    'PHOTO','ORGANIZER_NAME','ORGANIZER_EMAIL','ORGANIZER_PHONE','LANGUAGE','CONSENT'];
+    'ALL_DAY','VENUE_NAME','ADDRESS','MAPS_URL','IS_FREE','PRICE','TICKET_URL',
+    'DESCRIPTION','PHOTO','ORGANIZER_NAME','ORGANIZER_EMAIL','ORGANIZER_PHONE',
+    'LANGUAGE','LANGUAGE_OTHER','CONSENT'];
+  var SEP = ', ';
 
   var ERR = {
     text:   'Please write something here.',
@@ -26,6 +35,10 @@
     email:  'Please write a valid email, like name@mail.com.',
     number: 'Please write the price as a number, like 500.',
     TIME_START: 'Please pick a time, or say it lasts all day.',
+    'choice-multi': 'Please pick at least one option.',
+    CATEGORY: 'Please pick at least one category.',
+    url: 'Please paste a link that starts with https.',
+    partial: 'Please pick both hours and minutes.',
     consent: 'Please tick the box, or we cannot publish it.'
   };
   var STEPS = 7, LAST_Q = 6, MAIL_TO = 'events@tiranatodo.com';
@@ -47,6 +60,99 @@
     return (el.value || '').trim();
   }
 
+  /* — scelta multipla: categorie e lingue —
+     Le regole sono tre e le fa la macchina, non la persona: si accende e
+     si spegne premendo, oltre il tetto le altre voci si spengono ma
+     restano visibili, e una voce dichiarata esclusiva («Other») svuota
+     le altre e viene svuotata da loro. «Other» insieme a «Music» sarebbe
+     un dato che non vuol dire niente. */
+  var CHECK = '<svg class="te-ic te-ic--s te-chip__ic" viewBox="0 0 24 24" ' +
+    'aria-hidden="true"><path d="m5 13 4 4L19 7"></path></svg>';
+
+  function picked(group) {
+    return [].slice.call(group.querySelectorAll('[aria-pressed="true"]'))
+      .map(function (o) { return o.getAttribute('data-value'); });
+  }
+  function paintMulti(group) {
+    var excl = group.getAttribute('data-exclusive'),
+        max = parseInt(group.getAttribute('data-max'), 10) || 0,
+        list = [].slice.call(group.querySelectorAll('[data-value]')),
+        on = picked(group), full = max && on.length >= max;
+    list.forEach(function (o) {
+      var yes = o.getAttribute('aria-pressed') === 'true';
+      o.classList.toggle('is-picked', yes);
+      /* l'icona di categoria lascia il posto alla spunta: acceso e spento
+         si distinguono anche senza colore, che e' la prova del bianco e nero */
+      var ic = o.querySelector('.te-chip__ic');
+      if (ic) {
+        if (yes && !o.hasAttribute('data-ic')) {
+          o.setAttribute('data-ic', ic.outerHTML);
+          ic.outerHTML = CHECK;
+        } else if (!yes && o.hasAttribute('data-ic')) {
+          o.querySelector('.te-chip__ic').outerHTML = o.getAttribute('data-ic');
+          o.removeAttribute('data-ic');
+        }
+      } else {
+        /* le lingue non hanno un'icona da sostituire: la spunta si aggiunge
+           e si toglie, se no restano due riempimenti pallidi indistinguibili
+           per chi non vede il colore. */
+        var mark = o.querySelector('.te-mark');
+        if (yes && !mark) o.insertAdjacentHTML('afterbegin', CHECK.replace('te-chip__ic', 'te-mark'));
+        if (!yes && mark) mark.remove();
+      }
+      /* il tetto non spegne mai la voce esclusiva: e' quella che svuota le
+         altre, e lasciarla spenta a tetto pieno chiude una strada aperta. */
+      if (full && !yes && o.getAttribute('data-value') !== excl) {
+        o.setAttribute('aria-disabled', 'true');
+      } else { o.removeAttribute('aria-disabled'); }
+    });
+    answers[group.getAttribute('data-choice-multi')] = on.join(SEP);
+  }
+
+  [].slice.call(doc.querySelectorAll('[data-choice-multi]')).forEach(function (group) {
+    var excl = group.getAttribute('data-exclusive'),
+        max = parseInt(group.getAttribute('data-max'), 10) || 0;
+    group.addEventListener('click', function (e) {
+      var opt = e.target.closest('[data-value]');
+      if (!opt || !group.contains(opt)) return;
+      var was = opt.getAttribute('aria-pressed') === 'true',
+          v = opt.getAttribute('data-value');
+      if (!was && !opt.hasAttribute('aria-disabled')) {
+        if (excl && v === excl) {
+          [].slice.call(group.querySelectorAll('[data-value]')).forEach(function (o) {
+            o.setAttribute('aria-pressed', 'false');
+          });
+        } else if (excl) {
+          var e2 = group.querySelector('[data-value="' + excl + '"]');
+          if (e2) e2.setAttribute('aria-pressed', 'false');
+        }
+        opt.setAttribute('aria-pressed', 'true');
+      } else if (was) {
+        opt.setAttribute('aria-pressed', 'false');
+      }
+      paintMulti(group);
+      clearError(opt.closest('.te-field'));
+      sync();
+    });
+    paintMulti(group);
+  });
+
+  /* — orario: due menu, e valgono solo se sono pieni tutti e due — */
+  [].slice.call(doc.querySelectorAll('[data-time]')).forEach(function (grp) {
+    var name = grp.getAttribute('data-time');
+    function read() {
+      var h = grp.querySelector('[data-part="h"]').value,
+          m = grp.querySelector('[data-part="m"]').value;
+      answers[name] = (h && m) ? h + ':' + m : '';
+      answers[name + '__half'] = (h && !m) || (!h && m) ? '1' : '';
+    }
+    grp.addEventListener('change', function () {
+      read();
+      clearError(grp.closest('.te-field'));
+    });
+    read();
+  });
+
   /* — scelte a bersaglio: pastiglie e pulsanti si comportano uguale — */
   [].slice.call(doc.querySelectorAll('[data-choice]')).forEach(function (group) {
     group.addEventListener('click', function (e) {
@@ -65,8 +171,14 @@
   /* — campi che compaiono solo se una risposta precedente lo chiede — */
   function sync() {
     [].slice.call(doc.querySelectorAll('[data-show-if]')).forEach(function (f) {
-      var cond = f.getAttribute('data-show-if').split('='),
-          on = val(cond[0]) === cond[1];
+      var raw = f.getAttribute('data-show-if'), on;
+      if (raw.indexOf('~') > -1) {          /* «~» = fra i valori scelti c'e' */
+        var c = raw.split('~');
+        on = (val(c[0]) || '').split(SEP).indexOf(c[1]) > -1;
+      } else {
+        var cond = raw.split('=');
+        on = val(cond[0]) === cond[1];
+      }
       f.hidden = !on;
       if (!on) clearError(f);
     });
@@ -96,7 +208,22 @@
     f.appendChild(p);
   }
   function checkField(f) {
-    if (f.hidden || !f.getAttribute('data-req')) return true;
+    if (f.hidden) return true;
+    /* un orario compilato a meta' non si scarta in silenzio: senza questo
+       controllo «21» senza minuti sparirebbe dalla mail e nessuno lo saprebbe.
+       Vale anche su TIME_END, che obbligatorio non e'. */
+    var g = f.querySelector('[data-time]');
+    if (g && answers[g.getAttribute('data-time') + '__half']) {
+      clearError(f); showError(f, ERR.partial); return false;
+    }
+    /* un link va controllato anche quando il campo e' facoltativo: se non
+       si scrive niente va bene, ma se si incolla qualcosa deve essere un
+       indirizzo, se no arriva in mail una riga inservibile. */
+    if (f.getAttribute('data-type') === 'url') {
+      var u = val(f.getAttribute('data-f'));
+      if (u && !/^https?:\/\/\S+$/i.test(u)) { clearError(f); showError(f, ERR.url); return false; }
+    }
+    if (!f.getAttribute('data-req')) return true;
     /* si ripulisce prima di ricontrollare: senza questo un errore gia'
        mostrato resta rosso sotto un campo ormai compilato, e lo si
        ritrova tornando indietro. */
@@ -167,17 +294,28 @@
       TITLE: val('TITLE'), CATEGORY: val('CATEGORY'), DATE_START: val('DATE_START'),
       TIME_START: val('ALL_DAY') === 'YES' ? '' : val('TIME_START'),
       DATE_END: val('DATE_END'), TIME_END: val('TIME_END'), ALL_DAY: val('ALL_DAY'),
-      VENUE_NAME: val('VENUE_NAME'), ADDRESS: val('ADDRESS'), IS_FREE: val('IS_FREE'),
+      VENUE_NAME: val('VENUE_NAME'), ADDRESS: val('ADDRESS'),
+      MAPS_URL: val('MAPS_URL'), IS_FREE: val('IS_FREE'),
       PRICE: priceValue(), TICKET_URL: val('TICKET_URL'),
       DESCRIPTION: val('DESCRIPTION').replace(/\s*\n\s*/g, ' '),
       PHOTO: photoValue(), ORGANIZER_NAME: val('ORGANIZER_NAME'),
       ORGANIZER_EMAIL: val('ORGANIZER_EMAIL'), ORGANIZER_PHONE: val('ORGANIZER_PHONE'),
-      LANGUAGE: val('LANGUAGE') || 'EN', CONSENT: val('CONSENT') ? 'YES' : 'NO'
+      /* niente ripiego su 'EN': in una scelta multipla senza voci accese
+         un default consegnerebbe come inglese un evento in albanese. Vuoto
+         e' onesto, sbagliato no. */
+      LANGUAGE: val('LANGUAGE'),
+      LANGUAGE_OTHER: (val('LANGUAGE') || '').split(SEP).indexOf('OTHER') > -1
+        ? val('LANGUAGE_OTHER') : '',
+      CONSENT: val('CONSENT') ? 'YES' : 'NO'
     };
     return FIELDS.map(function (k) { return k + ': ' + v[k]; }).join('\n');
   }
   function subject() {
-    return '[TIRANATODO] NEW | ' + val('CATEGORY') + ' | ' + val('DATE_START') +
+    /* nell'oggetto va una categoria sola, la prima scelta: con tre
+       etichette l'oggetto si allunga e i client di posta lo tagliano.
+       Le altre restano tutte nel corpo. */
+    var c = (val('CATEGORY') || '').split(SEP)[0];
+    return '[TIRANATODO] NEW | ' + c + ' | ' + val('DATE_START') +
       ' | ' + val('TITLE');
   }
   function compose() {

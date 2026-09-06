@@ -171,7 +171,7 @@
 .te-chip__ic{flex:none}
 .te-chip--cat{border-color:var(--cat);color:var(--cat-ink)}
 .te-chip--cat .te-chip__ic{color:var(--cat)}
-.te-chip--cat:hover,.te-chip--cat.is-hover{background:var(--cat-bg);border-color:var(--cat)}
+.te-chip--cat:hover,.te-chip--cat.is-hover{background:var(--te-surface-2);border-color:var(--cat)}
 .te-chip--cat.is-active{background:var(--te-ink);border-color:var(--te-ink);color:var(--te-on-ink)}
 .te-chip--cat.is-active .te-chip__ic{color:var(--cat)}
 
@@ -266,7 +266,7 @@
    campi misti resta una colonna sola. */
 .te-choice{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:var(--te-sp-2)}
 .te-choice__opt{display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 var(--te-sp-3);border-radius:var(--te-r-md);border:1.5px solid var(--te-line);background:var(--te-white);color:var(--te-ink);font-family:var(--te-font);font-size:var(--te-fs-body);font-weight:700;line-height:1.2;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.te-choice__opt:hover,.te-choice__opt.is-hover{background:var(--te-surface-2);border-color:var(--te-ink)}
+.te-choice__opt:hover,.te-choice__opt.is-hover{border-color:var(--te-ink)}
 .te-choice__opt.is-active{background:var(--te-ink);border-color:var(--te-ink);color:var(--te-on-ink)}
 .te-choice__opt:focus-visible{outline:none;box-shadow:var(--te-ring)}
 .te-field.is-error .te-choice__opt{border-color:var(--te-err)}
@@ -275,6 +275,38 @@
    .te-chip--cat della lista eventi, quindi chi ha filtrato riconosce
    colore e icona e sceglie senza leggere. */
 .te-choice-grid{display:flex;flex-wrap:wrap;gap:var(--te-sp-2)}
+
+/* --- Scelta multipla: riempimento pallido, anello interno, spunta ---------
+   Progetto LORI 06/09/2026. Il nero pieno resta alle scelte esclusive
+   (ALL_DAY, IS_FREE): su una multipla riempirebbe mezzo schermo e non si
+   distinguerebbe piu' una domanda dall'altra. L'anello e' inset e non un
+   bordo piu' spesso, se no la pastiglia cambia larghezza e la griglia
+   rifluisce a ogni tap. Il secondo segnale e' la spunta al posto
+   dell'icona: acceso e spento si distinguono anche in bianco e nero. */
+.te-chip--cat.is-picked{background:var(--cat-bg);border-color:var(--cat);color:var(--cat-ink);box-shadow:inset 0 0 0 1px var(--cat)}
+.te-chip--cat.is-picked .te-chip__ic{color:var(--cat)}
+.te-choice__opt.is-picked{background:var(--te-surface-2);border-color:var(--te-ink);color:var(--te-ink);box-shadow:inset 0 0 0 1px var(--te-ink)}
+.te-choice__opt{position:relative}
+.te-choice__opt .te-mark{position:absolute;left:var(--te-sp-3);flex:none;color:var(--te-ink)}
+/* raggiunto il tetto le opzioni restanti si spengono ma restano visibili:
+   nasconderle mentre qualcuno sta scegliendo spaventa. ⛔ Non con opacity
+   sul bottone: LORI ha misurato 2,37:1 su otto etichette su dodici, sotto
+   il pavimento 4,5. Il grigio va sul testo (#4E535B su bianco = 7,74:1) e
+   l'icona resta l'unica cosa che sbiadisce. */
+.te-choice-grid [aria-disabled="true"],.te-choice [aria-disabled="true"]{color:var(--te-ink-muted);border-color:var(--te-line-soft);cursor:not-allowed}
+.te-choice-grid [aria-disabled="true"] .te-chip__ic{opacity:.45}
+
+/* --- Orario a scatti di 15 minuti ----------------------------------------
+   Due menu, mai un campo libero: con step="900" su un form novalidate le
+   21:07 digitate a mano entrano lo stesso e finiscono nella mail. Qui i
+   quindici minuti non sono un consiglio, sono l'unica cosa selezionabile. */
+.te-time{display:grid;grid-template-columns:1fr 10px 1fr;gap:var(--te-sp-2);align-items:center;max-width:340px}
+.te-time .te-select-wrap{min-width:0}
+.te-time__sep{font-size:var(--te-fs-body);font-weight:700;line-height:1;text-align:center;color:var(--te-ink-muted)}
+
+/* --- Lingue: stessa grammatica delle categorie, ma senza colore ---------- */
+.te-choice--multi{grid-template-columns:repeat(2,1fr)}
+@media (min-width:480px){.te-choice--multi{grid-template-columns:repeat(4,1fr)}}
 
 .te-wiz__nav{position:sticky;bottom:0;z-index:15;display:flex;gap:var(--te-sp-3);padding:var(--te-sp-3) var(--te-gutter);padding-bottom:calc(var(--te-sp-3) + env(safe-area-inset-bottom));background:var(--te-white);border-top:1px solid var(--te-line)}
 .te-wiz__nav .te-btn{flex:1 1 auto}

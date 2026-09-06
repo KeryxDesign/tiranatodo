@@ -1124,3 +1124,55 @@ La SOP dice che il campo assente vale `EN`. Tre chip invitano a sceglierne uno, 
 
 **5. Restano aperti dai lotti 1-4 e valgono ancora.**
 Il tempo di revisione (lotto 1 punto 1, `DA CHIEDERE A OPS`) · `NEW` contro `NUOVO` nell'oggetto (lotto 1 punto 2) · la dodicesima categoria `workshop` che la SOP non conosce (lotto 4 punto 1, `DA CHIEDERE A OPS`) · `Food &amp; Drink` HTML escaped (lotto 4 punto 2, `DA CHIEDERE A SENTINEL`) · `the event goes on the site` senza database (lotto 3 punto 3, `DA CHIEDERE A DAVIDE`) · il profilo target simulato mancante (lotto 3 punto 6, `DA CHIEDERE A CHRISTOPHER`).
+
+---
+
+# Lotto 6 — i quattro ordini sul questionario (06/09/2026)
+
+> Ordine di Davide, quattro punti in una riga: più etichette per un evento, orario a scatti di 15 minuti, i posti da Google Maps, più lingue selezionabili con «altro».
+> Teste dichiarate: **LORI** (progetto dei controlli) e **MUSE** (testo). La costruzione è del PM.
+> ⚡ **Questa sezione registra le stringhe come sono a schermo oggi**, dopo la costruzione. Non è una consegna nuova di MUSE: è la trascrizione verificata sull'HTML costruito, per tenere il file allineato a quello che l'organizzatore legge davvero.
+
+## 16 · Le 18 stringhe nuove o riscritte
+
+| # | Dove | Stringa | Car. | Nota |
+|---|------|---------|------|------|
+| 1 | Aiuto categorie | `Pick up to three. If nothing fits, pick Other and nothing else.` | 63 | Dichiara il tetto **e** la regola dell'esclusiva. Prima non c'era aiuto: la scelta era unica e si capiva da sola. |
+| 2 | Etichetta orario inizio | `Start time` | 10 | Era una `<label>` di un campo; ora è uno `<span>` che intesta un gruppo di due menu. Testo invariato. |
+| 3 | Aiuto orario inizio | `Use the 24 hour clock, like 21:00. Pick the nearest 15 minutes.` | 63 | La seconda frase è nuova. Serve perché i minuti non sono più liberi. |
+| 4 | Etichetta orario fine | `End time` + marcatore `Optional` | 17 | Invariata. |
+| 5 | Aiuto orario fine | `Only if you know it. Pick the nearest 15 minutes too.` | 53 | Il `too` evita di ripetere l'orologio a 24 ore due volte in mezzo schermo. |
+| 6 | Etichetta ore (lettore di schermo) | `Hours` | 5 | Visivamente nascosta. Vedi il punto aperto 1. |
+| 7 | Etichetta minuti (lettore di schermo) | `Minutes` | 7 | Idem. |
+| 8 | Etichetta campo Maps | `Google Maps link` + marcatore `Optional` | 25 | |
+| 9 | Aiuto campo Maps | `In Google Maps, open the place, press Share, then Copy link.` | 60 | Tre gesti nell'ordine in cui si fanno. `Share` e `Copy link` sono le parole che l'app mostra davvero, non una parafrasi. |
+| 10 | Etichetta lingue | `Languages of the event` | 22 | Era `Language of the event`. Cambia solo il plurale. |
+| 11 | Aiuto lingue | `The languages spoken at the event. Pick one or more.` | 52 | ⚡ Sostituisce `Empty means English`: quel default **non esiste più** nel codice, e una stringa che promette un default che non c'è è una bugia. Chiude il punto aperto 2 del lotto 5. |
+| 12-15 | Opzioni lingua | `English` · `Albanian` · `Italian` · `Other` | 7 · 8 · 7 · 5 | |
+| 16 | Etichetta lingua altra | `The other language` | 18 | Compare solo se `Other` è acceso. |
+| 17 | Aiuto lingua altra | `Write it in English, like Greek or Turkish.` | 43 | «In English» perché la mail la legge chi pubblica, non l'organizzatore. |
+| 18 | Errore link | `Please paste a link that starts with https.` | 43 | Vale su qualsiasi campo `url`, quindi anche sul link della foto. |
+
+**Errori toccati oltre al 18:** `Please pick at least one category.` (34) sostituisce `Please pick one of the options.` sulle categorie · `Please pick both hours and minutes.` (35) è nuovo, scatta quando qualcuno sceglie l'ora e lascia i minuti vuoti.
+
+## Budget caratteri — lotto 6
+
+**18 stringhe su 18 dentro il tetto, zero sfori.** Tetto aiuti 95, tetto etichette 45, tetto errori 60. La più larga è l'aiuto categorie a **63/95**; la più larga tra le etichette è `Google Maps link Optional` a **25/45**; l'errore più largo è `Please pick both hours and minutes.` a **35/60**.
+
+## Aperti (lotto 6)
+
+**1. I due menu dell'orario mostrano tutti e due `--`.**
+A schermo le ore e i minuti sono indistinguibili: la differenza sta solo nelle etichette per lettore di schermo, che sono nascoste. È una decisione visiva, non di copy.
+`DA CHIEDERE A LORI: l'opzione vuota dei due menu orario resta «--» in tutti e due, o le ore e i minuti si distinguono a schermo? Se serve un testo diverso dentro l'opzione vuota, quelle due stringhe le scrive MUSE.`
+
+**2. La mail ha 21 righe, la SOP ne prevede 19.**
+`MAPS_URL` e `LANGUAGE_OTHER` sono righe nuove, e `CATEGORY` e `LANGUAGE` possono portare più valori separati da `, `. Il separatore l'ho scelto io: non è ratificato da nessuna parte.
+`DA CHIEDERE A OPS: la SOP della mail va aggiornata a 21 righe, e qual è il separatore ufficiale per un campo con più valori? Oggi nel codice è virgola più spazio, per scelta mia.`
+
+**3. `Other` tra le lingue non ha un valore ammesso nella SOP.**
+La SOP elenca `EN`, `SQ`, `IT`. `OTHER` non c'è, e nemmeno il campo che lo accompagna.
+`DA CHIEDERE A OPS: «OTHER» è un valore ammesso per LANGUAGE, e LANGUAGE_OTHER è una riga della mail o va accodata dentro LANGUAGE?`
+
+**4. Le due stringhe più lunghe sono a filo per SQ e IT.**
+Aiuto categorie 63 e aiuto orario inizio 63, con crescita stimata 15-20% in traduzione: si arriva a ~76, dentro il tetto 95 ma senza margine per una riscrittura più lunga.
+⛔ Non ho tradotto niente: SQ e IT non sono in questo lotto.
