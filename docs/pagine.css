@@ -304,9 +304,16 @@
 .te-time .te-select-wrap{min-width:0}
 .te-time__sep{font-size:var(--te-fs-body);font-weight:700;line-height:1;text-align:center;color:var(--te-ink-muted)}
 
-/* --- Lingue: stessa grammatica delle categorie, ma senza colore ---------- */
-.te-choice--multi{grid-template-columns:repeat(2,1fr)}
-@media (min-width:480px){.te-choice--multi{grid-template-columns:repeat(4,1fr)}}
+/* --- Lingue: stessa grammatica delle categorie, ma senza colore ----------
+   ⛔ Niente numero fisso di colonne: a 4 colonne fra 480 e ~560px il bottone
+   scendeva a 111px e la spunta, che e' assoluta a sinistra, finiva sopra
+   l'etichetta (11,2px di sovrapposizione su «Albanian», misurati a 500).
+   Il 152 e' calcolato: spunta fino a 31 + 8 di respiro = 39 di zona vietata
+   per due lati, piu' 71,4 dell'etichetta piu' larga = 149,4, arrotondato.
+   ⚡ Il 152 vale per la lista attuale: la voce piu' larga e' «Albanian». Se ne
+   entra una piu' larga, il pavimento si ricalcola - e si ricalcola a 18px,
+   perche' sopra i 768 il corpo sale (--te-fs-body 17 -> 18). */
+.te-choice--multi{grid-template-columns:repeat(auto-fit,minmax(152px,1fr))}
 
 .te-wiz__nav{position:sticky;bottom:0;z-index:15;display:flex;gap:var(--te-sp-3);padding:var(--te-sp-3) var(--te-gutter);padding-bottom:calc(var(--te-sp-3) + env(safe-area-inset-bottom));background:var(--te-white);border-top:1px solid var(--te-line)}
 .te-wiz__nav .te-btn{flex:1 1 auto}
