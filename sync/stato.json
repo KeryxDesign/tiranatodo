@@ -2,7 +2,7 @@
   "progetto_claude_design": "e7f8476b-dc85-4d96-8409-98936e6d6f4e",
   "file_sorgente": "_ds/styles.css",
   "file_da_ignorare": ".thumbnail",
-  "file_da_ignorare_elenco": [".thumbnail", "_cal.css"],
+  "file_da_ignorare_elenco": [".thumbnail"],
   "ultimo_allineamento": "2026-09-06",
   "design_etag": "1788686546079144",
   "regola": "docs/_ds/styles.css = baseline + patch, e' l'unico file con una patch. Ogni altro file dell'elenco deve essere uguale byte per byte a quello di Claude Design. design_sha256 a null = mai letto dal progetto: lo script lo dichiara NON CONTROLLATO, mai allineato. I percorsi repo partono dalla radice del repo e cominciano per docs/; design e' il nome dentro Claude Design.",

@@ -32,9 +32,9 @@ Scritto da OPS il 06/09/2026, dentro la ratifica **#163**. Procedura completa: `
 
 ⚠️ **L'unica differenza dichiarata è `docs/_ds/styles.css`**, 27 byte su 33.297: **quattro righe di commento decorativo**, dove le sequenze lunghe di caratteri di riquadro escono con un conteggio diverso a ogni scrittura dentro Claude Design. Zero token, zero selettori, zero regole, nessun effetto a schermo. Sta in `sync/riparazioni-commenti.patch` e la ricostruzione è provata: baseline + patch dà lo sha del file pubblicato.
 
-⚠️ **Due cose restano aperte, e non si chiudono qui.**
+⚠️ **Una cosa resta aperta, e non si chiude qui.**
 1. **Lo script pretende esattamente un file con patch**: zero lo fa uscire in errore, due pure [MISURA, SENTINEL, 06/09/2026, tre corse]. Oggi ne abbiamo esattamente uno e il controllo regge, ma il giorno in cui quello scarto sparisce il controllo esce **1**. `DA CHIEDERE A OPS`: zero differenze è un errore, o è il caso normale di un repo pulito? È il buco **4-bis** di §14 della SOP.
-2. **`_cal.css` (185 byte)** è nel progetto Claude Design ma non nel repo: un banco di prova nato durante la bonifica. È dichiarato fra i file da ignorare; **va tolto a mano dall'editor**.
+2. ~~`_cal.css`~~ ✅ **chiuso il 06/09/2026**: cancellato dal progetto Claude Design su ordine di Davide. Conteneva una sola riga di commento, nessuna regola, e nessuna pagina lo caricava. ⚠️ Resta ignorato **`.thumbnail`** (13.820 byte), artefatto dello strumento: ⛔ non si cancella.
 
 ## Stack
 
