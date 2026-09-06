@@ -1142,8 +1142,8 @@ Il tempo di revisione (lotto 1 punto 1, `DA CHIEDERE A OPS`) · `NEW` contro `NU
 | 3 | Aiuto orario inizio | `Use the 24 hour clock, like 21:00. Pick the nearest 15 minutes.` | 63 | La seconda frase è nuova. Serve perché i minuti non sono più liberi. |
 | 4 | Etichetta orario fine | `End time` + marcatore `Optional` | 17 | Invariata. |
 | 5 | Aiuto orario fine | `Only if you know it. Pick the nearest 15 minutes too.` | 53 | Il `too` evita di ripetere l'orologio a 24 ore due volte in mezzo schermo. |
-| 6 | Etichetta ore (lettore di schermo) | `Hours` | 5 | Visivamente nascosta. Vedi il punto aperto 1. |
-| 7 | Etichetta minuti (lettore di schermo) | `Minutes` | 7 | Idem. |
+| 6 | Opzione vuota ore, ed etichetta ore per lettore di schermo | `Hour` | 4 | La stessa parola nei due posti. Era `--` a schermo e `Hours` nell'etichetta nascosta. Singolare: se ne sceglie **una**, non piu' d'una. Chiude il punto aperto 1. |
+| 7 | Opzione vuota minuti, ed etichetta minuti per lettore di schermo | `Minute` | 6 | Idem. Misurata a 375: 52,9px nei 93px utili del menu, non tronca. |
 | 8 | Etichetta campo Maps | `Google Maps link` + marcatore `Optional` | 25 | |
 | 9 | Aiuto campo Maps | `In Google Maps, open the place, press Share, then Copy link.` | 60 | Tre gesti nell'ordine in cui si fanno. `Share` e `Copy link` sono le parole che l'app mostra davvero, non una parafrasi. |
 | 10 | Etichetta lingue | `Languages of the event` | 22 | Era `Language of the event`. Cambia solo il plurale. |
@@ -1161,9 +1161,9 @@ Il tempo di revisione (lotto 1 punto 1, `DA CHIEDERE A OPS`) · `NEW` contro `NU
 
 ## Aperti (lotto 6)
 
-**1. I due menu dell'orario mostrano tutti e due `--`.**
-A schermo le ore e i minuti sono indistinguibili: la differenza sta solo nelle etichette per lettore di schermo, che sono nascoste. È una decisione visiva, non di copy.
-`DA CHIEDERE A LORI: l'opzione vuota dei due menu orario resta «--» in tutti e due, o le ore e i minuti si distinguono a schermo? Se serve un testo diverso dentro l'opzione vuota, quelle due stringhe le scrive MUSE.`
+**1. ~~I due menu dell'orario mostrano tutti e due `--`.~~ CHIUSO il 06/09/2026.**
+LORI ha risposto che le due voci si distinguono a schermo. MUSE ha scritto le due parole, `Hour` e `Minute` al singolare, e stanno sia dentro l'opzione vuota sia nell'etichetta per lettore di schermo: una parola sola per posto, invece di una a schermo e un'altra nascosta. Il mezzo compilato adesso legge `21 : Minute`, che dice da solo cosa manca. La capienza è misurata, non stimata: `Minute` occupa 52,9px nei 93px utili del menu a 375.
+⚠️ **La domanda di chiusura di MUSE confondeva due controlli** e va detto perché non torni: chiedeva se il pavimento di **152px** regge `Minute`. Il 152 è il pavimento della **griglia delle lingue**, non dei menu dell'orario, che sono un altro controllo - 157px ciascuno dentro un gruppo da 340. I due numeri non si parlano.
 
 **2. La mail ha 21 righe, la SOP ne prevede 19.**
 `MAPS_URL` e `LANGUAGE_OTHER` sono righe nuove, e `CATEGORY` e `LANGUAGE` possono portare più valori separati da `, `. Il separatore l'ho scelto io: non è ratificato da nessuna parte.
