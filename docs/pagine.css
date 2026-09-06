@@ -331,3 +331,69 @@
 .te-fallback__head{display:flex;align-items:center;justify-content:space-between;gap:var(--te-sp-3);margin-bottom:var(--te-sp-2)}
 .te-fallback__label{font-size:var(--te-fs-small);font-weight:700;color:var(--te-ink-muted)}
 .te-done__next{display:flex;flex-direction:column;gap:var(--te-sp-1);margin:0;font-size:var(--te-fs-small);line-height:1.45;color:var(--te-ink-muted)}
+
+/* ==================================================================
+   RITMO VERTICALE - prossimita' (LORI, 06/09/2026)
+   Tre gradini dentro la scala base 4 che c'e' gia' in _ds/styles.css.
+   Nessuna scala nuova, nessun valore fuori token. Misurati a 375 e
+   confermati a 1280: i token --te-sp-* non cambiano col viewport.
+     4px  --te-sp-1  legatura stretta: l'aiuto appartiene all'etichetta,
+                     la riga secondaria appartiene alla principale.
+     8px  --te-sp-2  un titolo in grassetto e la riga che gli sta sotto.
+    12px  --te-sp-3  un titolo e il blocco di contenuto che introduce.
+    ~20px            il ritmo normale del sito, non si tocca.
+    32px  --te-sp-8  sopra un titolo di gruppo: sopra piu' di sotto.
+   Perche' qui e non in _ds/styles.css: quel file ha una patch
+   registrata sulle righe di commento decorative e riscriverlo rompe
+   la ricostruzione del repo. Da promuovere nel DS quando la patch
+   e' risolta.
+   ================================================================== */
+
+/* 1. Un'etichetta e la cosa che introduce.
+   Fra etichetta e aiuto i 4px sono giusti e restano: quella e' la
+   legatura. Il difetto era altrove - un titolo in grassetto a 4px
+   dalla sua lista o dalla sua riga di spiegazione si legge attaccato,
+   non legato. 8px: sotto il ritmo normale (~20px) di piu' della meta',
+   quindi appartiene ancora, e sopra la legatura, quindi non collide.
+   Nel footer il primo link e' alto 44px con riga da 25,5: ci sono gia'
+   9px di piombo dentro il bersaglio. 8 qui valgono ~17 a schermo,
+   contro i 24 fra una colonna e l'altra. */
+.te-footer__title{margin:0 0 var(--te-sp-2)}
+.te-follow__body{gap:var(--te-sp-2)}
+
+/* 2. Questionario: l'aiuto smette di essere equidistante.
+   Era 4 sopra e 6 sotto - a occhio nudo la stessa distanza, quindi
+   non si capiva a chi appartenesse. Ora 4 sopra e 12 sotto: sale
+   con l'etichetta, si stacca dal campo. Il gap del campo passa da 6
+   (fuori scala) a 8, cosi' chi non ha aiuto legge etichetta e
+   controllo a 8. La barra di avanzamento fa la stessa cosa: il
+   contatore e la barra sono una cosa sola, 4px. */
+.te-field{gap:var(--te-sp-2)}
+.te-help{margin:calc(var(--te-sp-1) - var(--te-sp-2)) 0 var(--te-sp-1)}
+.te-wiz__count{margin:0 0 var(--te-sp-1)}
+
+/* 3. Titolo di sezione: 32 sopra, 12 sotto.
+   Prima erano 8 sotto e il titolo si legava alla sezione sbagliata.
+   Fra i paragrafi del corpo 16, cosi' il titolo resta piu' vicino al
+   suo primo paragrafo di quanto i paragrafi stiano fra loro.
+   ⚠️ Gli !important servono solo a battere gli stili in linea scritti
+   da app.js e da dettaglio-evento.html. Quando SENTINEL rimette mano
+   a quei due file, --te-sp-2 diventa --te-sp-3 e --te-sp-3 diventa
+   --te-sp-4 nel markup, e queste due righe si tolgono. */
+.te-group__title{padding:var(--te-sp-8) var(--te-gutter) var(--te-sp-3)}
+.te-section .te-h3+p,[data-d-about]>p:first-child{margin-top:var(--te-sp-3)!important}
+[data-d-about]>p+p{margin-top:var(--te-sp-4)!important}
+
+/* 4. Dettaglio: data, luogo e prezzo. La riga secondaria era incollata
+   alla principale (0px): il piombo dava respiro, lo spazio no. 4px la
+   lega senza staccarla, contro i 12 fra una riga e l'altra della lista. */
+.te-meta li>div{display:flex;flex-direction:column;gap:var(--te-sp-1)}
+
+/* 5. Il blocco WhatsApp a 375: icona, testo e bottone stanno su una riga
+      sola che non va a capo, e la colonna di testo si riduce a 21px con la
+      frase incolonnata una parola per riga. Sotto 600 il bottone scende. */
+@media (max-width:599.98px){
+  .te-follow{flex-wrap:wrap}
+  .te-follow__body{flex:1 1 60%}
+  .te-follow .te-btn{flex:1 1 100%}
+}

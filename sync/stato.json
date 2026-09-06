@@ -74,12 +74,12 @@
     {
       "repo": "docs/pagine.css",
       "design": "pagine.css",
-      "design_sha256": "d6c1678369cc93db187dd313c5e9d5097b34786e089c1f324a773951dfb07491",
-      "design_byte": 24021,
-      "repo_sha256": "d6c1678369cc93db187dd313c5e9d5097b34786e089c1f324a773951dfb07491",
-      "repo_byte": 24021,
-      "design_etag": "1788683695390229",
-      "prova": "riportato nel progetto dal repo il 2026-09-06 (bonifica), poi riletto: uguale"
+      "design_sha256": "61a8066a55113c383a794af619b1613deb0c97ca25f52db719511ba03c3c8a3a",
+      "design_byte": 27680,
+      "repo_sha256": "61a8066a55113c383a794af619b1613deb0c97ca25f52db719511ba03c3c8a3a",
+      "repo_byte": 27680,
+      "design_etag": "1788712653750437",
+      "prova": "sceso da Claude Design il 2026-09-06 dopo la correzione spazi di LORI: blocco RITMO VERTICALE aggiunto in coda, 66 righe. Byte ricostruiti 27680 = byte del progetto, e blocco riletto dal server e confrontato"
     },
     {
       "repo": "docs/submit-evento.html",
