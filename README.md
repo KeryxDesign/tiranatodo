@@ -26,9 +26,15 @@ Scritto da OPS il 06/09/2026, dentro la ratifica **#163**. Procedura completa: `
 
 ⛔ **Quello che non si fa: lasciare le due copie diverse senza dichiararlo.** È lo stato **BIFORCATI** (codice 3), e ⛔ solo `ALLINEATI` (codice 0) apre il lavoro.
 
-**⚠️ Il difetto vero, ed è questo il punto: `sync/` qui non esiste.** La riga **0-zero-bis** del `CLAUDE.md` scatta su `test -f <repo>/sync/stato.json`; senza quel file **non scatta mai**, e il controllo non è saltato per distrazione — non è proprio armato. Finché manca, il verdetto dello script non si può dare: lo stato formale è `NON CONTROLLATO` (codice 5), e la divergenza qui sopra la conosciamo perché l'ha vista una persona, non perché un controllo l'abbia detto.
+**✅ `sync/` esiste dal 06/09/2026, e il primo verdetto è `ALLINEATI` (codice 0), 9 file su 9.** La riga **0-zero-bis** del `CLAUDE.md` scatta su `test -f <repo>/sync/stato.json`: da oggi scatta. I quattro file sono `sync/_design-al-2026-09-06.css`, `sync/riparazioni-commenti.patch`, `sync/stato.json` (elenco a 9 voci), `sync/verifica.sh` (copia di quello di UNCAGED, scritta da SENTINEL).
 
-⏳ **Da fare, e non lo può fare OPS:** creare `sync/` a quattro file — `_design-al-<data>.html`, `riparazioni-<nome>.patch`, `stato.json` (con l'elenco dei file controllati), `verifica.sh` — armandola sul file **sceso** da Claude Design. ⛔ Serve una sessione con i tool `mcp__claude-design__*`, che OPS non ha. Richiesta aperta a Davide.
+**Com'è stato armato, e cosa è costato.** Il 06/09/2026 il questionario `/submit` era stato costruito **dentro il repo**: sei file divergenti, dove la struttura di `stato.json` ne regge **uno solo** con differenze registrate. Su decisione di Davide il contenuto è stato **riportato dentro Claude Design** (SOP §8, seconda riga), non registrato come patch. Sette file su otto sono tornati identici byte per byte.
+
+⚠️ **L'unica differenza dichiarata è `docs/_ds/styles.css`**, 27 byte su 33.297: **quattro righe di commento decorativo**, dove le sequenze lunghe di caratteri di riquadro escono con un conteggio diverso a ogni scrittura dentro Claude Design. Zero token, zero selettori, zero regole, nessun effetto a schermo. Sta in `sync/riparazioni-commenti.patch` e la ricostruzione è provata: baseline + patch dà lo sha del file pubblicato.
+
+⚠️ **Due cose restano aperte, e non si chiudono qui.**
+1. **Lo script pretende esattamente un file con patch**: zero lo fa uscire in errore, due pure [MISURA, SENTINEL, 06/09/2026, tre corse]. Oggi ne abbiamo esattamente uno e il controllo regge, ma il giorno in cui quello scarto sparisce il controllo esce **1**. `DA CHIEDERE A OPS`: zero differenze è un errore, o è il caso normale di un repo pulito? È il buco **4-bis** di §14 della SOP.
+2. **`_cal.css` (185 byte)** è nel progetto Claude Design ma non nel repo: un banco di prova nato durante la bonifica. È dichiarato fra i file da ignorare; **va tolto a mano dall'editor**.
 
 ## Stack
 

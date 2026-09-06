@@ -1,0 +1,109 @@
+{
+  "progetto_claude_design": "e7f8476b-dc85-4d96-8409-98936e6d6f4e",
+  "file_sorgente": "_ds/styles.css",
+  "file_da_ignorare": ".thumbnail",
+  "file_da_ignorare_elenco": [".thumbnail", "_cal.css"],
+  "ultimo_allineamento": "2026-09-06",
+  "design_etag": "1788686546079144",
+  "regola": "docs/_ds/styles.css = baseline + patch, e' l'unico file con una patch. Ogni altro file dell'elenco deve essere uguale byte per byte a quello di Claude Design. design_sha256 a null = mai letto dal progetto: lo script lo dichiara NON CONTROLLATO, mai allineato. I percorsi repo partono dalla radice del repo e cominciano per docs/; design e' il nome dentro Claude Design.",
+  "nota_patch": "Questa patch NON contiene riparazioni: contiene 4 righe di commento decorativo in cui le sequenze di caratteri di riquadro escono di lunghezza diversa quando il file viene scritto dentro Claude Design. Zero token, zero selettori, zero regole CSS, nessun effetto a schermo. Verso: baseline (lato Claude Design) + patch = file del repo.",
+  "nota_bonifica": "Il 2026-09-06 il questionario /submit era stato costruito dentro il repo (categorie multiple, orario a 15 minuti, link Maps, lingue multiple, piu' il giro di approvazione di LORI). Su decisione di Davide il contenuto e' stato riportato dentro Claude Design, come vuole la SOP §8 seconda riga. Sette file su otto sono tornati identici; il solo scarto rimasto e' questa patch.",
+  "nota_index": "docs/index.html e' una copia byte per byte di docs/lista-eventi.html, creata nel repo perche' GitHub Pages vuole una porta d'ingresso. Dentro Claude Design non esiste, ma il suo contenuto viene da li': per questo NON sta in nati_nel_repo_non_si_confrontano (SOP §9.2.1). Due voci puntano allo stesso file di Claude Design; F1 lo scende una volta sola, col nome di Claude Design.",
+  "file": [
+    {
+      "repo": "docs/_ds/styles.css",
+      "design": "_ds/styles.css",
+      "baseline": "sync/_design-al-2026-09-06.css",
+      "patch": "sync/riparazioni-commenti.patch",
+      "design_sha256": "541dc69b1b224f066b984c0bcf80f21179fc5d2442bed604a044b1c2c3955af8",
+      "design_byte": 33270,
+      "repo_sha256": "c925564a5f1083765ec6b68764691508b28c07b664ac71059fdaea1b4a6ff855",
+      "repo_byte": 33297,
+      "design_etag": "1788686546079144"
+    },
+    {
+      "repo": "docs/app.js",
+      "design": "app.js",
+      "design_sha256": "02ed3384dead53d87ffbfd9397b4e30aae32add904c9c8e0fa1be51b9610fc66",
+      "design_byte": 15519,
+      "repo_sha256": "02ed3384dead53d87ffbfd9397b4e30aae32add904c9c8e0fa1be51b9610fc66",
+      "repo_byte": 15519,
+      "design_etag": "1788630131998179",
+      "prova": "sceso dal progetto con read_file il 2026-09-06 e confrontato byte per byte col repo: uguale"
+    },
+    {
+      "repo": "docs/dettaglio-evento.html",
+      "design": "dettaglio-evento.html",
+      "design_sha256": "970afcba02064a434da357e8e44329fdb90a81ddb27e26845620b860cebf1a1f",
+      "design_byte": 8782,
+      "repo_sha256": "970afcba02064a434da357e8e44329fdb90a81ddb27e26845620b860cebf1a1f",
+      "repo_byte": 8782,
+      "design_etag": "1788633695796198",
+      "prova": "sceso dal progetto con read_file il 2026-09-06 e confrontato byte per byte col repo: uguale"
+    },
+    {
+      "repo": "docs/eventi.js",
+      "design": "eventi.js",
+      "design_sha256": "91d292680f4bd09d3341edf596cc89b81c71b5ac3bcc4894626ebd429c4b261e",
+      "design_byte": 14932,
+      "repo_sha256": "91d292680f4bd09d3341edf596cc89b81c71b5ac3bcc4894626ebd429c4b261e",
+      "repo_byte": 14932,
+      "design_etag": "1788682427483682",
+      "prova": "riportato nel progetto dal repo il 2026-09-06 (bonifica), poi riletto: uguale"
+    },
+    {
+      "repo": "docs/lista-eventi.html",
+      "design": "lista-eventi.html",
+      "design_sha256": "4dd9b084a1bd04cd05eb4d8a013a4cf62206b682a65de128e5d3914ebf3c1fff",
+      "design_byte": 14315,
+      "repo_sha256": "4dd9b084a1bd04cd05eb4d8a013a4cf62206b682a65de128e5d3914ebf3c1fff",
+      "repo_byte": 14315,
+      "design_etag": "1788682723686720",
+      "prova": "riportato nel progetto dal repo il 2026-09-06 (bonifica), poi riletto: uguale"
+    },
+    {
+      "repo": "docs/index.html",
+      "design": "lista-eventi.html",
+      "design_sha256": "4dd9b084a1bd04cd05eb4d8a013a4cf62206b682a65de128e5d3914ebf3c1fff",
+      "design_byte": 14315,
+      "repo_sha256": "4dd9b084a1bd04cd05eb4d8a013a4cf62206b682a65de128e5d3914ebf3c1fff",
+      "repo_byte": 14315,
+      "design_etag": "1788682723686720",
+      "prova": "copia byte per byte di docs/lista-eventi.html: stesso sha256, diff vuoto. Vedi nota_index."
+    },
+    {
+      "repo": "docs/pagine.css",
+      "design": "pagine.css",
+      "design_sha256": "d6c1678369cc93db187dd313c5e9d5097b34786e089c1f324a773951dfb07491",
+      "design_byte": 24021,
+      "repo_sha256": "d6c1678369cc93db187dd313c5e9d5097b34786e089c1f324a773951dfb07491",
+      "repo_byte": 24021,
+      "design_etag": "1788683695390229",
+      "prova": "riportato nel progetto dal repo il 2026-09-06 (bonifica), poi riletto: uguale"
+    },
+    {
+      "repo": "docs/submit-evento.html",
+      "design": "submit-evento.html",
+      "design_sha256": "bc59d322e9d9ca0d822dbcc002e2ae86f3bf324251510aaaada8aa19ae5fb866",
+      "design_byte": 26553,
+      "repo_sha256": "bc59d322e9d9ca0d822dbcc002e2ae86f3bf324251510aaaada8aa19ae5fb866",
+      "repo_byte": 26553,
+      "design_etag": "1788684698797915",
+      "prova": "riportato nel progetto dal repo il 2026-09-06 (bonifica), poi riletto: uguale"
+    },
+    {
+      "repo": "docs/submit-evento.js",
+      "design": "submit-evento.js",
+      "design_sha256": "07538942d7728904bf4985196a552bd1c953a3d669baf28f963722665142b9ad",
+      "design_byte": 15275,
+      "repo_sha256": "07538942d7728904bf4985196a552bd1c953a3d669baf28f963722665142b9ad",
+      "repo_byte": 15275,
+      "design_etag": "1788682826200014",
+      "prova": "riportato nel progetto dal repo il 2026-09-06 (bonifica), poi riletto: uguale"
+    }
+  ],
+  "nati_nel_repo_non_si_confrontano": [
+    "docs/.nojekyll",
+    "docs/README.md"
+  ]
+}

@@ -1,0 +1,35 @@
+--- sync/_design-al-2026-09-06.css	2026-09-06 11:44:45
++++ docs/_ds/styles.css	2026-09-05 20:22:34
+@@ -1,12 +1,12 @@
+ @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&display=swap');
+ 
+-/* ══════════════════════════════════════════════════════════════════════
++/* ═══════════════════════════════════════════════════════════════════════
+    TIRANA EVENTS — design system. Bianco fondo, nero inchiostro, rosso azione.
+    Prefisso classi: te-. Ogni colore passa da un token: niente esadecimali
+    scritti a mano nei componenti o nelle pagine.
+    Pavimento tipografico (profilo A, target 18-50): corpo ≥17px, altro ≥15px,
+    contrasto ≥4,5:1. Fonte: Sistema/_CORE/sop/grafica/graf_pagina_web.md §4.
+-   ══════════════════════════════════════════════════════════════════════ */
++   ═══════════════════════════════════════════════════════════════════════ */
+ :root{
+   /* --- I tre colori --- */
+   --te-white:#FFFFFF;/* @kind color */
+@@ -193,7 +193,7 @@
+ .te-search--surface .te-search__input{background:var(--te-surface-2);border-color:transparent}
+ .te-search--surface .te-search__input:focus{background:var(--te-white);border-color:var(--te-ink)}
+ 
+-/* ─── Tag categoria e badge ──────────────────────────────────────── */
++/* ─── Tag categoria e badge ────────────────────────────────────────── */
+ [data-cat="music"]{--cat:var(--te-cat-music);--cat-bg:var(--te-cat-music-bg);--cat-ink:var(--te-cat-music-ink)}
+ [data-cat="nightlife"]{--cat:var(--te-cat-nightlife);--cat-bg:var(--te-cat-nightlife-bg);--cat-ink:var(--te-cat-nightlife-ink)}
+ [data-cat="theatre"]{--cat:var(--te-cat-theatre);--cat-bg:var(--te-cat-theatre-bg);--cat-ink:var(--te-cat-theatre-ink)}
+@@ -346,7 +346,7 @@
+ .te-alert--err{background:var(--te-err-bg);color:var(--te-err-ink);border-color:var(--te-err)}
+ .te-alert--info{background:var(--te-info-bg);color:var(--te-info-ink);border-color:var(--te-info)}
+ 
+-/* ─── Stato vuoto e skeleton ──────────────────────────────────── */
++/* ─── Stato vuoto e skeleton ───────────────────────────────────────── */
+ .te-empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--te-sp-3);padding:var(--te-sp-10) var(--te-gutter)}
+ .te-empty__icon{width:64px;height:64px;border-radius:50%;background:var(--te-surface-2);display:flex;align-items:center;justify-content:center;color:var(--te-ink-muted)}
+ .te-empty__icon .te-ic{width:28px;height:28px}
