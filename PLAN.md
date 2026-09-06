@@ -80,15 +80,19 @@ Ogni chiamata al modulo, anche rifiutata: timestamp, ip_hash, esito, motivo. Ser
 
 ## 4. Categorie
 
-**Undici, fisse in fase 1**, tarate sugli expat. Le chiavi in database sono queste, in inglese, e sono le stesse del design system:
+**Dodici, fisse in fase 1**, tarate sugli expat. Le chiavi in database sono queste, in inglese, e sono le stesse del design system:
 
-`music` · `nightlife` · `theatre` · `cinema` · `art` · `food` · `sport` · `family` · `meetups` · `outdoors` · `other`
+`music` · `nightlife` · `theatre` · `cinema` · `art` · `food` · `sport` · `family` · `meetups` · `outdoors` · `workshop` · `other`
 
 Ogni categoria ha la sua terna di colori nel design system (`--te-cat-<nome>`, con `-bg` e `-ink`) e un'etichetta per ognuna delle tre lingue (§6).
 
 ⚠️ **Allineate al design system il 04/09/2026, dopo la consegna di LORI.** La prima stesura di questo piano ne elencava dieci accorpate (`theatre & cinema`, `sport & outdoors`, `family & other`, più `workshops & talks` e `markets & fairs`). LORI ha separato le coppie e sostituito le ultime due con `meetups` e `outdoors`, con questa ragione scritta nel design system: *un expat filtra per meetup e per escursione, non per mercatini*. Vince il design system, che è già costruito e reso.
 
-⚠️ **Conseguenza da tenere d'occhio:** workshop, conferenze e mercatini non hanno più una categoria propria e cadono in `other`. Se dopo tre mesi la coda di `/submit` mostra che arrivano spesso, si aggiunge una categoria: costa una riga di enum, una terna di colori e tre etichette. ⛔ Non si aggiunge prima di vedere il dato.
+⚠️ **Superato il 05/09/2026: `workshop` è entrata, per ordine di Davide** (*«Aggiungere categoria workshop»*). La riga qui sotto diceva di aspettare tre mesi di dati prima di aggiungerne una, e Davide ha deciso di non aspettare: la decisione è sua e batte la cautela scritta qui. La categoria è completa ovunque — chiave, terna `--te-cat-workshop`, icona propria, chip di filtro su home, lista e questionario. ⚡ **Questo paragrafo era l'ultimo file rimasto indietro**, allineato il 06/09/2026 su segnalazione di OPS, che leggendo `PLAN.md` vedeva undici categorie e nella pagina ne contava dodici.
+
+> ~~**Conseguenza da tenere d'occhio:** workshop, conferenze e mercatini non hanno più una categoria propria e cadono in `other`. Se dopo tre mesi la coda di `/submit` mostra che arrivano spesso, si aggiunge una categoria: costa una riga di enum, una terna di colori e tre etichette. ⛔ Non si aggiunge prima di vedere il dato.~~
+
+**Restano senza categoria propria conferenze e mercatini**, e per quelle la cautela vale ancora: cadono in `other`, e si aggiungono solo se la coda di `/submit` mostra che arrivano spesso.
 
 ## 5. Pagine e funzioni
 
