@@ -397,3 +397,75 @@
   .te-follow__body{flex:1 1 60%}
   .te-follow .te-btn{flex:1 1 100%}
 }
+
+/* ==================================================================
+   GIUNTURE E ALLINEAMENTI (LORI, 07/09/2026)
+   Sei difetti visti a 375 e confermati a 1280. Stessa scala base 4 di
+   _ds/styles.css: nessun valore fuori token, nessuna tinta nuova.
+   ================================================================== */
+
+/* 6. La giuntura fra l'evento in evidenza e la lista era ZERO.
+   Misurato: fondo della card in evidenza e cima della prima card della
+   griglia allo stesso pixel, a 375 e a 1280. Due livelli di lettura
+   diversi - "questo te lo indichiamo noi" e "questi ci sono" -
+   separati da meno di quanto separi due card dello stesso livello (16
+   a 375, 24 da 600). Il risultato e' una massa sola, e l'evento in
+   evidenza smette di essere in evidenza.
+   32 a 375 e 40 da 600: il doppio del gap fra pari, che e' la stessa
+   regola di prossimita' gia' usata sopra (32 sopra un titolo di
+   gruppo). :first-child perche' sul dettaglio la griglia ha un titolo
+   sopra, e li' i 12 sotto il titolo sono giusti e restano.
+   Il padding-bottom fa lo stesso dall'altra parte: 24 qui piu' 24
+   della sezione WhatsApp fanno 48 prima del blocco che cambia
+   argomento. E quando l'evento in evidenza e' filtrato via, questi 32
+   sono anche l'aria fra la barra dei filtri appiccicata e la prima
+   card, che prima era zero. */
+.te-group>.te-grid:first-child{padding-top:var(--te-sp-8);padding-bottom:var(--te-sp-6)}
+@media (min-width:600px){.te-group>.te-grid:first-child{padding-top:var(--te-sp-10)}}
+
+/* 7. I piedi delle card non erano allineati in riga.
+   .te-card__foot ha margin-top:auto dal 04/09 - e non faceva niente,
+   perche' la riga qui sopra mette il corpo a flex:0 1 auto, e un auto
+   senza spazio da distribuire vale zero. Misurato in prima riga a
+   1280: 16, 21 e 44 pixel di bianco morto sotto il prezzo, col terzo
+   prezzo 28px piu' in alto degli altri due. Tre prezzi su tre quote
+   diverse non si confrontano, e il prezzo e' la seconda cosa che si
+   guarda dopo il titolo.
+   flex:1 1 auto restituisce al corpo lo spazio della card piu' alta
+   della riga, e l'auto del piede torna a fare il suo mestiere. In
+   colonna singola non cambia niente: la card e' alta quanto il suo
+   contenuto e l'auto vale zero. */
+.te-card--list .te-card__body{flex:1 1 auto}
+
+/* 8. L'interruttore di lingua nel footer era largo quanto il footer.
+   Misurato: 343 a 375 e 1200 a 1280, per tre voci da 40px. E' un
+   inline-flex dentro una colonna flex, e la colonna lo stira: EN SQ IT
+   diventava una fascia vuota con tre lettere ai lati. Un interruttore
+   si legge come un oggetto solo se e' largo quanto le sue opzioni. */
+.te-footer__lang{align-self:flex-start}
+
+/* 9. Le due file di pastiglie perdevano il margine sinistro.
+   Misurato a 375 appena caricata la pagina: scrollLeft 16 su tutte e
+   due le file, cioe' esattamente il padding. La prima pastiglia
+   ("Anytime", "All") toccava il bordo dello schermo e sembrava
+   tagliata. Non e' il padding che manca: e' lo scatto di scorrimento
+   che allinea il primo elemento al bordo della finestra di
+   scorrimento ignorando il padding. scroll-padding sposta quel bordo
+   dentro, e lo scatto rispetta il margine. */
+.te-scroll{scroll-padding-left:var(--te-gutter);scroll-padding-right:var(--te-gutter)}
+
+/* 10. Il disco dello stato vuoto era invisibile, non poco visibile:
+   .te-empty__icon ha il fondo --te-surface-2 e la pagina lista ha
+   --te-surface-2 come fondo. Stesso colore, 1,00:1. La lente restava
+   a mezz'aria sopra il titolo. --te-surface-3 sullo stesso fondo da'
+   1,11:1: un piatto appena percepibile, che e' quanto serve a un
+   elemento decorativo. Chi porta l'informazione e' l'icona
+   (--te-ink-muted su --te-surface-3 = 6,3:1), non il disco.
+   Nessuna tinta nuova: surface-3 e' gia' in palette. */
+.te-empty__icon{background:var(--te-surface-3)}
+
+/* 11. Il titolo del blocco WhatsApp andava a capo con una parola sola
+   in seconda riga ("Events we pick, on / WhatsApp", colonna 243px).
+   text-wrap:balance pareggia le due righe senza toccare il testo, che
+   e' di MUSE. Dove non e' supportato non succede niente. */
+.te-follow__title{text-wrap:balance}

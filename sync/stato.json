@@ -3,7 +3,7 @@
   "file_sorgente": "_ds/styles.css",
   "file_da_ignorare": ".thumbnail",
   "file_da_ignorare_elenco": [".thumbnail"],
-  "ultimo_allineamento": "2026-09-06",
+  "ultimo_allineamento": "2026-09-07",
   "design_etag": "1788686546079144",
   "regola": "docs/_ds/styles.css = baseline + patch, e' l'unico file con una patch. Ogni altro file dell'elenco deve essere uguale byte per byte a quello di Claude Design. design_sha256 a null = mai letto dal progetto: lo script lo dichiara NON CONTROLLATO, mai allineato. I percorsi repo partono dalla radice del repo e cominciano per docs/; design e' il nome dentro Claude Design.",
   "nota_patch": "Questa patch NON contiene riparazioni: contiene 4 righe di commento decorativo in cui le sequenze di caratteri di riquadro escono di lunghezza diversa quando il file viene scritto dentro Claude Design. Zero token, zero selettori, zero regole CSS, nessun effetto a schermo. Verso: baseline (lato Claude Design) + patch = file del repo.",
@@ -74,12 +74,13 @@
     {
       "repo": "docs/pagine.css",
       "design": "pagine.css",
-      "design_sha256": "61a8066a55113c383a794af619b1613deb0c97ca25f52db719511ba03c3c8a3a",
-      "design_byte": 27680,
-      "repo_sha256": "61a8066a55113c383a794af619b1613deb0c97ca25f52db719511ba03c3c8a3a",
-      "repo_byte": 27680,
-      "design_etag": "1788712653750437",
-      "prova": "sceso da Claude Design il 2026-09-06 dopo la correzione spazi di LORI: blocco RITMO VERTICALE aggiunto in coda, 66 righe. Byte ricostruiti 27680 = byte del progetto, e blocco riletto dal server e confrontato"
+      "design_sha256": "589f2b017a8743d497b429f11d468a965131c5ad64d9fd35754f46424e68a720",
+      "design_byte": 31849,
+      "repo_sha256": "589f2b017a8743d497b429f11d468a965131c5ad64d9fd35754f46424e68a720",
+      "repo_byte": 31849,
+      "design_etag": "1788767311218764",
+      "prova": "sceso da Claude Design il 2026-09-07 dopo il giro qualita' di LORI: blocco GIUNTURE E ALLINEAMENTI aggiunto in coda, sei correzioni (giuntura evidenza/lista, piedi card, interruttore lingua, scroll-padding pastiglie, disco stato vuoto, titolo WhatsApp). Byte ricostruiti 31849 = byte del progetto, e il file e' stato letto per intero dal server in questa sessione (etag_provato_il).",
+      "etag_provato_il": "2026-09-07"
     },
     {
       "repo": "docs/submit-evento.html",
